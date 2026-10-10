@@ -1,0 +1,527 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Edit Empire — Edición de video y postproducción con IA</title>
+<meta name="description" content="Edit Empire: edición de reels y videos para marcas, inmobiliarias, gastronomía y marcas personales. Postproducción con IA. Cada corte, con intención.">
+<meta name="theme-color" content="#0B0B0C">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Edit Empire — Cada corte, con intención.">
+<meta property="og:description" content="Edición de video y postproducción con IA. Mira el showreel y cotiza tu video.">
+<meta property="og:image" content="assets/showreel-horizontal.jpg">
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&amp;family=Instrument+Serif:ital@0;1&amp;family=Inter+Tight:wght@400;500;600&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0;background:#0B0B0C}
+a{color:#F2F0EC;text-decoration:none}a:hover{color:#FF8A33}
+button{font-family:inherit;cursor:pointer}
+.cutA,.cutB{position:absolute;left:0;top:0;font-family:Anton,Impact,sans-serif;line-height:1;white-space:nowrap;color:#F2F0EC}
+.cutA{clip-path:inset(0 0 52% 0)}
+.cutB{clip-path:inset(48% 0 0 0);animation:ee-slide 2.8s ease-in-out infinite}
+@keyframes ee-slide{0%,40%,100%{transform:translateX(0)}55%,85%{transform:translateX(0.09em)}}
+.ee-ph{animation:ee-play 9s linear infinite}
+@keyframes ee-play{from{left:0%}to{left:100%}}
+.ee-blink{animation:ee-bl 1.2s steps(2) infinite}
+@keyframes ee-bl{50%{opacity:0}}
+.ee-btn{position:relative;display:inline-flex;align-items:stretch;vertical-align:middle;cursor:pointer;border:none;background:transparent;padding:0;font:inherit;text-decoration:none}
+.ee-btn:hover,.ee-btn:focus{color:#111}
+.ee-l,.ee-r{display:flex;align-items:center;white-space:nowrap;box-sizing:border-box;transition:transform .3s cubic-bezier(.2,.9,.25,1.15)}
+.ee-l{border-radius:6px 0 0 6px}
+.ee-r{border-radius:0 6px 6px 0}
+.ee-o .ee-r{margin-left:-1px}
+.ee-cut{position:relative;width:0;z-index:2}
+.ee-cut::before{content:"";position:absolute;left:-1px;top:-7px;bottom:-7px;width:2px;background:#F2F0EC;opacity:0;transform:scaleY(.3);transition:opacity .2s,transform .3s cubic-bezier(.2,.9,.25,1.15)}
+.ee-cut::after{content:"";position:absolute;left:-5px;top:-11px;border-left:5px solid transparent;border-right:5px solid transparent;border-top:6px solid #F2F0EC;opacity:0;transition:opacity .2s}
+.ee-btn:hover .ee-l,.ee-btn:focus-visible .ee-l{transform:translateX(-4px)}
+.ee-btn:hover .ee-r,.ee-btn:focus-visible .ee-r{transform:translateX(4px)}
+.ee-btn:hover .ee-cut::before,.ee-btn:focus-visible .ee-cut::before{opacity:1;transform:scaleY(1)}
+.ee-btn:hover .ee-cut::after,.ee-btn:focus-visible .ee-cut::after{opacity:1}
+.ee-btn:active .ee-l,.ee-btn:active .ee-r{transform:translateX(0);transition-duration:.08s}
+.ee-btn:focus-visible{outline:2px solid #F2F0EC;outline-offset:6px;border-radius:6px}
+@media (hover:none){.ee-l{transform:translateX(-1px)}.ee-r{transform:translateX(1px)}}
+.reel-v{display:none}
+.nav-burger{display:none}
+.mob-menu{display:none}
+.ee-play{transition:transform .2s cubic-bezier(.2,.9,.25,1.15)}
+.ee-play:hover{transform:scale(1.06)}
+.ee-play:focus-visible{outline:2px solid #F2F0EC;outline-offset:4px}
+@media (max-width: 640px){
+.reel-h{display:none}
+.reel-v{display:block}
+.nav-l{display:none}
+.nav-cta{display:none !important}
+.nav-burger{display:flex}
+.mob-menu{display:flex}
+.works{grid-template-columns:repeat(2,minmax(0,1fr)) !important;gap:12px !important}
+.sec{padding-top:64px !important;padding-bottom:64px !important}
+.hero{padding-top:40px !important}
+}
+
+html{scroll-behavior:smooth}
+*{-webkit-tap-highlight-color:transparent}
+.is-hidden{display:none !important}
+#mobmenu[hidden]{display:none !important}
+.ic-close{display:none}
+.nav-burger[aria-expanded="true"] .ic-open{display:none}
+.nav-burger[aria-expanded="true"] .ic-close{display:block}
+.rate-btn[hidden]{display:inline-block !important;visibility:hidden}
+</style>
+</head>
+<body>
+<div style="background: #0B0B0C; color: #F2F0EC; font-family: 'Inter Tight', 'Helvetica Neue', sans-serif; font-size: 16px; line-height: 1.6; min-height: 100vh; overflow-x: hidden">
+
+<header style="border-bottom: 1px solid #1F1F22">
+<nav style="max-width: 1240px; margin: 0 auto; padding: 20px 24px; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 16px">
+<a href="#inicio" style="font-family: Anton, Impact, sans-serif; font-size: 26px; letter-spacing: 0.02em; color: #F2F0EC">EDIT <span style="color: #FF6A00">EMPIRE</span></a>
+<div style="display: flex; flex-wrap: wrap; align-items: center; gap: 28px; font-size: 14px; color: #B5B3AE">
+<a class="nav-l" href="#trabajos" style="color: #B5B3AE">Trabajos</a>
+<a class="nav-l" href="#ia" style="color: #B5B3AE">Rescates con IA</a>
+<a class="nav-l" href="#servicios" style="color: #B5B3AE">Servicios</a>
+<a class="ee-btn nav-cta" href="https://wa.me/5491123641711?text=Hola%2C%20vi%20tu%20portfolio%20y%20quiero%20cotizar%20un%20video"><span class="ee-l" style="background: #FF6A00; color: #111; font-weight: 600; padding: 14px 14px 14px 18px">Cotiza tu video</span><span class="ee-cut" aria-hidden="true"></span><span class="ee-r" aria-hidden="true" style="background: #FF6A00; color: #111; font-weight: 600; padding: 14px 14px 14px 12px"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#111" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"></path><path d="M13 6l6 6-6 6"></path></svg></span></a>
+<button class="nav-burger" id="burger" aria-label="Abrir menú" aria-expanded="false" aria-controls="mobmenu" style="width: 44px; height: 44px; border-radius: 8px; border: 1px solid #3A3A3F; background: #0B0B0C; align-items: center; justify-content: center; padding: 0"><svg class="ic-open" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#F2F0EC" stroke-width="2" stroke-linecap="round"><path d="M4 7h16"></path><path d="M4 12h16"></path><path d="M4 17h16"></path></svg><svg class="ic-close" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#FF6A00" stroke-width="2" stroke-linecap="round"><path d="M6 6l12 12"></path><path d="M18 6L6 18"></path></svg></button>
+</div>
+</nav>
+<div class="mob-menu" id="mobmenu" hidden style="border-top: 1px solid #1F1F22; padding: 8px 24px 24px; flex-direction: column; align-items: center; gap: 4px; text-align: center">
+<a href="#trabajos" data-close-menu style="display: block; width: 100%; padding: 14px 0; font-family: Anton, Impact, sans-serif; font-size: 28px; letter-spacing: 0.02em; color: #F2F0EC; border-bottom: 1px solid #1F1F22">TRABAJOS</a>
+<a href="#ia" data-close-menu style="display: block; width: 100%; padding: 14px 0; font-family: Anton, Impact, sans-serif; font-size: 28px; letter-spacing: 0.02em; color: #F2F0EC; border-bottom: 1px solid #1F1F22">RESCATES CON IA</a>
+<a href="#servicios" data-close-menu style="display: block; width: 100%; padding: 14px 0; font-family: Anton, Impact, sans-serif; font-size: 28px; letter-spacing: 0.02em; color: #F2F0EC; border-bottom: 1px solid #1F1F22">SERVICIOS</a>
+<a class="ee-btn" href="https://wa.me/5491123641711?text=Hola%2C%20vi%20tu%20portfolio%20y%20quiero%20cotizar%20un%20video" style="margin-top: 20px"><span class="ee-l" style="background: #FF6A00; color: #111; font-weight: 600; padding: 16px 14px 16px 24px">Cotiza tu video</span><span class="ee-cut" aria-hidden="true"></span><span class="ee-r" aria-hidden="true" style="background: #FF6A00; color: #111; font-weight: 600; padding: 16px 20px 16px 12px"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#111" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"></path><path d="M13 6l6 6-6 6"></path></svg></span></a>
+</div>
+</header>
+
+<section id="inicio" class="hero" style="max-width: 1240px; margin: 0 auto; padding: 72px 24px 40px">
+<div style="display: flex; justify-content: center; flex-wrap: wrap; gap: 8px 28px; font-family: 'JetBrains Mono', monospace; font-size: 12px; letter-spacing: 0.08em; color: #8C8A85">
+<span><span class="ee-blink" style="color: #FF6A00">●</span> REC · CORTE · 00:00:00:00</span>
+<span>EDICIÓN DE VIDEO · POSTPRODUCCIÓN CON IA</span>
+</div>
+<div style="position: relative; width: max-content; max-width: 100%; height: clamp(64px, 11.5vw, 172px); font-size: clamp(64px, 11.5vw, 172px); margin: 40px auto 0">
+<div aria-hidden="true" style="visibility: hidden; font-family: Anton, Impact, sans-serif; line-height: 1; white-space: nowrap">EDIT EMPIRE</div>
+<div class="cutA">EDIT EMPIRE</div>
+<div class="cutB">EDIT <span style="color: #FF6A00">EMPIRE</span></div>
+<div style="position: absolute; left: -100vw; right: -100vw; top: 50%; height: 2px; background: #FF6A00"></div>
+</div>
+<div style="display: flex; flex-direction: column; align-items: center; text-align: center; gap: 32px; margin-top: 40px">
+<div style="max-width: 620px">
+<p style="font-family: 'Instrument Serif', Georgia, serif; font-size: clamp(32px, 4vw, 52px); line-height: 1.08; margin: 0">Cada corte, <em style="color: #FF6A00">con intención.</em></p>
+<p style="color: #B5B3AE; font-size: 18px; margin: 16px 0 0">Edito reels y videos para marcas que quieren verse serias. Y cuando algo sale mal en la grabación, lo resuelvo con IA.</p>
+</div>
+<div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 12px">
+<a class="ee-btn" href="#contacto"><span class="ee-l" style="background: #FF6A00; color: #111; font-weight: 600; padding: 16px 14px 16px 24px">Hablemos</span><span class="ee-cut" aria-hidden="true"></span><span class="ee-r" aria-hidden="true" style="background: #FF6A00; color: #111; font-weight: 600; padding: 16px 20px 16px 12px"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#111" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"></path><path d="M13 6l6 6-6 6"></path></svg></span></a>
+<a class="ee-btn ee-o" href="#reel"><span class="ee-l" style="border: 1px solid #4A4A50; background: #0B0B0C; color: #F2F0EC; padding: 15px 14px 15px 24px">Ver el reel</span><span class="ee-cut" aria-hidden="true"></span><span class="ee-r" aria-hidden="true" style="border: 1px solid #4A4A50; background: #0B0B0C; color: #F2F0EC; padding: 15px 20px 15px 12px"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#F2F0EC" stroke-width="2" stroke-linejoin="round"><path d="M7 4v16l13-8z"></path></svg></span></a>
+</div>
+</div>
+
+<div style="margin-top: 56px; border-top: 1px solid #26262A; padding-top: 12px">
+<div style="display: flex; justify-content: space-between; font-family: 'JetBrains Mono', monospace; font-size: 11px; color: #6E6C68; padding-left: 44px">
+<span>00:00</span><span>00:15</span><span>00:30</span><span>00:45</span><span>01:00</span>
+</div>
+<div style="position: relative; margin-top: 8px; display: flex; flex-direction: column; gap: 6px">
+<div style="display: flex; align-items: center; gap: 12px"><span style="width: 32px; font-family: 'JetBrains Mono', monospace; font-size: 11px; color: #6E6C68">V2</span><div style="position: relative; flex: 1; height: 18px"><div style="position: absolute; top: 0; bottom: 0; left: 18%; width: 14%; background: #FF6A00; border-radius: 2px"></div><div style="position: absolute; top: 0; bottom: 0; left: 52%; width: 10%; background: #2A2A2E; border-radius: 2px"></div><div style="position: absolute; top: 0; bottom: 0; left: 78%; width: 16%; background: #FF6A00; border-radius: 2px"></div></div></div>
+<div style="display: flex; align-items: center; gap: 12px"><span style="width: 32px; font-family: 'JetBrains Mono', monospace; font-size: 11px; color: #6E6C68">V1</span><div style="position: relative; flex: 1; height: 18px"><div style="position: absolute; top: 0; bottom: 0; left: 0; width: 24%; background: #2A2A2E; border-radius: 2px"></div><div style="position: absolute; top: 0; bottom: 0; left: 25%; width: 30%; background: #34343A; border-radius: 2px"></div><div style="position: absolute; top: 0; bottom: 0; left: 56%; width: 21%; background: #2A2A2E; border-radius: 2px"></div><div style="position: absolute; top: 0; bottom: 0; left: 78%; width: 22%; background: #34343A; border-radius: 2px"></div></div></div>
+<div style="display: flex; align-items: center; gap: 12px"><span style="width: 32px; font-family: 'JetBrains Mono', monospace; font-size: 11px; color: #6E6C68">A1</span><div style="position: relative; flex: 1; height: 18px"><div style="position: absolute; top: 0; bottom: 0; left: 0; width: 100%; background: #1E1E21; border-radius: 2px"></div></div></div>
+<div style="position: absolute; top: -6px; bottom: -6px; left: 44px; right: 0">
+<div class="ee-ph" style="position: absolute; top: 0; bottom: 0; width: 2px; background: #FF6A00"></div>
+</div>
+</div>
+</div>
+</section>
+
+<section id="reel" style="max-width: 1240px; margin: 0 auto; padding: 24px 24px 96px">
+<div style="display: flex; justify-content: center; gap: 28px; margin-bottom: 12px; font-family: 'JetBrains Mono', monospace; font-size: 12px; letter-spacing: 0.08em; color: #8C8A85"><span><span style="color: #FF6A00">●</span> SHOWREEL · 2026</span><span>00:00:39</span></div>
+<div class="reel-h" style="position: relative; aspect-ratio: 16 / 9; background: #000; border: 1px solid #26262A; border-radius: 12px; overflow: hidden">
+<video src="assets/showreel-horizontal.mp4" poster="assets/showreel-horizontal.jpg" controls playsinline preload="metadata" aria-label="Showreel de Edit Empire, versión horizontal" style="display: block; width: 100%; height: 100%; object-fit: cover; background: #000"></video>
+</div>
+<div class="reel-v" style="position: relative; max-width: 420px; margin: 0 auto; aspect-ratio: 9 / 16; background: #000; border: 1px solid #26262A; border-radius: 14px; overflow: hidden">
+<video src="assets/showreel-vertical.mp4" poster="assets/showreel-vertical.jpg" controls playsinline preload="metadata" aria-label="Showreel de Edit Empire, versión vertical" style="display: block; width: 100%; height: 100%; object-fit: cover; background: #000"></video>
+</div>
+</section>
+
+<section id="trabajos" style="border-top: 1px solid #1F1F22">
+<div style="max-width: 1240px; margin: 0 auto; padding: 88px 24px">
+<div style="display: flex; flex-direction: column; align-items: center; gap: 28px">
+<h2 style="font-family: Anton, Impact, sans-serif; font-weight: 400; font-size: clamp(44px, 6vw, 80px); line-height: 1; margin: 0; text-align: center">ELIGE UN ESTILO.<br><span style="font-family: 'Instrument Serif', Georgia, serif; font-style: italic; color: #FF6A00">Yo lo hago tuyo.</span></h2>
+<div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 8px">
+<button class="filter-btn" data-filter="todo" aria-pressed="true" style="min-height: 44px; padding: 0 18px; border-radius: 999px; font-size: 14px; border: 1px solid #3A3A3F; background: transparent; color: #D8D6D1">Todo</button>
+<button class="filter-btn" data-filter="basico" aria-pressed="false" style="min-height: 44px; padding: 0 18px; border-radius: 999px; font-size: 14px; border: 1px solid #3A3A3F; background: transparent; color: #D8D6D1">Básico</button>
+<button class="filter-btn" data-filter="pro" aria-pressed="false" style="min-height: 44px; padding: 0 18px; border-radius: 999px; font-size: 14px; border: 1px solid #3A3A3F; background: transparent; color: #D8D6D1">Pro</button>
+<button class="filter-btn" data-filter="ia" aria-pressed="false" style="min-height: 44px; padding: 0 18px; border-radius: 999px; font-size: 14px; border: 1px solid #3A3A3F; background: transparent; color: #D8D6D1">Premium IA</button>
+<button class="filter-btn" data-filter="motion" aria-pressed="false" style="min-height: 44px; padding: 0 18px; border-radius: 999px; font-size: 14px; border: 1px solid #3A3A3F; background: transparent; color: #D8D6D1">Motion graphics</button>
+<button class="filter-btn" data-filter="re" aria-pressed="false" style="min-height: 44px; padding: 0 18px; border-radius: 999px; font-size: 14px; border: 1px solid #3A3A3F; background: transparent; color: #D8D6D1">Real estate</button>
+</div>
+</div>
+<div class="works" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 20px; margin-top: 48px">
+<div class="work" data-cat="re" style="display: flex; flex-direction: column; gap: 10px">
+<div style="position: relative; aspect-ratio: 9 / 16; background: #000; border: 1px solid #26262A; border-radius: 10px; overflow: hidden">
+<video src="assets/trabajo-re2.mp4" poster="assets/trabajo-re2.jpg" controls playsinline preload="none" aria-label="Casa en Tampa" style="display: block; width: 100%; height: 100%; object-fit: cover; background: #000"></video>
+<span style="position: absolute; top: 12px; left: 12px; font-family: 'JetBrains Mono', monospace; font-size: 11px; background: #0B0B0C; color: #B5B3AE; padding: 4px 8px; border-radius: 4px; pointer-events: none">REAL ESTATE</span>
+</div>
+<div style="font-weight: 500">Casa en Tampa</div>
+<div style="font-size: 13px; color: #8C8A85; margin-top: -8px">Recorrido de propiedad</div>
+</div>
+<div class="work" data-cat="ia" style="display: flex; flex-direction: column; gap: 10px">
+<div style="position: relative; aspect-ratio: 9 / 16; background: #000; border: 1px solid #26262A; border-radius: 10px; overflow: hidden">
+<video src="assets/trabajo-anim.mp4" poster="assets/trabajo-anim.jpg" controls playsinline preload="none" aria-label="La Borgoña · Videoclip animado" style="display: block; width: 100%; height: 100%; object-fit: cover; background: #000"></video>
+<span style="position: absolute; top: 12px; left: 12px; font-family: 'JetBrains Mono', monospace; font-size: 11px; background: #0B0B0C; color: #B5B3AE; padding: 4px 8px; border-radius: 4px; pointer-events: none">PREMIUM IA</span>
+</div>
+<div style="font-weight: 500">La Borgoña · Videoclip animado</div>
+<div style="font-size: 13px; color: #8C8A85; margin-top: -8px">Tomas generadas con IA</div>
+</div>
+<div class="work" data-cat="pro" style="display: flex; flex-direction: column; gap: 10px">
+<div style="position: relative; aspect-ratio: 9 / 16; background: #000; border: 1px solid #26262A; border-radius: 10px; overflow: hidden">
+<video src="assets/trabajo-moda.mp4" poster="assets/trabajo-moda.jpg" controls playsinline preload="none" aria-label="Moda · Campaña" style="display: block; width: 100%; height: 100%; object-fit: cover; background: #000"></video>
+<span style="position: absolute; top: 12px; left: 12px; font-family: 'JetBrains Mono', monospace; font-size: 11px; background: #0B0B0C; color: #B5B3AE; padding: 4px 8px; border-radius: 4px; pointer-events: none">PRO</span>
+</div>
+<div style="font-weight: 500">Moda · Campaña</div>
+<div style="font-size: 13px; color: #8C8A85; margin-top: -8px">Colorimetría y SFX</div>
+</div>
+<div class="work" data-cat="motion" style="display: flex; flex-direction: column; gap: 10px">
+<div style="position: relative; aspect-ratio: 9 / 16; background: #000; border: 1px solid #26262A; border-radius: 10px; overflow: hidden">
+<video src="assets/trabajo-mg3.mp4" poster="assets/trabajo-mg3.jpg" controls playsinline preload="none" aria-label="Marca personal" style="display: block; width: 100%; height: 100%; object-fit: cover; background: #000"></video>
+<span style="position: absolute; top: 12px; left: 12px; font-family: 'JetBrains Mono', monospace; font-size: 11px; background: #0B0B0C; color: #B5B3AE; padding: 4px 8px; border-radius: 4px; pointer-events: none">MOTION</span>
+</div>
+<div style="font-weight: 500">Marca personal</div>
+<div style="font-size: 13px; color: #8C8A85; margin-top: -8px">Íconos y animación 2D</div>
+</div>
+<div class="work" data-cat="basico" style="display: flex; flex-direction: column; gap: 10px">
+<div style="position: relative; aspect-ratio: 9 / 16; background: #000; border: 1px solid #26262A; border-radius: 10px; overflow: hidden">
+<video src="assets/trabajo-rs.mp4" poster="assets/trabajo-rs.jpg" controls playsinline preload="none" aria-label="AIMpulse · Video para redes" style="display: block; width: 100%; height: 100%; object-fit: cover; background: #000"></video>
+<span style="position: absolute; top: 12px; left: 12px; font-family: 'JetBrains Mono', monospace; font-size: 11px; background: #0B0B0C; color: #B5B3AE; padding: 4px 8px; border-radius: 4px; pointer-events: none">BÁSICO</span>
+</div>
+<div style="font-weight: 500">AIMpulse · Video para redes</div>
+<div style="font-size: 13px; color: #8C8A85; margin-top: -8px">Cortes, ritmo y subtítulos</div>
+</div>
+</div>
+</div>
+</section>
+
+
+<section id="ia" style="border-top: 1px solid #1F1F22">
+<div style="max-width: 1240px; margin: 0 auto; padding: 88px 24px">
+<h2 style="font-family: Anton, Impact, sans-serif; font-weight: 400; font-size: clamp(44px, 6vw, 80px); line-height: 1; margin: 0; text-align: center">¿SALIÓ MAL LA GRABACIÓN?<br><span style="font-family: 'Instrument Serif', Georgia, serif; font-style: italic; color: #FF6A00">Tranquilo, lo resuelvo.</span></h2>
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 420px), 1fr)); gap: 24px; margin-top: 48px">
+<div style="border: 1px solid #26262A; border-radius: 12px; padding: 16px; background: #111113">
+<div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px">
+<div style="aspect-ratio: 4 / 5; border-radius: 8px; background: #1C1C1F; position: relative; overflow: hidden"><img src="assets/ia-bano-foto.jpg" alt="Foto original del baño" loading="lazy" style="display: block; width: 100%; height: 100%; object-fit: cover"><span style="position: absolute; top: 8px; left: 8px; font-family: 'JetBrains Mono', monospace; font-size: 11px; background: #0B0B0C; color: #D8D6D1; padding: 3px 7px; border-radius: 4px">FOTO ORIGINAL</span></div>
+<div style="aspect-ratio: 4 / 5; border-radius: 8px; background: #2B2118; border: 1px solid #FF6A00; position: relative; overflow: hidden"><img src="assets/ia-bano-toma.jpg" alt="Toma del baño generada con IA" loading="lazy" style="display: block; width: 100%; height: 100%; object-fit: cover"><span style="position: absolute; top: 8px; left: 8px; font-family: 'JetBrains Mono', monospace; font-size: 11px; background: #FF6A00; color: #111; padding: 3px 7px; border-radius: 4px">TOMA CON IA</span></div>
+</div>
+<div style="font-family: Anton, Impact, sans-serif; font-size: 24px; margin-top: 16px; line-height: 1.1">Faltó grabar una toma</div>
+<div style="color: #B5B3AE; font-size: 15px; margin-top: 6px">Con una sola foto del baño, generé con IA la toma de video que faltaba.</div>
+</div>
+<div style="border: 1px solid #26262A; border-radius: 12px; padding: 16px; background: #111113">
+<div id="fx" style="aspect-ratio: 8 / 5; min-height: 230px; border-radius: 8px; background: #161618; border: 1px solid #26262A; padding: 14px; box-sizing: border-box; display: flex; flex-direction: column; justify-content: space-between; gap: 12px; transition: background .35s, border-color .35s">
+<div style="display: flex; justify-content: space-between; align-items: center; gap: 8px; font-family: 'JetBrains Mono', monospace; font-size: 11px">
+<span id="fx-tag" style="background: #0B0B0C; color: #D8D6D1; padding: 3px 7px; border-radius: 4px">ANTES · CON RUIDO</span>
+<span style="color: #8C8A85">A1 · VOZ</span>
+</div>
+<button id="fx-wave" aria-label="Elegir el momento del audio" style="position: relative; display: flex; align-items: center; gap: 2px; height: 72px; width: 100%; padding: 0; border: none; background: transparent; cursor: pointer"><span id="fx-head" style="position: absolute; top: -4px; bottom: -4px; left: 0%; width: 2px; background: #F2F0EC; pointer-events: none; z-index: 1"></span></button>
+<div style="display: flex; flex-wrap: wrap; align-items: center; gap: 12px">
+<button class="ee-play" id="fx-play" aria-label="Reproducir audio" style="position: relative; width: 56px; height: 56px; border-radius: 50%; border: none; background: #FF6A00; padding: 0; display: flex; align-items: center; justify-content: center; flex: none"><svg class="ic-play" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#111" stroke-width="2" stroke-linejoin="round"><path d="M8 5v14l11-7z"></path></svg><svg class="ic-pause" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#111" stroke-width="2.4" stroke-linecap="round" style="display:none"><path d="M8 5v14"></path><path d="M16 5v14"></path></svg></button>
+<span id="fx-time" style="font-family: 'JetBrains Mono', monospace; font-size: 12px; color: #B5B3AE">0:00 / 0:41</span>
+<button class="ee-btn" id="fx-enh" aria-pressed="false" style="margin-left: auto; color: #111"><span class="ee-l" style="background: #FF6A00; color: #111; border: 1px solid #FF6A00; font-weight: 600; font-size: 14px; min-height: 44px; box-sizing: border-box; padding: 11px 12px 11px 16px">Mejorar audio</span><span class="ee-cut" aria-hidden="true"></span><span class="ee-r" aria-hidden="true" style="background: #FF6A00; border: 1px solid #FF6A00; min-height: 44px; box-sizing: border-box; padding: 11px 14px 11px 10px"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#111" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v4"></path><path d="M12 17v4"></path><path d="M3 12h4"></path><path d="M17 12h4"></path><path d="M6.5 6.5l2.5 2.5"></path><path d="M15 15l2.5 2.5"></path><path d="M17.5 6.5L15 9"></path><path d="M9 15l-2.5 2.5"></path></svg></span></button>
+</div>
+</div>
+<div style="font-family: Anton, Impact, sans-serif; font-size: 24px; margin-top: 16px; line-height: 1.1">El audio vino con ruido</div>
+<div style="color: #B5B3AE; font-size: 15px; margin-top: 6px">Dale play y toca «Mejorar audio» mientras suena: escucha cómo cambia en el momento.</div>
+</div>
+<div style="border: 1px solid #26262A; border-radius: 12px; padding: 16px; background: #111113">
+<div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px">
+<div style="aspect-ratio: 4 / 5; border-radius: 8px; background: #1C1C1F; position: relative; overflow: hidden"><img src="assets/ia-patio-original.jpg" alt="Patio vacío, plano original" loading="lazy" style="display: block; width: 100%; height: 100%; object-fit: cover"><span style="position: absolute; top: 8px; left: 8px; font-family: 'JetBrains Mono', monospace; font-size: 11px; background: #0B0B0C; color: #D8D6D1; padding: 3px 7px; border-radius: 4px">PLANO A · ORIGINAL</span></div>
+<div style="aspect-ratio: 4 / 5; border-radius: 8px; background: #2B2118; border: 1px solid #FF6A00; position: relative; overflow: hidden"><img src="assets/ia-patio-ia.jpg" alt="El mismo patio con una familia, plano generado con IA" loading="lazy" style="display: block; width: 100%; height: 100%; object-fit: cover"><span style="position: absolute; top: 8px; left: 8px; font-family: 'JetBrains Mono', monospace; font-size: 11px; background: #FF6A00; color: #111; padding: 3px 7px; border-radius: 4px">PLANO B · CON IA</span></div>
+</div>
+<div style="font-family: Anton, Impact, sans-serif; font-size: 24px; margin-top: 16px; line-height: 1.1">No había material extra</div>
+<div style="color: #B5B3AE; font-size: 15px; margin-top: 6px">Solo había un plano del patio vacío. Creé uno nuevo con IA para darle vida y ritmo a la escena.</div>
+</div>
+<div style="border: 1px solid #26262A; border-radius: 12px; padding: 16px; background: #111113">
+<div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px">
+<div style="aspect-ratio: 4 / 5; border-radius: 8px; background: #1C1C1F; position: relative; overflow: hidden"><img src="assets/ia-terreno.jpg" alt="Terreno vacío visto desde arriba" loading="lazy" style="display: block; width: 100%; height: 100%; object-fit: cover"><span style="position: absolute; top: 8px; left: 8px; font-family: 'JetBrains Mono', monospace; font-size: 11px; background: #0B0B0C; color: #D8D6D1; padding: 3px 7px; border-radius: 4px">TERRENO REAL</span></div>
+<div style="aspect-ratio: 4 / 5; border-radius: 8px; background: #2B2118; border: 1px solid #FF6A00; position: relative; overflow: hidden"><img src="assets/ia-edificio.jpg" alt="Edificio terminado generado con IA" loading="lazy" style="display: block; width: 100%; height: 100%; object-fit: cover"><span style="position: absolute; top: 8px; left: 8px; font-family: 'JetBrains Mono', monospace; font-size: 11px; background: #FF6A00; color: #111; padding: 3px 7px; border-radius: 4px">EDIFICIO CON IA</span></div>
+</div>
+<div style="font-family: Anton, Impact, sans-serif; font-size: 24px; margin-top: 16px; line-height: 1.1">La obra todavía no existe</div>
+<div style="color: #B5B3AE; font-size: 15px; margin-top: 6px">Del terreno vacío al edificio terminado, sin esperar la construcción.</div>
+</div>
+</div>
+</div>
+</section>
+
+<section style="border-top: 1px solid #1F1F22; background: #0F0F11">
+<div style="max-width: 1240px; margin: 0 auto; padding: 72px 24px">
+<h2 style="font-family: Anton, Impact, sans-serif; font-weight: 400; font-size: clamp(44px, 6vw, 80px); line-height: 1; margin: 0; text-align: center">NO LO DIGO YO.<br><span style="font-family: 'Instrument Serif', Georgia, serif; font-style: italic; color: #FF6A00">Escúchalos.</span></h2>
+<div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 48px 40px; margin-top: 56px">
+<div class="voice" data-name="Blink Marketing" data-src="assets/resena-blink.m4a" style="display: flex; flex-direction: column; align-items: center; gap: 16px; text-align: center; width: 200px">
+<button class="ee-play voice-btn" aria-label="Escuchar la reseña de Blink Marketing" aria-pressed="false" style="position: relative; width: 176px; height: 176px; border-radius: 50%; border: none; background: transparent; padding: 0">
+<svg width="176" height="176" viewBox="0 0 176 176" style="position: absolute; inset: 0; transform: rotate(-90deg)"><circle cx="88" cy="88" r="85" fill="none" stroke="#2A2A2E" stroke-width="3"></circle><circle class="ring" cx="88" cy="88" r="85" fill="none" stroke="#FF6A00" stroke-width="3" stroke-linecap="round" stroke-dasharray="534.1" stroke-dashoffset="534.1"></circle></svg>
+<img class="voice-logo" src="assets/resena-blink.jpg" alt="" loading="lazy" style="position: absolute; left: 10px; top: 10px; width: 156px; height: 156px; border-radius: 50%; object-fit: cover; filter: grayscale(1) brightness(0.8) contrast(1.1); transition: filter .6s ease">
+<span style="position: absolute; right: 4px; bottom: 4px; width: 48px; height: 48px; border-radius: 50%; background: #FF6A00; border: 3px solid #0F0F11; display: flex; align-items: center; justify-content: center; box-sizing: border-box"><svg class="ic-play" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#111" stroke-width="2" stroke-linejoin="round"><path d="M8 5v14l11-7z"></path></svg><svg class="ic-pause" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#111" stroke-width="2.4" stroke-linecap="round" style="display:none"><path d="M8 5v14"></path><path d="M16 5v14"></path></svg></span>
+</button>
+<div>
+<div style="font-weight: 500">Blink Marketing</div>
+<div style="font-family: 'JetBrains Mono', monospace; font-size: 11px; color: #8C8A85; margin-top: 2px">Reseña en audio · 1:03</div>
+<div style="font-family: 'JetBrains Mono', monospace; font-size: 11px; color: #6E6C68; margin-top: 2px">21 de junio de 2026</div>
+</div>
+<div style="height: 32px; display: flex; align-items: center; justify-content: center">
+<button class="rate-btn" hidden aria-label="Velocidad 1×. Cambiar a 2×" style="min-width: 44px; height: 32px; padding: 0 10px; border-radius: 999px; border: 1px solid #3A3A3F; background: transparent; color: #D8D6D1; font-family: 'JetBrains Mono', monospace; font-size: 12px; font-weight: 500">1×</button>
+</div>
+</div>
+<div class="voice" data-name="OhmyMati" data-src="assets/resena-ohmymati.m4a" style="display: flex; flex-direction: column; align-items: center; gap: 16px; text-align: center; width: 200px">
+<button class="ee-play voice-btn" aria-label="Escuchar la reseña de OhmyMati" aria-pressed="false" style="position: relative; width: 176px; height: 176px; border-radius: 50%; border: none; background: transparent; padding: 0">
+<svg width="176" height="176" viewBox="0 0 176 176" style="position: absolute; inset: 0; transform: rotate(-90deg)"><circle cx="88" cy="88" r="85" fill="none" stroke="#2A2A2E" stroke-width="3"></circle><circle class="ring" cx="88" cy="88" r="85" fill="none" stroke="#FF6A00" stroke-width="3" stroke-linecap="round" stroke-dasharray="534.1" stroke-dashoffset="534.1"></circle></svg>
+<img class="voice-logo" src="assets/resena-ohmymati.jpg" alt="" loading="lazy" style="position: absolute; left: 10px; top: 10px; width: 156px; height: 156px; border-radius: 50%; object-fit: cover; filter: grayscale(1) brightness(0.8) contrast(1.1); transition: filter .6s ease">
+<span style="position: absolute; right: 4px; bottom: 4px; width: 48px; height: 48px; border-radius: 50%; background: #FF6A00; border: 3px solid #0F0F11; display: flex; align-items: center; justify-content: center; box-sizing: border-box"><svg class="ic-play" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#111" stroke-width="2" stroke-linejoin="round"><path d="M8 5v14l11-7z"></path></svg><svg class="ic-pause" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#111" stroke-width="2.4" stroke-linecap="round" style="display:none"><path d="M8 5v14"></path><path d="M16 5v14"></path></svg></span>
+</button>
+<div>
+<div style="font-weight: 500">OhmyMati</div>
+<div style="font-family: 'JetBrains Mono', monospace; font-size: 11px; color: #8C8A85; margin-top: 2px">Reseña en audio · 0:27</div>
+<div style="font-family: 'JetBrains Mono', monospace; font-size: 11px; color: #6E6C68; margin-top: 2px">9 de octubre de 2026</div>
+</div>
+<div style="height: 32px; display: flex; align-items: center; justify-content: center">
+<button class="rate-btn" hidden aria-label="Velocidad 1×. Cambiar a 2×" style="min-width: 44px; height: 32px; padding: 0 10px; border-radius: 999px; border: 1px solid #3A3A3F; background: transparent; color: #D8D6D1; font-family: 'JetBrains Mono', monospace; font-size: 12px; font-weight: 500">1×</button>
+</div>
+</div>
+<div class="voice" data-name="Tercer Ojo" data-src="assets/resena-tercerojo.m4a" style="display: flex; flex-direction: column; align-items: center; gap: 16px; text-align: center; width: 200px">
+<button class="ee-play voice-btn" aria-label="Escuchar la reseña de Tercer Ojo" aria-pressed="false" style="position: relative; width: 176px; height: 176px; border-radius: 50%; border: none; background: transparent; padding: 0">
+<svg width="176" height="176" viewBox="0 0 176 176" style="position: absolute; inset: 0; transform: rotate(-90deg)"><circle cx="88" cy="88" r="85" fill="none" stroke="#2A2A2E" stroke-width="3"></circle><circle class="ring" cx="88" cy="88" r="85" fill="none" stroke="#FF6A00" stroke-width="3" stroke-linecap="round" stroke-dasharray="534.1" stroke-dashoffset="534.1"></circle></svg>
+<img class="voice-logo" src="assets/resena-tercerojo.jpg" alt="" loading="lazy" style="position: absolute; left: 10px; top: 10px; width: 156px; height: 156px; border-radius: 50%; object-fit: cover; filter: grayscale(1) brightness(0.8) contrast(1.1); transition: filter .6s ease">
+<span style="position: absolute; right: 4px; bottom: 4px; width: 48px; height: 48px; border-radius: 50%; background: #FF6A00; border: 3px solid #0F0F11; display: flex; align-items: center; justify-content: center; box-sizing: border-box"><svg class="ic-play" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#111" stroke-width="2" stroke-linejoin="round"><path d="M8 5v14l11-7z"></path></svg><svg class="ic-pause" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#111" stroke-width="2.4" stroke-linecap="round" style="display:none"><path d="M8 5v14"></path><path d="M16 5v14"></path></svg></span>
+</button>
+<div>
+<div style="font-weight: 500">Tercer Ojo</div>
+<div style="font-family: 'JetBrains Mono', monospace; font-size: 11px; color: #8C8A85; margin-top: 2px">Reseña en audio · 1:23</div>
+<div style="font-family: 'JetBrains Mono', monospace; font-size: 11px; color: #6E6C68; margin-top: 2px">10 de octubre de 2026</div>
+</div>
+<div style="height: 32px; display: flex; align-items: center; justify-content: center">
+<button class="rate-btn" hidden aria-label="Velocidad 1×. Cambiar a 2×" style="min-width: 44px; height: 32px; padding: 0 10px; border-radius: 999px; border: 1px solid #3A3A3F; background: transparent; color: #D8D6D1; font-family: 'JetBrains Mono', monospace; font-size: 12px; font-weight: 500">1×</button>
+</div>
+</div>
+</div>
+</div>
+</section>
+
+<section id="servicios" style="border-top: 1px solid #1F1F22">
+<div style="max-width: 1240px; margin: 0 auto; padding: 88px 24px">
+<h2 style="font-family: Anton, Impact, sans-serif; font-weight: 400; font-size: clamp(44px, 6vw, 80px); line-height: 1; margin: 0; text-align: center">CUATRO FORMAS<br><span style="font-family: 'Instrument Serif', Georgia, serif; font-style: italic; color: #FF6A00">de trabajar juntos.</span></h2>
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 16px; margin-top: 48px">
+<div style="border: 1px solid #26262A; border-radius: 12px; padding: 24px; background: #111113; display: flex; flex-direction: column; gap: 14px">
+<div style="font-family: 'JetBrains Mono', monospace; font-size: 12px; color: #FF6A00">01</div>
+<div style="font-family: Anton, Impact, sans-serif; font-size: 30px; line-height: 1">BÁSICO</div>
+<div style="color: #B5B3AE; font-size: 15px">Para publicar rápido y seguido.</div>
+<div style="font-size: 14px; color: #D8D6D1; line-height: 1.8">Cortes y ritmo<br>Música de fondo<br>Corrección de voz<br>Subtítulos</div>
+</div>
+<div style="border: 1px solid #26262A; border-radius: 12px; padding: 24px; background: #111113; display: flex; flex-direction: column; gap: 14px">
+<div style="font-family: 'JetBrains Mono', monospace; font-size: 12px; color: #FF6A00">02</div>
+<div style="font-family: Anton, Impact, sans-serif; font-size: 30px; line-height: 1">PRO</div>
+<div style="color: #B5B3AE; font-size: 15px">Para destacar y retener.</div>
+<div style="font-size: 14px; color: #D8D6D1; line-height: 1.8">Todo lo de Básico<br>Colorimetría y zooms<br>SFX<br>Subtítulos animados<br>Efectos especiales (a consultar)</div>
+</div>
+<div style="border: 1px solid #FF6A00; border-radius: 12px; padding: 24px; background: #111113; display: flex; flex-direction: column; gap: 14px">
+<div style="font-family: 'JetBrains Mono', monospace; font-size: 12px; color: #FF6A00">03</div>
+<div style="font-family: Anton, Impact, sans-serif; font-size: 30px; line-height: 1">PREMIUM IA</div>
+<div style="color: #B5B3AE; font-size: 15px">El máximo nivel de producción.</div>
+<div style="font-size: 14px; color: #D8D6D1; line-height: 1.8">Todo lo de Pro<br>Tomas y planos con IA<br>Voz avanzada con IA<br>Transiciones con IA</div>
+</div>
+<div style="border: 1px solid #26262A; border-radius: 12px; padding: 24px; background: #111113; display: flex; flex-direction: column; gap: 14px">
+<div style="font-family: 'JetBrains Mono', monospace; font-size: 12px; color: #FF6A00">04</div>
+<div style="font-family: Anton, Impact, sans-serif; font-size: 30px; line-height: 1">MOTION GRAPHICS</div>
+<div style="color: #B5B3AE; font-size: 15px">Una identidad visual propia.</div>
+<div style="font-size: 14px; color: #D8D6D1; line-height: 1.8">Animación 2D<br>Íconos para tu marca<br>Plantillas de motion<br>IA cuando hace falta</div>
+</div>
+</div>
+<div style="margin-top: 32px; text-align: center"><a class="ee-btn" href="https://wa.me/5491123641711?text=Hola%2C%20vi%20tu%20portfolio%20y%20quiero%20cotizar%20un%20video"><span class="ee-l" style="background: #FF6A00; color: #111; font-weight: 600; padding: 16px 14px 16px 24px">Pide tu presupuesto</span><span class="ee-cut" aria-hidden="true"></span><span class="ee-r" aria-hidden="true" style="background: #FF6A00; color: #111; font-weight: 600; padding: 16px 20px 16px 12px"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#111" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"></path><path d="M13 6l6 6-6 6"></path></svg></span></a></div>
+</div>
+</section>
+
+<section style="border-top: 1px solid #1F1F22; background: #0F0F11">
+<div style="max-width: 1240px; margin: 0 auto; padding: 88px 24px; display: flex; flex-direction: column; align-items: center; gap: 40px; text-align: center">
+<div style="width: min(100%, 320px); aspect-ratio: 4 / 5; border-radius: 12px; overflow: hidden; border: 1px solid #26262A; background: #141416"><img src="assets/gabriel.jpg" alt="Gabriel, editor de video de Edit Empire" loading="lazy" style="display: block; width: 100%; height: 100%; object-fit: cover"></div>
+<div style="max-width: 620px">
+<h2 style="font-family: Anton, Impact, sans-serif; font-weight: 400; font-size: clamp(40px, 5vw, 64px); line-height: 1; margin: 0; text-align: center">SOY GABRIEL.</h2>
+<p style="font-family: 'Instrument Serif', Georgia, serif; font-style: italic; font-size: 30px; line-height: 1.2; margin: 14px 0 0; color: #FF6A00">Más de 6 años editando.</p>
+<p style="color: #B5B3AE; max-width: 520px; margin: 16px auto 0">Edito para inmobiliarias, gastronomía, marcas personales, bandas y empresas. Me envías el crudo, aunque venga del celular, y te devuelvo un video listo para publicar. Y si falta algo, lo resuelvo con IA.</p>
+</div>
+</div>
+</section>
+
+<section id="contacto" style="border-top: 1px solid #1F1F22">
+<div style="max-width: 1240px; margin: 0 auto; padding: 120px 24px; text-align: center">
+<h2 style="font-family: Anton, Impact, sans-serif; font-weight: 400; font-size: clamp(52px, 9vw, 132px); line-height: 0.95; margin: 0">¿TIENES EL CRUDO?</h2>
+<p style="font-family: 'Instrument Serif', Georgia, serif; font-style: italic; font-size: clamp(30px, 4vw, 48px); color: #FF6A00; margin: 12px 0 0">Yo me encargo del resto.</p>
+<a class="ee-btn" href="https://wa.me/5491123641711?text=Hola%2C%20vi%20tu%20portfolio%20y%20quiero%20cotizar%20un%20video" style="margin-top: 40px"><span class="ee-l" style="background: #FF6A00; color: #111; font-weight: 600; font-size: 18px; padding: 20px 14px 20px 32px">Hablemos</span><span class="ee-cut" aria-hidden="true"></span><span class="ee-r" aria-hidden="true" style="background: #FF6A00; color: #111; font-weight: 600; font-size: 18px; padding: 20px 28px 20px 12px"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#111" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"></path><path d="M13 6l6 6-6 6"></path></svg></span></a>
+<div style="font-family: 'JetBrains Mono', monospace; font-size: 12px; color: #8C8A85; margin-top: 16px">+54 9 11 2364-1711</div>
+</div>
+</section>
+
+<footer style="border-top: 1px solid #1F1F22">
+<div style="max-width: 1240px; margin: 0 auto; padding: 28px 24px; display: flex; flex-wrap: wrap; justify-content: space-between; gap: 12px; font-family: 'JetBrains Mono', monospace; font-size: 12px; color: #6E6C68">
+<span>EDIT EMPIRE · 2026</span>
+<a href="https://www.instagram.com/gabomarchese/" style="color: #B5B3AE">Instagram · @gabomarchese</a>
+<a href="#inicio" style="color: #8C8A85">Volver al inicio ↑</a>
+</div>
+</footer>
+
+</div>
+<script>
+(function () {
+  var ACCENT = '#FF6A00';
+  var WAVES = {"raw": [21, 25, 32, 26, 13, 24, 25, 19, 24, 17, 16, 31, 25, 31, 27, 14, 17, 23, 18, 29, 20, 23, 21, 21, 30, 23, 26, 24, 31, 29, 21, 14, 14, 21, 24, 30, 20, 26, 15, 28, 23, 19, 29, 26, 22, 26, 13, 28, 25, 23, 21, 22, 19, 28, 31, 24, 30, 27, 22, 26, 21, 29, 18, 20], "cln": [20, 26, 27, 24, 7, 21, 24, 15, 22, 11, 5, 29, 25, 28, 24, 5, 6, 13, 13, 27, 5, 24, 8, 16, 28, 19, 27, 25, 28, 25, 21, 5, 5, 20, 25, 28, 20, 25, 8, 25, 24, 10, 26, 26, 18, 27, 5, 24, 23, 24, 20, 24, 20, 27, 27, 24, 28, 26, 21, 24, 23, 28, 23, 13]};
+  var players = []; // everything that can play, so only one sounds at a time
+
+  function stopOthers(except) {
+    players.forEach(function (p) { if (p !== except) p.stop(); });
+    document.querySelectorAll('video').forEach(function (v) { if (v !== except) v.pause(); });
+  }
+  function mmss(s) { s = Math.max(0, s || 0); return Math.floor(s / 60) + ':' + String(Math.floor(s % 60)).padStart(2, '0'); }
+  function setIcon(root, playing) {
+    root.querySelectorAll('.ic-play').forEach(function (e) { e.style.display = playing ? 'none' : ''; });
+    root.querySelectorAll('.ic-pause').forEach(function (e) { e.style.display = playing ? '' : 'none'; });
+  }
+
+  // ---------- mobile menu
+  var burger = document.getElementById('burger');
+  var menu = document.getElementById('mobmenu');
+  function setMenu(open) {
+    burger.setAttribute('aria-expanded', open ? 'true' : 'false');
+    burger.setAttribute('aria-label', open ? 'Cerrar menú' : 'Abrir menú');
+    if (open) menu.removeAttribute('hidden'); else menu.setAttribute('hidden', '');
+  }
+  burger.addEventListener('click', function () { setMenu(menu.hasAttribute('hidden')); });
+  menu.querySelectorAll('a').forEach(function (a) { a.addEventListener('click', function () { setMenu(false); }); });
+
+  // ---------- only one video at a time
+  document.querySelectorAll('video').forEach(function (v) {
+    v.addEventListener('play', function () { stopOthers(v); });
+  });
+
+  // ---------- style filters
+  var fbtns = document.querySelectorAll('.filter-btn');
+  function pick(cat) {
+    fbtns.forEach(function (b) {
+      var on = b.getAttribute('data-filter') === cat;
+      b.setAttribute('aria-pressed', on ? 'true' : 'false');
+      b.style.background = on ? ACCENT : 'transparent';
+      b.style.color = on ? '#111111' : '#D8D6D1';
+      b.style.borderColor = on ? ACCENT : '#3A3A3F';
+    });
+    document.querySelectorAll('.work').forEach(function (w) {
+      var show = cat === 'todo' || w.getAttribute('data-cat') === cat;
+      w.classList.toggle('is-hidden', !show);
+      if (!show) { var v = w.querySelector('video'); if (v) v.pause(); }
+    });
+  }
+  fbtns.forEach(function (b) { b.addEventListener('click', function () { pick(b.getAttribute('data-filter')); }); });
+  pick('todo');
+
+  // ---------- "Mejorar audio": two synced tracks, switch which one is heard
+  var fx = document.getElementById('fx');
+  if (fx) {
+    var A = new Audio('assets/audio-antes.m4a');
+    var B = new Audio('assets/audio-despues.m4a');
+    A.preload = B.preload = 'metadata';
+    var wave = document.getElementById('fx-wave'), head = document.getElementById('fx-head');
+    var tag = document.getElementById('fx-tag'), time = document.getElementById('fx-time');
+    var playBtn = document.getElementById('fx-play'), enh = document.getElementById('fx-enh');
+    var enhanced = false, playing = false, dur = 41.7;
+    var bars = [];
+    for (var i = 0; i < 64; i++) {
+      var b = document.createElement('span');
+      b.style.cssText = 'flex:1;border-radius:1px;transition:height .35s ease, background .35s ease';
+      wave.appendChild(b); bars.push(b);
+    }
+    function draw() {
+      var p = A.duration ? A.currentTime / A.duration : 0;
+      var w = enhanced ? WAVES.cln : WAVES.raw;
+      bars.forEach(function (b, i) {
+        var done = i / 64 < p;
+        b.style.height = (w[i] * 2) + 'px';
+        b.style.background = enhanced ? (done ? ACCENT : '#7A3D12') : (done ? '#D8D6D1' : '#4A4A50');
+      });
+      head.style.left = (p * 100).toFixed(2) + '%';
+      time.textContent = mmss(A.currentTime) + ' / ' + mmss(A.duration || dur);
+    }
+    function paintMode() {
+      A.muted = enhanced; B.muted = !enhanced;
+      tag.textContent = enhanced ? 'DESPUÉS · VOZ LIMPIA' : 'ANTES · CON RUIDO';
+      tag.style.background = enhanced ? ACCENT : '#0B0B0C';
+      tag.style.color = enhanced ? '#111111' : '#D8D6D1';
+      fx.style.background = enhanced ? '#1E1712' : '#161618';
+      fx.style.borderColor = enhanced ? ACCENT : '#26262A';
+      var l = enh.querySelector('.ee-l'), r = enh.querySelector('.ee-r'), ic = r.querySelector('svg');
+      l.textContent = enhanced ? 'Escuchar original' : 'Mejorar audio';
+      [l, r].forEach(function (e) { e.style.background = enhanced ? '#0B0B0C' : ACCENT; e.style.borderColor = enhanced ? '#4A4A50' : ACCENT; });
+      l.style.color = enhanced ? '#F2F0EC' : '#111111';
+      ic.setAttribute('stroke', enhanced ? '#F2F0EC' : '#111111');
+      enh.classList.toggle('ee-o', enhanced);
+      enh.setAttribute('aria-pressed', enhanced ? 'true' : 'false');
+      draw();
+    }
+    var fxPlayer = {
+      stop: function () { if (!playing) return; A.pause(); B.pause(); playing = false; setIcon(playBtn, false); playBtn.setAttribute('aria-label', 'Reproducir audio'); }
+    };
+    players.push(fxPlayer);
+    playBtn.addEventListener('click', function () {
+      if (playing) { fxPlayer.stop(); return; }
+      stopOthers(fxPlayer);
+      B.currentTime = A.currentTime;
+      A.muted = enhanced; B.muted = !enhanced;
+      A.play(); B.play();
+      playing = true; setIcon(playBtn, true); playBtn.setAttribute('aria-label', 'Pausar audio');
+    });
+    enh.addEventListener('click', function () { enhanced = !enhanced; paintMode(); });
+    wave.addEventListener('click', function (e) {
+      var r = wave.getBoundingClientRect();
+      var f = Math.min(1, Math.max(0, (e.clientX - r.left) / r.width));
+      var d = A.duration || dur;
+      A.currentTime = f * d; B.currentTime = f * d; draw();
+    });
+    A.addEventListener('loadedmetadata', draw);
+    A.addEventListener('timeupdate', function () {
+      if (!B.paused && Math.abs(A.currentTime - B.currentTime) > 0.06) B.currentTime = A.currentTime;
+      draw();
+    });
+    A.addEventListener('ended', function () { B.pause(); A.currentTime = 0; B.currentTime = 0; fxPlayer.stop(); playing = false; setIcon(playBtn, false); draw(); });
+    paintMode();
+  }
+
+  // ---------- audio reviews: logo in grey, colour while it plays, 1×/2× while playing
+  document.querySelectorAll('.voice').forEach(function (card) {
+    var btn = card.querySelector('.voice-btn'), ring = card.querySelector('.ring');
+    var logo = card.querySelector('.voice-logo'), rate = card.querySelector('.rate-btn');
+    var name = card.getAttribute('data-name');
+    var a = null, playing = false, speed = 1, C = 534.1;
+    function paint() {
+      setIcon(btn, playing);
+      logo.style.filter = playing ? 'none' : 'grayscale(1) brightness(0.8) contrast(1.1)';
+      btn.setAttribute('aria-pressed', playing ? 'true' : 'false');
+      btn.setAttribute('aria-label', (playing ? 'Pausar la reseña de ' : 'Escuchar la reseña de ') + name);
+      if (playing) rate.removeAttribute('hidden'); else rate.setAttribute('hidden', '');
+      rate.textContent = speed + '×';
+      rate.setAttribute('aria-label', 'Velocidad ' + speed + '×. Cambiar a ' + (speed === 1 ? 2 : 1) + '×');
+      rate.style.background = speed === 2 ? ACCENT : 'transparent';
+      rate.style.color = speed === 2 ? '#111111' : '#D8D6D1';
+      rate.style.borderColor = speed === 2 ? ACCENT : '#3A3A3F';
+    }
+    var player = { stop: function () { if (a && playing) { a.pause(); playing = false; paint(); } } };
+    players.push(player);
+    btn.addEventListener('click', function () {
+      if (!a) {
+        a = new Audio(card.getAttribute('data-src'));
+        a.addEventListener('timeupdate', function () {
+          var p = a.duration ? a.currentTime / a.duration : 0;
+          ring.setAttribute('stroke-dashoffset', String(C * (1 - p)));
+        });
+        a.addEventListener('ended', function () { playing = false; a.currentTime = 0; ring.setAttribute('stroke-dashoffset', String(C)); paint(); });
+      }
+      if (playing) { player.stop(); return; }
+      stopOthers(player);
+      a.playbackRate = speed;
+      a.play(); playing = true; paint();
+    });
+    rate.addEventListener('click', function () { speed = speed === 1 ? 2 : 1; if (a) a.playbackRate = speed; paint(); });
+    paint();
+  });
+})();
+
+</script>
+</body>
+</html>
