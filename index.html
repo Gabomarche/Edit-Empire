@@ -43,11 +43,17 @@ button{font-family:inherit;cursor:pointer}
 .ee-btn:focus-visible{outline:2px solid #F2F0EC;outline-offset:6px;border-radius:6px}
 @media (hover:none){.ee-l{transform:translateX(-1px)}.ee-r{transform:translateX(1px)}}
 .reel-v{display:none}
+.fx-panel{min-width:0}
+.fx-wave{min-width:0;overflow:hidden}
 .nav-burger{display:none}
 .mob-menu{display:none}
 .ee-play{transition:transform .2s cubic-bezier(.2,.9,.25,1.15)}
 .ee-play:hover{transform:scale(1.06)}
 .ee-play:focus-visible{outline:2px solid #F2F0EC;outline-offset:4px}
+@media (max-width: 1024px){
+.mesa-sec{display:none}
+.nav-mesa{display:none}
+}
 @media (max-width: 640px){
 .reel-h{display:none}
 .reel-v{display:block}
@@ -58,6 +64,16 @@ button{font-family:inherit;cursor:pointer}
 .works{grid-template-columns:repeat(2,minmax(0,1fr)) !important;gap:12px !important}
 .sec{padding-top:64px !important;padding-bottom:64px !important}
 .hero{padding-top:40px !important}
+.voices{flex-direction:column !important;align-items:stretch !important;gap:12px !important;margin-top:32px !important}
+.voice-card{flex-direction:row !important;width:auto !important;text-align:left !important;gap:16px !important;padding:12px !important;border:1px solid #26262A;border-radius:12px}
+.voice-btn{width:88px !important;height:88px !important;flex:none}
+.voice-ring{width:88px !important;height:88px !important}
+.voice-img{left:6px !important;top:6px !important;width:76px !important;height:76px !important}
+.voice-badge{width:30px !important;height:30px !important;right:0 !important;bottom:0 !important;border-width:2px !important}
+.voice-badge svg{width:12px;height:12px}
+.voice-rate{margin-left:auto}
+.fx-panel{aspect-ratio:auto !important;min-height:0 !important}
+.fx-wave{height:56px !important}
 }
 
 html{scroll-behavior:smooth}
@@ -78,6 +94,7 @@ html{scroll-behavior:smooth}
 <a href="#inicio" style="font-family: Anton, Impact, sans-serif; font-size: 26px; letter-spacing: 0.02em; color: #F2F0EC">EDIT <span style="color: #FF6A00">EMPIRE</span></a>
 <div style="display: flex; flex-wrap: wrap; align-items: center; gap: 28px; font-size: 14px; color: #B5B3AE">
 <a class="nav-l" href="#trabajos" style="color: #B5B3AE">Trabajos</a>
+<a class="nav-l nav-mesa" href="#mesa" style="color: #B5B3AE">Mesa de edición</a>
 <a class="nav-l" href="#ia" style="color: #B5B3AE">Rescates con IA</a>
 <a class="nav-l" href="#servicios" style="color: #B5B3AE">Servicios</a>
 <a class="ee-btn nav-cta" href="https://wa.me/5491123641711?text=Hola%2C%20vi%20tu%20portfolio%20y%20quiero%20cotizar%20un%20video"><span class="ee-l" style="background: #FF6A00; color: #111; font-weight: 600; padding: 14px 14px 14px 18px">Cotiza tu video</span><span class="ee-cut" aria-hidden="true"></span><span class="ee-r" aria-hidden="true" style="background: #FF6A00; color: #111; font-weight: 600; padding: 14px 14px 14px 12px"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#111" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"></path><path d="M13 6l6 6-6 6"></path></svg></span></a>
@@ -93,11 +110,7 @@ html{scroll-behavior:smooth}
 </header>
 
 <section id="inicio" class="hero" style="max-width: 1240px; margin: 0 auto; padding: 72px 24px 40px">
-<div style="display: flex; justify-content: center; flex-wrap: wrap; gap: 8px 28px; font-family: 'JetBrains Mono', monospace; font-size: 12px; letter-spacing: 0.08em; color: #8C8A85">
-<span><span class="ee-blink" style="color: #FF6A00">●</span> REC · CORTE · 00:00:00:00</span>
-<span>EDICIÓN DE VIDEO · POSTPRODUCCIÓN CON IA</span>
-</div>
-<div style="position: relative; width: max-content; max-width: 100%; height: clamp(64px, 11.5vw, 172px); font-size: clamp(64px, 11.5vw, 172px); margin: 40px auto 0">
+<div style="position: relative; width: max-content; max-width: 100%; height: clamp(64px, 11.5vw, 172px); font-size: clamp(64px, 11.5vw, 172px); margin: 8px auto 0">
 <div aria-hidden="true" style="visibility: hidden; font-family: Anton, Impact, sans-serif; line-height: 1; white-space: nowrap">EDIT EMPIRE</div>
 <div class="cutA">EDIT EMPIRE</div>
 <div class="cutB">EDIT <span style="color: #FF6A00">EMPIRE</span></div>
@@ -114,23 +127,10 @@ html{scroll-behavior:smooth}
 </div>
 </div>
 
-<div style="margin-top: 56px; border-top: 1px solid #26262A; padding-top: 12px">
-<div style="display: flex; justify-content: space-between; font-family: 'JetBrains Mono', monospace; font-size: 11px; color: #6E6C68; padding-left: 44px">
-<span>00:00</span><span>00:15</span><span>00:30</span><span>00:45</span><span>01:00</span>
-</div>
-<div style="position: relative; margin-top: 8px; display: flex; flex-direction: column; gap: 6px">
-<div style="display: flex; align-items: center; gap: 12px"><span style="width: 32px; font-family: 'JetBrains Mono', monospace; font-size: 11px; color: #6E6C68">V2</span><div style="position: relative; flex: 1; height: 18px"><div style="position: absolute; top: 0; bottom: 0; left: 18%; width: 14%; background: #FF6A00; border-radius: 2px"></div><div style="position: absolute; top: 0; bottom: 0; left: 52%; width: 10%; background: #2A2A2E; border-radius: 2px"></div><div style="position: absolute; top: 0; bottom: 0; left: 78%; width: 16%; background: #FF6A00; border-radius: 2px"></div></div></div>
-<div style="display: flex; align-items: center; gap: 12px"><span style="width: 32px; font-family: 'JetBrains Mono', monospace; font-size: 11px; color: #6E6C68">V1</span><div style="position: relative; flex: 1; height: 18px"><div style="position: absolute; top: 0; bottom: 0; left: 0; width: 24%; background: #2A2A2E; border-radius: 2px"></div><div style="position: absolute; top: 0; bottom: 0; left: 25%; width: 30%; background: #34343A; border-radius: 2px"></div><div style="position: absolute; top: 0; bottom: 0; left: 56%; width: 21%; background: #2A2A2E; border-radius: 2px"></div><div style="position: absolute; top: 0; bottom: 0; left: 78%; width: 22%; background: #34343A; border-radius: 2px"></div></div></div>
-<div style="display: flex; align-items: center; gap: 12px"><span style="width: 32px; font-family: 'JetBrains Mono', monospace; font-size: 11px; color: #6E6C68">A1</span><div style="position: relative; flex: 1; height: 18px"><div style="position: absolute; top: 0; bottom: 0; left: 0; width: 100%; background: #1E1E21; border-radius: 2px"></div></div></div>
-<div style="position: absolute; top: -6px; bottom: -6px; left: 44px; right: 0">
-<div class="ee-ph" style="position: absolute; top: 0; bottom: 0; width: 2px; background: #FF6A00"></div>
-</div>
-</div>
-</div>
 </section>
 
 <section id="reel" style="max-width: 1240px; margin: 0 auto; padding: 24px 24px 96px">
-<div style="display: flex; justify-content: center; gap: 28px; margin-bottom: 12px; font-family: 'JetBrains Mono', monospace; font-size: 12px; letter-spacing: 0.08em; color: #8C8A85"><span><span style="color: #FF6A00">●</span> SHOWREEL · 2026</span><span>00:00:39</span></div>
+<div style="display: flex; justify-content: center; gap: 28px; margin-bottom: 12px; font-family: 'JetBrains Mono', monospace; font-size: 12px; letter-spacing: 0.08em; color: #8C8A85"><span><span style="color: #FF6A00">●</span> SHOWREEL · 2026</span><span>00:00:36</span></div>
 <div class="reel-h" style="position: relative; aspect-ratio: 16 / 9; background: #000; border: 1px solid #26262A; border-radius: 12px; overflow: hidden">
 <video src="assets/showreel-horizontal.mp4" poster="assets/showreel-horizontal.jpg" controls playsinline preload="metadata" aria-label="Showreel de Edit Empire, versión horizontal" style="display: block; width: 100%; height: 100%; object-fit: cover; background: #000"></video>
 </div>
@@ -194,9 +194,49 @@ html{scroll-behavior:smooth}
 <div style="font-size: 13px; color: #8C8A85; margin-top: -8px">Cortes, ritmo y subtítulos</div>
 </div>
 </div>
+<div style="margin-top: 40px; text-align: center"><a class="ee-btn" href="#contacto"><span class="ee-l" style="background: #FF6A00; color: #111; font-weight: 600; padding: 16px 14px 16px 24px">Hablemos</span><span class="ee-cut" aria-hidden="true"></span><span class="ee-r" aria-hidden="true" style="background: #FF6A00; color: #111; font-weight: 600; padding: 16px 20px 16px 12px"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#111" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"></path><path d="M13 6l6 6-6 6"></path></svg></span></a></div>
 </div>
 </section>
 
+<section id="mesa" class="mesa-sec" style="border-top: 1px solid #1F1F22; background: #0F0F11">
+<div style="max-width: 1240px; margin: 0 auto; padding: 88px 24px">
+<h2 style="font-family: Anton, Impact, sans-serif; font-weight: 400; font-size: clamp(44px, 6vw, 80px); line-height: 1; margin: 0; text-align: center">EDITA CONMIGO.<br><span style="font-family: 'Instrument Serif', Georgia, serif; font-style: italic; color: #FF6A00">Bloque por bloque.</span></h2>
+<p style="color: #B5B3AE; max-width: 560px; margin: 16px auto 0; text-align: center">Este es un clip crudo. Suma cada bloque de la postproducción y mira cómo se transforma, hasta quedar listo para publicar.</p>
+<div style="display: flex; flex-wrap: wrap; gap: 48px; margin-top: 48px; align-items: flex-start">
+<div style="flex: 0 1 320px; min-width: 260px">
+<div id="m-frame" style="position: relative; aspect-ratio: 9 / 16; border-radius: 14px; overflow: hidden; border: 1px solid #2A2A2E; background: #262626; transition: background .4s">
+<div id="m-skin" style="position: absolute; left: 50%; top: 30%; width: 34%; aspect-ratio: 1; border-radius: 50%; transform: translateX(-50%); background: #7A7A7A; transition: background .4s"></div>
+<div id="m-subj" style="position: absolute; left: 50%; top: 50%; width: 64%; height: 46%; border-radius: 40% 40% 0 0; transform: translateX(-50%); background: #4A4A4A; transition: background .4s"></div>
+<span id="m-stage" style="position: absolute; top: 12px; left: 12px; font-family: 'JetBrains Mono', monospace; font-size: 11px; background: #0B0B0C; color: #F2F0EC; padding: 4px 8px; border-radius: 4px">CRUDO</span>
+<span id="m-s3" hidden style="position: absolute; top: 12px; right: 12px; font-family: 'JetBrains Mono', monospace; font-size: 11px; background: #0B0B0C; color: #FF6A00; padding: 4px 8px; border-radius: 4px">♫ MÚSICA</span>
+<div id="m-s4" hidden style="position: absolute; top: 48px; right: 12px; width: 38%; aspect-ratio: 4 / 5; border-radius: 8px; border: 2px solid #FF6A00; background: #3A3026; padding: 6px; box-sizing: border-box"><span style="position: absolute; left: 6px; bottom: 6px; font-family: 'JetBrains Mono', monospace; font-size: 11px; color: #F2F0EC">B-ROLL IA</span></div>
+<span id="m-s6" hidden style="position: absolute; top: 46%; left: 12px; font-family: 'JetBrains Mono', monospace; font-size: 11px; background: #FF6A00; color: #111; padding: 4px 8px; border-radius: 4px">SFX · WHOOSH</span>
+<div id="m-bars" style="position: absolute; left: 12px; right: 12px; bottom: 14px; height: 30px; display: flex; align-items: center; gap: 3px"></div>
+<div id="m-s5" hidden style="position: absolute; left: 0; right: 0; bottom: 64px; text-align: center; font-weight: 600; font-size: 22px; line-height: 1.2; text-transform: uppercase">esto es <span style="background: #FF6A00; color: #111; padding: 0 6px; border-radius: 4px">editar</span></div>
+<div id="m-s8" hidden style="position: absolute; inset: 0; background: #0B0B0C; flex-direction: column; align-items: center; justify-content: center; gap: 14px">
+<div style="font-family: Anton, Impact, sans-serif; font-size: 34px; letter-spacing: 0.02em">EDIT <span style="color: #FF6A00">EMPIRE</span></div>
+<span style="font-family: 'Instrument Serif', Georgia, serif; font-style: italic; font-size: 20px; color: #FF6A00">Listo para publicar.</span>
+</div>
+</div>
+<div style="display: flex; justify-content: space-between; margin-top: 12px; font-family: 'JetBrains Mono', monospace; font-size: 12px; color: #8C8A85"><span id="m-prog">0 / 8 bloques</span><span id="m-tc">00:00:00:00</span></div>
+</div>
+<div style="flex: 999 1 520px; min-width: 0">
+<div id="m-blocks" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 12px"></div>
+<div style="margin-top: 28px; border: 1px solid #26262A; border-radius: 10px; padding: 14px 16px; background: #0B0B0C">
+<div style="display: flex; justify-content: space-between; flex-wrap: wrap; gap: 8px; font-family: 'JetBrains Mono', monospace; font-size: 11px; color: #6E6C68; margin-bottom: 8px"><span>TIMELINE</span><span>Toca un bloque agregado para quitarlo</span></div>
+<div id="m-slots" style="display: grid; grid-template-columns: repeat(8, minmax(0, 1fr)); gap: 4px"></div>
+</div>
+<div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 12px; margin-top: 20px">
+<button class="ee-btn" id="m-next" style="color: #111"><span class="ee-l" style="background: #FF6A00; color: #111; font-weight: 600; font-size: 15px; min-height: 48px; box-sizing: border-box; padding: 14px 14px 14px 22px">Agregar cortes</span><span class="ee-cut" aria-hidden="true"></span><span class="ee-r" aria-hidden="true" style="background: #FF6A00; color: #111; font-weight: 600; font-size: 15px; min-height: 48px; box-sizing: border-box; padding: 14px 18px 14px 12px"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#111" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"></path><path d="M13 6l6 6-6 6"></path></svg></span></button>
+<div style="display: flex; flex-wrap: wrap; gap: 12px; margin-left: auto">
+<button class="ee-btn ee-o" id="m-prev" style="color: #F2F0EC"><span class="ee-l" aria-hidden="true" style="border: 1px solid #4A4A50; background: #0B0B0C; color: #F2F0EC; font-size: 15px; min-height: 48px; box-sizing: border-box; padding: 13px 12px 13px 18px; border-radius: 6px 0 0 6px"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#F2F0EC" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5"></path><path d="M11 6l-6 6 6 6"></path></svg></span><span class="ee-cut" aria-hidden="true"></span><span class="ee-r" style="border: 1px solid #4A4A50; background: #0B0B0C; color: #F2F0EC; font-size: 15px; min-height: 48px; box-sizing: border-box; padding: 13px 22px 13px 14px; border-radius: 0 6px 6px 0">Nada que quitar</span></button>
+<button class="ee-btn ee-o" id="m-reset" style="color: #F2F0EC"><span class="ee-l" style="border: 1px solid #4A4A50; background: #0B0B0C; color: #F2F0EC; font-size: 15px; min-height: 48px; box-sizing: border-box; padding: 13px 14px 13px 22px">Volver al crudo</span><span class="ee-cut" aria-hidden="true"></span><span class="ee-r" aria-hidden="true" style="border: 1px solid #4A4A50; background: #0B0B0C; color: #F2F0EC; font-size: 15px; min-height: 48px; box-sizing: border-box; padding: 13px 18px 13px 12px"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#F2F0EC" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12a8 8 0 1 0 2.3-5.6"></path><path d="M4 4v4h4"></path></svg></span></button>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
 
 <section id="ia" style="border-top: 1px solid #1F1F22">
 <div style="max-width: 1240px; margin: 0 auto; padding: 88px 24px">
@@ -211,12 +251,12 @@ html{scroll-behavior:smooth}
 <div style="color: #B5B3AE; font-size: 15px; margin-top: 6px">Con una sola foto del baño, generé con IA la toma de video que faltaba.</div>
 </div>
 <div style="border: 1px solid #26262A; border-radius: 12px; padding: 16px; background: #111113">
-<div id="fx" style="aspect-ratio: 8 / 5; min-height: 230px; border-radius: 8px; background: #161618; border: 1px solid #26262A; padding: 14px; box-sizing: border-box; display: flex; flex-direction: column; justify-content: space-between; gap: 12px; transition: background .35s, border-color .35s">
+<div id="fx" class="fx-panel" style="aspect-ratio: 8 / 5; min-height: 230px; border-radius: 8px; background: #161618; border: 1px solid #26262A; padding: 14px; box-sizing: border-box; display: flex; flex-direction: column; justify-content: space-between; gap: 12px; transition: background .35s, border-color .35s">
 <div style="display: flex; justify-content: space-between; align-items: center; gap: 8px; font-family: 'JetBrains Mono', monospace; font-size: 11px">
 <span id="fx-tag" style="background: #0B0B0C; color: #D8D6D1; padding: 3px 7px; border-radius: 4px">ANTES · CON RUIDO</span>
 <span style="color: #8C8A85">A1 · VOZ</span>
 </div>
-<button id="fx-wave" aria-label="Elegir el momento del audio" style="position: relative; display: flex; align-items: center; gap: 2px; height: 72px; width: 100%; padding: 0; border: none; background: transparent; cursor: pointer"><span id="fx-head" style="position: absolute; top: -4px; bottom: -4px; left: 0%; width: 2px; background: #F2F0EC; pointer-events: none; z-index: 1"></span></button>
+<button id="fx-wave" class="fx-wave" aria-label="Elegir el momento del audio" style="position: relative; display: flex; align-items: center; gap: 2px; height: 72px; width: 100%; padding: 0; border: none; background: transparent; cursor: pointer"><span id="fx-head" style="position: absolute; top: -4px; bottom: -4px; left: 0%; width: 2px; background: #F2F0EC; pointer-events: none; z-index: 1"></span></button>
 <div style="display: flex; flex-wrap: wrap; align-items: center; gap: 12px">
 <button class="ee-play" id="fx-play" aria-label="Reproducir audio" style="position: relative; width: 56px; height: 56px; border-radius: 50%; border: none; background: #FF6A00; padding: 0; display: flex; align-items: center; justify-content: center; flex: none"><svg class="ic-play" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#111" stroke-width="2" stroke-linejoin="round"><path d="M8 5v14l11-7z"></path></svg><svg class="ic-pause" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#111" stroke-width="2.4" stroke-linecap="round" style="display:none"><path d="M8 5v14"></path><path d="M16 5v14"></path></svg></button>
 <span id="fx-time" style="font-family: 'JetBrains Mono', monospace; font-size: 12px; color: #B5B3AE">0:00 / 0:41</span>
@@ -249,49 +289,49 @@ html{scroll-behavior:smooth}
 <section style="border-top: 1px solid #1F1F22; background: #0F0F11">
 <div style="max-width: 1240px; margin: 0 auto; padding: 72px 24px">
 <h2 style="font-family: Anton, Impact, sans-serif; font-weight: 400; font-size: clamp(44px, 6vw, 80px); line-height: 1; margin: 0; text-align: center">NO LO DIGO YO.<br><span style="font-family: 'Instrument Serif', Georgia, serif; font-style: italic; color: #FF6A00">Escúchalos.</span></h2>
-<div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 48px 40px; margin-top: 56px">
-<div class="voice" data-name="Blink Marketing" data-src="assets/resena-blink.m4a" style="display: flex; flex-direction: column; align-items: center; gap: 16px; text-align: center; width: 200px">
+<div class="voices" style="display: flex; flex-wrap: wrap; justify-content: center; gap: 48px 40px; margin-top: 56px">
+<div class="voice voice-card" data-name="Blink Marketing" data-src="assets/resena-blink.m4a" style="display: flex; flex-direction: column; align-items: center; gap: 16px; text-align: center; width: 200px">
 <button class="ee-play voice-btn" aria-label="Escuchar la reseña de Blink Marketing" aria-pressed="false" style="position: relative; width: 176px; height: 176px; border-radius: 50%; border: none; background: transparent; padding: 0">
-<svg width="176" height="176" viewBox="0 0 176 176" style="position: absolute; inset: 0; transform: rotate(-90deg)"><circle cx="88" cy="88" r="85" fill="none" stroke="#2A2A2E" stroke-width="3"></circle><circle class="ring" cx="88" cy="88" r="85" fill="none" stroke="#FF6A00" stroke-width="3" stroke-linecap="round" stroke-dasharray="534.1" stroke-dashoffset="534.1"></circle></svg>
-<img class="voice-logo" src="assets/resena-blink.jpg" alt="" loading="lazy" style="position: absolute; left: 10px; top: 10px; width: 156px; height: 156px; border-radius: 50%; object-fit: cover; filter: grayscale(1) brightness(0.8) contrast(1.1); transition: filter .6s ease">
-<span style="position: absolute; right: 4px; bottom: 4px; width: 48px; height: 48px; border-radius: 50%; background: #FF6A00; border: 3px solid #0F0F11; display: flex; align-items: center; justify-content: center; box-sizing: border-box"><svg class="ic-play" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#111" stroke-width="2" stroke-linejoin="round"><path d="M8 5v14l11-7z"></path></svg><svg class="ic-pause" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#111" stroke-width="2.4" stroke-linecap="round" style="display:none"><path d="M8 5v14"></path><path d="M16 5v14"></path></svg></span>
+<svg class="voice-ring" width="176" height="176" viewBox="0 0 176 176" style="position: absolute; inset: 0; transform: rotate(-90deg)"><circle cx="88" cy="88" r="85" fill="none" stroke="#2A2A2E" stroke-width="3"></circle><circle class="ring" cx="88" cy="88" r="85" fill="none" stroke="#FF6A00" stroke-width="3" stroke-linecap="round" stroke-dasharray="534.1" stroke-dashoffset="534.1"></circle></svg>
+<img class="voice-logo voice-img" src="assets/resena-blink.jpg" alt="" loading="lazy" style="position: absolute; left: 10px; top: 10px; width: 156px; height: 156px; border-radius: 50%; object-fit: cover; filter: grayscale(1) brightness(0.8) contrast(1.1); transition: filter .6s ease">
+<span class="voice-badge" style="position: absolute; right: 4px; bottom: 4px; width: 48px; height: 48px; border-radius: 50%; background: #FF6A00; border: 3px solid #0F0F11; display: flex; align-items: center; justify-content: center; box-sizing: border-box"><svg class="ic-play" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#111" stroke-width="2" stroke-linejoin="round"><path d="M8 5v14l11-7z"></path></svg><svg class="ic-pause" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#111" stroke-width="2.4" stroke-linecap="round" style="display:none"><path d="M8 5v14"></path><path d="M16 5v14"></path></svg></span>
 </button>
 <div>
 <div style="font-weight: 500">Blink Marketing</div>
 <div style="font-family: 'JetBrains Mono', monospace; font-size: 11px; color: #8C8A85; margin-top: 2px">Reseña en audio · 1:03</div>
 <div style="font-family: 'JetBrains Mono', monospace; font-size: 11px; color: #6E6C68; margin-top: 2px">21 de junio de 2026</div>
 </div>
-<div style="height: 32px; display: flex; align-items: center; justify-content: center">
+<div class="voice-rate" style="height: 32px; display: flex; align-items: center; justify-content: center">
 <button class="rate-btn" hidden aria-label="Velocidad 1×. Cambiar a 2×" style="min-width: 44px; height: 32px; padding: 0 10px; border-radius: 999px; border: 1px solid #3A3A3F; background: transparent; color: #D8D6D1; font-family: 'JetBrains Mono', monospace; font-size: 12px; font-weight: 500">1×</button>
 </div>
 </div>
-<div class="voice" data-name="OhmyMati" data-src="assets/resena-ohmymati.m4a" style="display: flex; flex-direction: column; align-items: center; gap: 16px; text-align: center; width: 200px">
+<div class="voice voice-card" data-name="OhmyMati" data-src="assets/resena-ohmymati.m4a" style="display: flex; flex-direction: column; align-items: center; gap: 16px; text-align: center; width: 200px">
 <button class="ee-play voice-btn" aria-label="Escuchar la reseña de OhmyMati" aria-pressed="false" style="position: relative; width: 176px; height: 176px; border-radius: 50%; border: none; background: transparent; padding: 0">
-<svg width="176" height="176" viewBox="0 0 176 176" style="position: absolute; inset: 0; transform: rotate(-90deg)"><circle cx="88" cy="88" r="85" fill="none" stroke="#2A2A2E" stroke-width="3"></circle><circle class="ring" cx="88" cy="88" r="85" fill="none" stroke="#FF6A00" stroke-width="3" stroke-linecap="round" stroke-dasharray="534.1" stroke-dashoffset="534.1"></circle></svg>
-<img class="voice-logo" src="assets/resena-ohmymati.jpg" alt="" loading="lazy" style="position: absolute; left: 10px; top: 10px; width: 156px; height: 156px; border-radius: 50%; object-fit: cover; filter: grayscale(1) brightness(0.8) contrast(1.1); transition: filter .6s ease">
-<span style="position: absolute; right: 4px; bottom: 4px; width: 48px; height: 48px; border-radius: 50%; background: #FF6A00; border: 3px solid #0F0F11; display: flex; align-items: center; justify-content: center; box-sizing: border-box"><svg class="ic-play" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#111" stroke-width="2" stroke-linejoin="round"><path d="M8 5v14l11-7z"></path></svg><svg class="ic-pause" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#111" stroke-width="2.4" stroke-linecap="round" style="display:none"><path d="M8 5v14"></path><path d="M16 5v14"></path></svg></span>
+<svg class="voice-ring" width="176" height="176" viewBox="0 0 176 176" style="position: absolute; inset: 0; transform: rotate(-90deg)"><circle cx="88" cy="88" r="85" fill="none" stroke="#2A2A2E" stroke-width="3"></circle><circle class="ring" cx="88" cy="88" r="85" fill="none" stroke="#FF6A00" stroke-width="3" stroke-linecap="round" stroke-dasharray="534.1" stroke-dashoffset="534.1"></circle></svg>
+<img class="voice-logo voice-img" src="assets/resena-ohmymati.jpg" alt="" loading="lazy" style="position: absolute; left: 10px; top: 10px; width: 156px; height: 156px; border-radius: 50%; object-fit: cover; filter: grayscale(1) brightness(0.8) contrast(1.1); transition: filter .6s ease">
+<span class="voice-badge" style="position: absolute; right: 4px; bottom: 4px; width: 48px; height: 48px; border-radius: 50%; background: #FF6A00; border: 3px solid #0F0F11; display: flex; align-items: center; justify-content: center; box-sizing: border-box"><svg class="ic-play" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#111" stroke-width="2" stroke-linejoin="round"><path d="M8 5v14l11-7z"></path></svg><svg class="ic-pause" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#111" stroke-width="2.4" stroke-linecap="round" style="display:none"><path d="M8 5v14"></path><path d="M16 5v14"></path></svg></span>
 </button>
 <div>
 <div style="font-weight: 500">OhmyMati</div>
 <div style="font-family: 'JetBrains Mono', monospace; font-size: 11px; color: #8C8A85; margin-top: 2px">Reseña en audio · 0:27</div>
 <div style="font-family: 'JetBrains Mono', monospace; font-size: 11px; color: #6E6C68; margin-top: 2px">9 de octubre de 2026</div>
 </div>
-<div style="height: 32px; display: flex; align-items: center; justify-content: center">
+<div class="voice-rate" style="height: 32px; display: flex; align-items: center; justify-content: center">
 <button class="rate-btn" hidden aria-label="Velocidad 1×. Cambiar a 2×" style="min-width: 44px; height: 32px; padding: 0 10px; border-radius: 999px; border: 1px solid #3A3A3F; background: transparent; color: #D8D6D1; font-family: 'JetBrains Mono', monospace; font-size: 12px; font-weight: 500">1×</button>
 </div>
 </div>
-<div class="voice" data-name="Tercer Ojo" data-src="assets/resena-tercerojo.m4a" style="display: flex; flex-direction: column; align-items: center; gap: 16px; text-align: center; width: 200px">
+<div class="voice voice-card" data-name="Tercer Ojo" data-src="assets/resena-tercerojo.m4a" style="display: flex; flex-direction: column; align-items: center; gap: 16px; text-align: center; width: 200px">
 <button class="ee-play voice-btn" aria-label="Escuchar la reseña de Tercer Ojo" aria-pressed="false" style="position: relative; width: 176px; height: 176px; border-radius: 50%; border: none; background: transparent; padding: 0">
-<svg width="176" height="176" viewBox="0 0 176 176" style="position: absolute; inset: 0; transform: rotate(-90deg)"><circle cx="88" cy="88" r="85" fill="none" stroke="#2A2A2E" stroke-width="3"></circle><circle class="ring" cx="88" cy="88" r="85" fill="none" stroke="#FF6A00" stroke-width="3" stroke-linecap="round" stroke-dasharray="534.1" stroke-dashoffset="534.1"></circle></svg>
-<img class="voice-logo" src="assets/resena-tercerojo.jpg" alt="" loading="lazy" style="position: absolute; left: 10px; top: 10px; width: 156px; height: 156px; border-radius: 50%; object-fit: cover; filter: grayscale(1) brightness(0.8) contrast(1.1); transition: filter .6s ease">
-<span style="position: absolute; right: 4px; bottom: 4px; width: 48px; height: 48px; border-radius: 50%; background: #FF6A00; border: 3px solid #0F0F11; display: flex; align-items: center; justify-content: center; box-sizing: border-box"><svg class="ic-play" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#111" stroke-width="2" stroke-linejoin="round"><path d="M8 5v14l11-7z"></path></svg><svg class="ic-pause" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#111" stroke-width="2.4" stroke-linecap="round" style="display:none"><path d="M8 5v14"></path><path d="M16 5v14"></path></svg></span>
+<svg class="voice-ring" width="176" height="176" viewBox="0 0 176 176" style="position: absolute; inset: 0; transform: rotate(-90deg)"><circle cx="88" cy="88" r="85" fill="none" stroke="#2A2A2E" stroke-width="3"></circle><circle class="ring" cx="88" cy="88" r="85" fill="none" stroke="#FF6A00" stroke-width="3" stroke-linecap="round" stroke-dasharray="534.1" stroke-dashoffset="534.1"></circle></svg>
+<img class="voice-logo voice-img" src="assets/resena-tercerojo.jpg" alt="" loading="lazy" style="position: absolute; left: 10px; top: 10px; width: 156px; height: 156px; border-radius: 50%; object-fit: cover; filter: grayscale(1) brightness(0.8) contrast(1.1); transition: filter .6s ease">
+<span class="voice-badge" style="position: absolute; right: 4px; bottom: 4px; width: 48px; height: 48px; border-radius: 50%; background: #FF6A00; border: 3px solid #0F0F11; display: flex; align-items: center; justify-content: center; box-sizing: border-box"><svg class="ic-play" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#111" stroke-width="2" stroke-linejoin="round"><path d="M8 5v14l11-7z"></path></svg><svg class="ic-pause" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#111" stroke-width="2.4" stroke-linecap="round" style="display:none"><path d="M8 5v14"></path><path d="M16 5v14"></path></svg></span>
 </button>
 <div>
 <div style="font-weight: 500">Tercer Ojo</div>
 <div style="font-family: 'JetBrains Mono', monospace; font-size: 11px; color: #8C8A85; margin-top: 2px">Reseña en audio · 1:23</div>
 <div style="font-family: 'JetBrains Mono', monospace; font-size: 11px; color: #6E6C68; margin-top: 2px">10 de octubre de 2026</div>
 </div>
-<div style="height: 32px; display: flex; align-items: center; justify-content: center">
+<div class="voice-rate" style="height: 32px; display: flex; align-items: center; justify-content: center">
 <button class="rate-btn" hidden aria-label="Velocidad 1×. Cambiar a 2×" style="min-width: 44px; height: 32px; padding: 0 10px; border-radius: 999px; border: 1px solid #3A3A3F; background: transparent; color: #D8D6D1; font-family: 'JetBrains Mono', monospace; font-size: 12px; font-weight: 500">1×</button>
 </div>
 </div>
@@ -412,24 +452,40 @@ html{scroll-behavior:smooth}
   fbtns.forEach(function (b) { b.addEventListener('click', function () { pick(b.getAttribute('data-filter')); }); });
   pick('todo');
 
-  // ---------- "Mejorar audio": two synced tracks, switch which one is heard
+  // ---------- "Mejorar audio": both versions decoded and played through Web Audio from the same
+  // start time (sample-locked); the button only crossfades which one is heard.
   var fx = document.getElementById('fx');
   if (fx) {
-    var A = new Audio('assets/audio-antes.m4a');
-    var B = new Audio('assets/audio-despues.m4a');
-    A.preload = B.preload = 'metadata';
     var wave = document.getElementById('fx-wave'), head = document.getElementById('fx-head');
     var tag = document.getElementById('fx-tag'), time = document.getElementById('fx-time');
     var playBtn = document.getElementById('fx-play'), enh = document.getElementById('fx-enh');
-    var enhanced = false, playing = false, dur = 41.7;
+    var enhanced = false, playing = false, dur = 41.7, offset = 0, startAt = null;
+    var ctx = null, bufA = null, bufB = null, srcA = null, srcB = null, gA = null, gB = null, loading = null, timer = null, token = 0;
     var bars = [];
     for (var i = 0; i < 64; i++) {
       var b = document.createElement('span');
       b.style.cssText = 'flex:1;border-radius:1px;transition:height .35s ease, background .35s ease';
       wave.appendChild(b); bars.push(b);
     }
+    function getCtx() {
+      if (!ctx) ctx = new (window.AudioContext || window.webkitAudioContext)();
+      if (ctx.state === 'suspended') ctx.resume();
+      return ctx;
+    }
+    function decode(url) {
+      return fetch(url).then(function (r) { return r.arrayBuffer(); }).then(function (data) {
+        return new Promise(function (res, rej) { getCtx().decodeAudioData(data, res, rej); });
+      });
+    }
+    function load() {
+      if (!loading) loading = Promise.all([decode('assets/audio-antes.m4a'), decode('assets/audio-despues.m4a')]).then(function (r) {
+        bufA = r[0]; bufB = r[1]; dur = Math.min(bufA.duration, bufB.duration); draw();
+      });
+      return loading;
+    }
+    function pos() { return playing && startAt != null ? Math.min(dur, ctx.currentTime - startAt) : offset; }
     function draw() {
-      var p = A.duration ? A.currentTime / A.duration : 0;
+      var p = Math.min(1, pos() / dur);
       var w = enhanced ? WAVES.cln : WAVES.raw;
       bars.forEach(function (b, i) {
         var done = i / 64 < p;
@@ -437,10 +493,51 @@ html{scroll-behavior:smooth}
         b.style.background = enhanced ? (done ? ACCENT : '#7A3D12') : (done ? '#D8D6D1' : '#4A4A50');
       });
       head.style.left = (p * 100).toFixed(2) + '%';
-      time.textContent = mmss(A.currentTime) + ' / ' + mmss(A.duration || dur);
+      time.textContent = mmss(pos()) + ' / ' + mmss(dur);
     }
+    function kill() {
+      clearInterval(timer); token++;
+      [srcA, srcB].forEach(function (x) { if (x) { try { x.stop(); } catch (e) {} } });
+      srcA = srcB = null;
+    }
+    function start(at) {
+      var c = getCtx(); kill(); var my = token;
+      gA = c.createGain(); gB = c.createGain();
+      gA.gain.value = enhanced ? 0 : 1; gB.gain.value = enhanced ? 1 : 0;
+      gA.connect(c.destination); gB.connect(c.destination);
+      srcA = c.createBufferSource(); srcA.buffer = bufA; srcA.connect(gA);
+      srcB = c.createBufferSource(); srcB.buffer = bufB; srcB.connect(gB);
+      var t0 = c.currentTime + 0.03;
+      srcA.start(t0, at); srcB.start(t0, at); startAt = t0 - at;
+      srcA.onended = function () {
+        if (my !== token) return;
+        clearInterval(timer); playing = false; startAt = null; offset = 0;
+        setIcon(playBtn, false); playBtn.setAttribute('aria-label', 'Reproducir audio'); draw();
+      };
+      timer = setInterval(draw, 100);
+    }
+    var elA = null, elB = null;
+    function useElements() {
+      if (!elA) {
+        elA = new Audio('assets/audio-antes.m4a'); elB = new Audio('assets/audio-despues.m4a');
+        elA.addEventListener('timeupdate', function () { offset = elA.currentTime; if (elA.duration) dur = elA.duration; draw(); });
+        elA.addEventListener('ended', function () { elB.pause(); playing = false; offset = 0; elA.currentTime = 0; elB.currentTime = 0; setIcon(playBtn, false); draw(); });
+      }
+      if (!playing) return;
+      elA.currentTime = offset; elB.currentTime = offset;
+      elA.muted = enhanced; elB.muted = !enhanced;
+      elA.play(); elB.play();
+    }
+    var fxPlayer = {
+      stop: function () {
+        if (!playing) return;
+        offset = pos(); startAt = null; playing = false; kill();
+        if (elA) { elA.pause(); elB.pause(); }
+        setIcon(playBtn, false); playBtn.setAttribute('aria-label', 'Reproducir audio'); draw();
+      }
+    };
+    players.push(fxPlayer);
     function paintMode() {
-      A.muted = enhanced; B.muted = !enhanced;
       tag.textContent = enhanced ? 'DESPUÉS · VOZ LIMPIA' : 'ANTES · CON RUIDO';
       tag.style.background = enhanced ? ACCENT : '#0B0B0C';
       tag.style.color = enhanced ? '#111111' : '#D8D6D1';
@@ -455,32 +552,87 @@ html{scroll-behavior:smooth}
       enh.setAttribute('aria-pressed', enhanced ? 'true' : 'false');
       draw();
     }
-    var fxPlayer = {
-      stop: function () { if (!playing) return; A.pause(); B.pause(); playing = false; setIcon(playBtn, false); playBtn.setAttribute('aria-label', 'Reproducir audio'); }
-    };
-    players.push(fxPlayer);
     playBtn.addEventListener('click', function () {
+      getCtx();
       if (playing) { fxPlayer.stop(); return; }
       stopOthers(fxPlayer);
-      B.currentTime = A.currentTime;
-      A.muted = enhanced; B.muted = !enhanced;
-      A.play(); B.play();
       playing = true; setIcon(playBtn, true); playBtn.setAttribute('aria-label', 'Pausar audio');
+      load().then(function () {
+        if (!playing) return;
+        if (offset >= dur - 0.1) offset = 0;
+        start(offset);
+      }).catch(function () { useElements(); });
     });
-    enh.addEventListener('click', function () { enhanced = !enhanced; paintMode(); });
+    enh.addEventListener('click', function () {
+      enhanced = !enhanced;
+      if (elA) { elA.muted = enhanced; elB.muted = !enhanced; }
+      if (gA && ctx) {
+        gA.gain.setTargetAtTime(enhanced ? 0 : 1, ctx.currentTime, 0.015);
+        gB.gain.setTargetAtTime(enhanced ? 1 : 0, ctx.currentTime, 0.015);
+      }
+      paintMode();
+    });
     wave.addEventListener('click', function (e) {
       var r = wave.getBoundingClientRect();
       var f = Math.min(1, Math.max(0, (e.clientX - r.left) / r.width));
-      var d = A.duration || dur;
-      A.currentTime = f * d; B.currentTime = f * d; draw();
-    });
-    A.addEventListener('loadedmetadata', draw);
-    A.addEventListener('timeupdate', function () {
-      if (!B.paused && Math.abs(A.currentTime - B.currentTime) > 0.06) B.currentTime = A.currentTime;
+      offset = f * dur;
+      if (playing && bufA) start(offset);
+      else if (playing && elA) { elA.currentTime = offset; elB.currentTime = offset; }
       draw();
     });
-    A.addEventListener('ended', function () { B.pause(); A.currentTime = 0; B.currentTime = 0; fxPlayer.stop(); playing = false; setIcon(playBtn, false); draw(); });
     paintMode();
+  }
+
+  // ---------- "Edita conmigo": interactive edit table (desktop only)
+  var mBlocks = document.getElementById('m-blocks');
+  if (mBlocks) {
+    var steps = [
+      ['CORTES', 'CORTES', 'Ritmo y silencios fuera'], ['SONIDO', 'SONIDO', 'Voz limpia y nivelada'],
+      ['MÚSICA', 'MÚSICA', 'Según el momento del video'], ['ESTRUCTURA + IA', 'IA', 'B-roll, tomas y transiciones con IA'],
+      ['SUBTÍTULOS', 'SUBS', 'Animados, palabra por palabra'], ['SFX', 'SFX', 'Efectos que marcan el ritmo'],
+      ['COLOR', 'COLOR', 'Colorimetría final'], ['LOGO', 'LOGO', 'La firma de la marca al cierre']
+    ];
+    var raw = [9, 26, 6, 30, 14, 4, 28, 10, 22, 5, 30, 12, 7, 27, 16, 3, 29, 11, 24, 6, 18, 30, 8, 20];
+    var smooth = [10, 14, 18, 22, 20, 16, 12, 16, 20, 24, 22, 18, 14, 18, 22, 24, 20, 16, 12, 14, 18, 20, 16, 12];
+    var step = 0, $ = function (id) { return document.getElementById(id); };
+    var mBars = $('m-bars'), barEls = [], blockEls = [], slotEls = [];
+    raw.forEach(function () { var d = document.createElement('div'); d.style.cssText = 'flex:1;border-radius:2px;transition:height .3s, background .3s'; mBars.appendChild(d); barEls.push(d); });
+    steps.forEach(function (st, i) {
+      var b = document.createElement('button');
+      b.style.cssText = 'text-align:left;min-height:76px;padding:14px 16px;border-radius:10px;display:flex;gap:14px;align-items:flex-start;border:1px solid;cursor:pointer;font-family:inherit';
+      b.innerHTML = '<span style="font-family:\'JetBrains Mono\',monospace;font-size:12px;padding-top:3px">' + String(i + 1).padStart(2, '0') + '</span><span style="display:flex;flex-direction:column;gap:2px"><span style="font-family:Anton,Impact,sans-serif;font-size:20px;letter-spacing:.02em;line-height:1.1">' + st[0] + '</span><span class="d" style="font-size:13px">' + st[2] + '</span></span>';
+      b.addEventListener('click', function () { step = i < step ? i : i + 1; render(); });
+      mBlocks.appendChild(b); blockEls.push(b);
+      var s = document.createElement('div');
+      s.style.cssText = "height:30px;border-radius:3px;border:1px dashed;font-family:'JetBrains Mono',monospace;font-size:11px;display:flex;align-items:center;justify-content:center;overflow:hidden;white-space:nowrap";
+      s.textContent = st[1]; $('m-slots').appendChild(s); slotEls.push(s);
+    });
+    function show(id, on) { var e = $(id); if (on) { e.removeAttribute('hidden'); if (id === 'm-s8') e.style.display = 'flex'; } else { e.setAttribute('hidden', ''); e.style.display = ''; } }
+    function render() {
+      var graded = step >= 7, clean = step >= 2, pad = function (x) { return String(x).padStart(2, '0'); };
+      blockEls.forEach(function (b, i) {
+        var added = i < step, next = i === step;
+        b.style.background = added ? ACCENT : '#141416'; b.style.color = added ? '#111111' : '#F2F0EC';
+        b.style.borderColor = added || next ? ACCENT : '#2A2A2E';
+        b.querySelector('.d').style.color = added ? '#2B1500' : '#A3A19C';
+        b.setAttribute('aria-pressed', added ? 'true' : 'false');
+        var s = slotEls[i]; s.style.background = added ? ACCENT : 'transparent'; s.style.color = added ? '#111111' : '#4A4845'; s.style.borderColor = added ? ACCENT : '#34343A';
+      });
+      (clean ? smooth : raw).forEach(function (h, i) { barEls[i].style.height = h + 'px'; barEls[i].style.background = clean ? ACCENT : '#6E6C68'; });
+      $('m-frame').style.background = graded ? '#2E1F14' : '#262626';
+      $('m-subj').style.background = graded ? '#1E3A4A' : '#4A4A4A';
+      $('m-skin').style.background = graded ? '#D9A07A' : '#7A7A7A';
+      $('m-stage').textContent = step === 0 ? 'CRUDO' : (step === 8 ? 'ENTREGADO' : 'BLOQUE ' + step + ' / 8');
+      show('m-s3', step >= 3); show('m-s4', step >= 4); show('m-s5', step >= 5); show('m-s6', step >= 6); show('m-s8', step >= 8);
+      $('m-prog').textContent = step + ' / 8 bloques';
+      $('m-tc').textContent = '00:00:' + pad(step * 7) + ':' + pad((step * 5) % 24);
+      $('m-next').querySelector('.ee-l').textContent = step < 8 ? 'Agregar ' + steps[step][0].toLowerCase() : 'Video terminado';
+      $('m-prev').querySelector('.ee-r').textContent = step > 0 ? 'Quitar ' + steps[step - 1][0].toLowerCase() : 'Nada que quitar';
+    }
+    $('m-next').addEventListener('click', function () { step = Math.min(8, step + 1); render(); });
+    $('m-prev').addEventListener('click', function () { step = Math.max(0, step - 1); render(); });
+    $('m-reset').addEventListener('click', function () { step = 0; render(); });
+    render();
   }
 
   // ---------- audio reviews: logo in grey, colour while it plays, 1×/2× while playing
