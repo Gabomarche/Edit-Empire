@@ -44,6 +44,8 @@ button{font-family:inherit;cursor:pointer}
 @media (hover:none){.ee-l{transform:translateX(-1px)}.ee-r{transform:translateX(1px)}}
 .reel-v{display:none}
 .fx-panel{min-width:0}
+.rev-banner{transition:border-color .2s}
+.rev-banner:hover{border-color:#4A4A50;color:#F2F0EC}
 .fx-wave{min-width:0;overflow:hidden}
 .nav-burger{display:none}
 .mob-menu{display:none}
@@ -74,6 +76,8 @@ button{font-family:inherit;cursor:pointer}
 .voice-rate{margin-left:auto}
 .fx-panel{aspect-ratio:auto !important;min-height:0 !important}
 .fx-wave{height:56px !important}
+.rev-quotes{grid-template-columns:1fr !important;gap:14px !important}
+.rev-banner{padding:16px 18px !important;margin-top:32px !important}
 }
 
 html{scroll-behavior:smooth}
@@ -126,6 +130,26 @@ html{scroll-behavior:smooth}
 <a class="ee-btn ee-o" href="#reel"><span class="ee-l" style="border: 1px solid #4A4A50; background: #0B0B0C; color: #F2F0EC; padding: 15px 14px 15px 24px">Ver el reel</span><span class="ee-cut" aria-hidden="true"></span><span class="ee-r" aria-hidden="true" style="border: 1px solid #4A4A50; background: #0B0B0C; color: #F2F0EC; padding: 15px 20px 15px 12px"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#F2F0EC" stroke-width="2" stroke-linejoin="round"><path d="M7 4v16l13-8z"></path></svg></span></a>
 </div>
 </div>
+<a href="#resenas" class="rev-banner" style="display: block; max-width: 980px; margin: 44px auto 0; padding: 18px 24px; border: 1px solid #26262A; border-radius: 12px; background: #111113; color: #F2F0EC; text-align: center">
+<div style="display: flex; align-items: center; justify-content: center; gap: 10px; flex-wrap: wrap">
+<span role="img" aria-label="5 de 5 estrellas" style="display: inline-flex; gap: 3px"><svg width="14" height="14" viewBox="0 0 24 24" fill="#FF6A00" aria-hidden="true"><path d="M12 2.5l2.9 6.1 6.6.8-4.9 4.6 1.3 6.6L12 17.3l-5.9 3.3 1.3-6.6-4.9-4.6 6.6-.8z"></path></svg><svg width="14" height="14" viewBox="0 0 24 24" fill="#FF6A00" aria-hidden="true"><path d="M12 2.5l2.9 6.1 6.6.8-4.9 4.6 1.3 6.6L12 17.3l-5.9 3.3 1.3-6.6-4.9-4.6 6.6-.8z"></path></svg><svg width="14" height="14" viewBox="0 0 24 24" fill="#FF6A00" aria-hidden="true"><path d="M12 2.5l2.9 6.1 6.6.8-4.9 4.6 1.3 6.6L12 17.3l-5.9 3.3 1.3-6.6-4.9-4.6 6.6-.8z"></path></svg><svg width="14" height="14" viewBox="0 0 24 24" fill="#FF6A00" aria-hidden="true"><path d="M12 2.5l2.9 6.1 6.6.8-4.9 4.6 1.3 6.6L12 17.3l-5.9 3.3 1.3-6.6-4.9-4.6 6.6-.8z"></path></svg><svg width="14" height="14" viewBox="0 0 24 24" fill="#FF6A00" aria-hidden="true"><path d="M12 2.5l2.9 6.1 6.6.8-4.9 4.6 1.3 6.6L12 17.3l-5.9 3.3 1.3-6.6-4.9-4.6 6.6-.8z"></path></svg></span>
+<span style="font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: 0.08em; color: #B5B3AE">5,0 · RESEÑAS REALES DE CLIENTES</span>
+</div>
+<div class="rev-quotes" style="display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 24px; margin-top: 16px">
+<figure style="margin: 0; display: flex; flex-direction: column; gap: 6px">
+<blockquote style="margin: 0; font-family: 'Instrument Serif', Georgia, serif; font-style: italic; font-size: 20px; line-height: 1.25; color: #F2F0EC">“Para mí es un 10 de 10 en servicio. Lo súper recomiendo.”</blockquote>
+<figcaption style="font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: 0.06em; color: #8C8A85">— BLINK MARKETING</figcaption>
+</figure>
+<figure style="margin: 0; display: flex; flex-direction: column; gap: 6px">
+<blockquote style="margin: 0; font-family: 'Instrument Serif', Georgia, serif; font-style: italic; font-size: 20px; line-height: 1.25; color: #F2F0EC">“Desde el principio entendió súper rápido lo que quería hacer con mi marca personal.”</blockquote>
+<figcaption style="font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: 0.06em; color: #8C8A85">— OHMYMATI</figcaption>
+</figure>
+<figure style="margin: 0; display: flex; flex-direction: column; gap: 6px">
+<blockquote style="margin: 0; font-family: 'Instrument Serif', Georgia, serif; font-style: italic; font-size: 20px; line-height: 1.25; color: #F2F0EC">“Te importa realmente el resultado. Por eso te seguimos eligiendo.”</blockquote>
+<figcaption style="font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: 0.06em; color: #8C8A85">— TERCER OJO</figcaption>
+</figure>
+</div>
+</a>
 
 </section>
 
@@ -286,7 +310,7 @@ html{scroll-behavior:smooth}
 </div>
 </section>
 
-<section style="border-top: 1px solid #1F1F22; background: #0F0F11">
+<section id="resenas" style="border-top: 1px solid #1F1F22; background: #0F0F11">
 <div style="max-width: 1240px; margin: 0 auto; padding: 72px 24px">
 <h2 style="font-family: Anton, Impact, sans-serif; font-weight: 400; font-size: clamp(44px, 6vw, 80px); line-height: 1; margin: 0; text-align: center">NO LO DIGO YO.<br><span style="font-family: 'Instrument Serif', Georgia, serif; font-style: italic; color: #FF6A00">Escúchalos.</span></h2>
 <div class="voices" style="display: flex; flex-wrap: wrap; justify-content: center; gap: 48px 40px; margin-top: 56px">
