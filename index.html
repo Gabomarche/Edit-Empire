@@ -632,9 +632,9 @@ html{scroll-behavior:smooth}
   var mBlocks = document.getElementById('m-blocks');
   if (mBlocks) {
     var steps = [
-      ['CORTES', 'CORTES', 'Ritmo y silencios fuera'], ['SEGUIMIENTO DE CÁMARA', 'CÁMARA', 'El encuadre sigue al sujeto'],
-      ['SONIDO', 'SONIDO', 'Voz limpia y nivelada'], ['MÚSICA', 'MÚSICA', 'Según el momento del video'],
-      ['COLOR', 'COLOR', 'Colorimetría final'], ['ESTRUCTURA + IA', 'IA', 'B-roll, tomas y transiciones con IA'],
+      ['CORTES', 'CORTES', 'Ritmo y silencios fuera'], ['ESTRUCTURA + IA', 'IA', 'B-roll, tomas y transiciones con IA'],
+      ['SEGUIMIENTO DE CÁMARA', 'CÁMARA', 'El encuadre sigue al sujeto'], ['SONIDO', 'SONIDO', 'Voz limpia y nivelada'],
+      ['MÚSICA', 'MÚSICA', 'Según el momento del video'], ['COLOR', 'COLOR', 'Colorimetría final'],
       ['SUBTÍTULOS', 'SUBS', 'Animados, palabra por palabra'], ['SFX', 'SFX', 'Efectos que marcan el ritmo'],
       ['LOGO', 'LOGO', 'La firma de la marca al cierre']
     ];
@@ -655,7 +655,7 @@ html{scroll-behavior:smooth}
     });
     function show(id, on) { var e = $(id); if (on) { e.removeAttribute('hidden'); if (id === 'm-s8') e.style.display = 'flex'; } else { e.setAttribute('hidden', ''); e.style.display = ''; } }
     function render() {
-      var graded = step >= 5, clean = step >= 3, pad = function (x) { return String(x).padStart(2, '0'); };
+      var graded = step >= 6, clean = step >= 4, pad = function (x) { return String(x).padStart(2, '0'); };
       blockEls.forEach(function (b, i) {
         var added = i < step, next = i === step;
         b.style.background = added ? ACCENT : '#141416'; b.style.color = added ? '#111111' : '#F2F0EC';
@@ -669,7 +669,7 @@ html{scroll-behavior:smooth}
       $('m-subj').style.background = graded ? '#1E3A4A' : '#4A4A4A';
       $('m-skin').style.background = graded ? '#D9A07A' : '#7A7A7A';
       $('m-stage').textContent = step === 0 ? 'CRUDO' : (step === 9 ? 'ENTREGADO' : 'BLOQUE ' + step + ' / 9');
-      show('m-s2', step >= 2); show('m-s3', step >= 4); show('m-s4', step >= 6); show('m-s5', step >= 7); show('m-s6', step >= 8); show('m-s8', step >= 9);
+      show('m-s2', step >= 3); show('m-s3', step >= 5); show('m-s4', step >= 2); show('m-s5', step >= 7); show('m-s6', step >= 8); show('m-s8', step >= 9);
       $('m-prog').textContent = step + ' / 9 bloques';
       $('m-tc').textContent = '00:00:' + pad(step * 7) + ':' + pad((step * 5) % 24);
       $('m-next').querySelector('.ee-l').textContent = step < 9 ? 'Agregar ' + steps[step][0].toLowerCase() : 'Video terminado';
