@@ -237,6 +237,7 @@ html{scroll-behavior:smooth}
 <div id="m-skin" style="position: absolute; left: 50%; top: 30%; width: 34%; aspect-ratio: 1; border-radius: 50%; transform: translateX(-50%); background: #7A7A7A; transition: background .4s"></div>
 <div id="m-subj" style="position: absolute; left: 50%; top: 50%; width: 64%; height: 46%; border-radius: 40% 40% 0 0; transform: translateX(-50%); background: #4A4A4A; transition: background .4s"></div>
 <span id="m-stage" style="position: absolute; top: 12px; left: 12px; font-family: 'JetBrains Mono', monospace; font-size: 11px; background: #0B0B0C; color: #F2F0EC; padding: 4px 8px; border-radius: 4px">CRUDO</span>
+<div id="m-s2" hidden style="position: absolute; left: 50%; top: 26%; width: 46%; aspect-ratio: 1; transform: translateX(-50%); border: 2px dashed #FF6A00; border-radius: 8px"><span style="position: absolute; top: -22px; left: 0; font-family: 'JetBrains Mono', monospace; font-size: 10px; color: #FF6A00; white-space: nowrap">◎ TRACKING</span></div>
 <span id="m-s3" hidden style="position: absolute; top: 12px; right: 12px; font-family: 'JetBrains Mono', monospace; font-size: 11px; background: #0B0B0C; color: #FF6A00; padding: 4px 8px; border-radius: 4px">♫ MÚSICA</span>
 <div id="m-s4" hidden style="position: absolute; top: 48px; right: 12px; width: 38%; aspect-ratio: 4 / 5; border-radius: 8px; border: 2px solid #FF6A00; background: #3A3026; padding: 6px; box-sizing: border-box"><span style="position: absolute; left: 6px; bottom: 6px; font-family: 'JetBrains Mono', monospace; font-size: 11px; color: #F2F0EC">B-ROLL IA</span></div>
 <span id="m-s6" hidden style="position: absolute; top: 46%; left: 12px; font-family: 'JetBrains Mono', monospace; font-size: 11px; background: #FF6A00; color: #111; padding: 4px 8px; border-radius: 4px">SFX · WHOOSH</span>
@@ -247,13 +248,13 @@ html{scroll-behavior:smooth}
 <span style="font-family: 'Instrument Serif', Georgia, serif; font-style: italic; font-size: 20px; color: #FF6A00">Listo para publicar.</span>
 </div>
 </div>
-<div style="display: flex; justify-content: space-between; margin-top: 12px; font-family: 'JetBrains Mono', monospace; font-size: 12px; color: #8C8A85"><span id="m-prog">0 / 8 bloques</span><span id="m-tc">00:00:00:00</span></div>
+<div style="display: flex; justify-content: space-between; margin-top: 12px; font-family: 'JetBrains Mono', monospace; font-size: 12px; color: #8C8A85"><span id="m-prog">0 / 9 bloques</span><span id="m-tc">00:00:00:00</span></div>
 </div>
 <div style="flex: 999 1 520px; min-width: 0">
 <div id="m-blocks" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 12px"></div>
 <div style="margin-top: 28px; border: 1px solid #26262A; border-radius: 10px; padding: 14px 16px; background: #0B0B0C">
 <div style="display: flex; justify-content: space-between; flex-wrap: wrap; gap: 8px; font-family: 'JetBrains Mono', monospace; font-size: 11px; color: #6E6C68; margin-bottom: 8px"><span>TIMELINE</span><span>Toca un bloque agregado para quitarlo</span></div>
-<div id="m-slots" style="display: grid; grid-template-columns: repeat(8, minmax(0, 1fr)); gap: 4px"></div>
+<div id="m-slots" style="display: grid; grid-template-columns: repeat(9, minmax(0, 1fr)); gap: 4px"></div>
 </div>
 <div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 12px; margin-top: 20px">
 <button class="ee-btn" id="m-next" style="color: #111"><span class="ee-l" style="background: #FF6A00; color: #111; font-weight: 600; font-size: 15px; min-height: 48px; box-sizing: border-box; padding: 14px 14px 14px 22px">Agregar cortes</span><span class="ee-cut" aria-hidden="true"></span><span class="ee-r" aria-hidden="true" style="background: #FF6A00; color: #111; font-weight: 600; font-size: 15px; min-height: 48px; box-sizing: border-box; padding: 14px 18px 14px 12px"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#111" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"></path><path d="M13 6l6 6-6 6"></path></svg></span></button>
@@ -631,10 +632,11 @@ html{scroll-behavior:smooth}
   var mBlocks = document.getElementById('m-blocks');
   if (mBlocks) {
     var steps = [
-      ['CORTES', 'CORTES', 'Ritmo y silencios fuera'], ['SONIDO', 'SONIDO', 'Voz limpia y nivelada'],
-      ['MÚSICA', 'MÚSICA', 'Según el momento del video'], ['ESTRUCTURA + IA', 'IA', 'B-roll, tomas y transiciones con IA'],
+      ['CORTES', 'CORTES', 'Ritmo y silencios fuera'], ['SEGUIMIENTO DE CÁMARA', 'CÁMARA', 'El encuadre sigue al sujeto'],
+      ['SONIDO', 'SONIDO', 'Voz limpia y nivelada'], ['MÚSICA', 'MÚSICA', 'Según el momento del video'],
+      ['COLOR', 'COLOR', 'Colorimetría final'], ['ESTRUCTURA + IA', 'IA', 'B-roll, tomas y transiciones con IA'],
       ['SUBTÍTULOS', 'SUBS', 'Animados, palabra por palabra'], ['SFX', 'SFX', 'Efectos que marcan el ritmo'],
-      ['COLOR', 'COLOR', 'Colorimetría final'], ['LOGO', 'LOGO', 'La firma de la marca al cierre']
+      ['LOGO', 'LOGO', 'La firma de la marca al cierre']
     ];
     var raw = [9, 26, 6, 30, 14, 4, 28, 10, 22, 5, 30, 12, 7, 27, 16, 3, 29, 11, 24, 6, 18, 30, 8, 20];
     var smooth = [10, 14, 18, 22, 20, 16, 12, 16, 20, 24, 22, 18, 14, 18, 22, 24, 20, 16, 12, 14, 18, 20, 16, 12];
@@ -653,7 +655,7 @@ html{scroll-behavior:smooth}
     });
     function show(id, on) { var e = $(id); if (on) { e.removeAttribute('hidden'); if (id === 'm-s8') e.style.display = 'flex'; } else { e.setAttribute('hidden', ''); e.style.display = ''; } }
     function render() {
-      var graded = step >= 7, clean = step >= 2, pad = function (x) { return String(x).padStart(2, '0'); };
+      var graded = step >= 5, clean = step >= 3, pad = function (x) { return String(x).padStart(2, '0'); };
       blockEls.forEach(function (b, i) {
         var added = i < step, next = i === step;
         b.style.background = added ? ACCENT : '#141416'; b.style.color = added ? '#111111' : '#F2F0EC';
@@ -666,14 +668,14 @@ html{scroll-behavior:smooth}
       $('m-frame').style.background = graded ? '#2E1F14' : '#262626';
       $('m-subj').style.background = graded ? '#1E3A4A' : '#4A4A4A';
       $('m-skin').style.background = graded ? '#D9A07A' : '#7A7A7A';
-      $('m-stage').textContent = step === 0 ? 'CRUDO' : (step === 8 ? 'ENTREGADO' : 'BLOQUE ' + step + ' / 8');
-      show('m-s3', step >= 3); show('m-s4', step >= 4); show('m-s5', step >= 5); show('m-s6', step >= 6); show('m-s8', step >= 8);
-      $('m-prog').textContent = step + ' / 8 bloques';
+      $('m-stage').textContent = step === 0 ? 'CRUDO' : (step === 9 ? 'ENTREGADO' : 'BLOQUE ' + step + ' / 9');
+      show('m-s2', step >= 2); show('m-s3', step >= 4); show('m-s4', step >= 6); show('m-s5', step >= 7); show('m-s6', step >= 8); show('m-s8', step >= 9);
+      $('m-prog').textContent = step + ' / 9 bloques';
       $('m-tc').textContent = '00:00:' + pad(step * 7) + ':' + pad((step * 5) % 24);
-      $('m-next').querySelector('.ee-l').textContent = step < 8 ? 'Agregar ' + steps[step][0].toLowerCase() : 'Video terminado';
+      $('m-next').querySelector('.ee-l').textContent = step < 9 ? 'Agregar ' + steps[step][0].toLowerCase() : 'Video terminado';
       $('m-prev').querySelector('.ee-r').textContent = step > 0 ? 'Quitar ' + steps[step - 1][0].toLowerCase() : 'Nada que quitar';
     }
-    $('m-next').addEventListener('click', function () { step = Math.min(8, step + 1); render(); });
+    $('m-next').addEventListener('click', function () { step = Math.min(9, step + 1); render(); });
     $('m-prev').addEventListener('click', function () { step = Math.max(0, step - 1); render(); });
     $('m-reset').addEventListener('click', function () { step = 0; render(); });
     render();
