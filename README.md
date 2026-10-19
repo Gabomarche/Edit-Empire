@@ -20,7 +20,7 @@ Desde ese momento, cada cambio que se suba a la rama `main` se publica solo en u
 
 ## Publicar en Hostinger
 
-En el **Administrador de archivos** de Hostinger, subí `index.html` y la carpeta `assets` dentro de `public_html`.
+En el **Administrador de archivos** de Hostinger, sube dentro de `public_html`: `index.html`, la carpeta `assets`, `robots.txt`, `sitemap.xml`, `site.webmanifest` y `.htaccess` (en Mac es un archivo oculto: en Finder, Cmd + Shift + punto para verlo).
 
 ## Agregar una reseña o un trabajo
 
