@@ -596,15 +596,35 @@ html{scroll-behavior:smooth}
 <script>
 (function () {
 function mesaEngine(vids, bar, onUpdate) {
-  var cur = 0, playing = false, wipe = null, token = 0;
+  // shown = clip on screen and heard; target = last block the visitor asked for.
+  // Fast clicks only move the target: a clip that is still loading is dropped (nothing on screen changes),
+  // a wipe that already started is allowed to finish and then jumps straight to the latest target.
+  var shown = 0, target = 0, playing = false, T = null, token = 0;
   vids.forEach(function (v, i) {
     v.loop = true; v.playsInline = true;
+    v.setAttribute('data-src', v.getAttribute('src') || '');
     v.style.visibility = i === 0 ? 'visible' : 'hidden';
     v.style.zIndex = i === 0 ? '2' : '0';
-    v.addEventListener('timeupdate', function () { if (i === cur) onUpdate(); });
-    v.addEventListener('loadedmetadata', function () { if (i === cur) onUpdate(); });
+    v.addEventListener('timeupdate', function () { if (i === shown) onUpdate(); });
+    v.addEventListener('loadedmetadata', function () { if (i === shown) onUpdate(); });
   });
-  function warm(i) { var v = vids[i]; if (v && v.preload !== 'auto') { v.preload = 'auto'; try { v.load(); } catch (e) {} } }
+  function warm(i) {
+    var v = vids[i]; if (!v) return;
+    if (!v.getAttribute('src')) v.setAttribute('src', v.getAttribute('data-src'));
+    if (v.preload !== 'auto') { v.preload = 'auto'; try { v.load(); } catch (e) {} }
+  }
+  function unload(i) {
+    var v = vids[i]; if (!v || !v.getAttribute('src') || v.preload !== 'auto') return;
+    v.pause(); v.removeAttribute('src'); v.preload = 'none'; try { v.load(); } catch (e) {}
+  }
+  // keep only the clips around the current one alive, so the phone/computer is never decoding many videos
+  function tidy() {
+    vids.forEach(function (v, i) {
+      if (Math.abs(i - shown) > 1 && i !== target && !(T && i === T.to)) unload(i);
+    });
+    if (vids[shown].readyState >= 3) warm(shown + 1);
+    else vids[shown].addEventListener('canplaythrough', function () { if (!T) warm(shown + 1); }, { once: true });
+  }
   function mapT(a, b, t) {
     var da = vids[a].duration, db = vids[b].duration;
     if (!da || !db) return t;
@@ -612,25 +632,31 @@ function mesaEngine(vids, bar, onUpdate) {
     return (t % da) * db / da;
   }
   function clip(v, s) { v.style.clipPath = s; v.style.webkitClipPath = s; }
-  function settle() { if (wipe) wipe(); }
-  function go(to) {
-    if (to === cur || to < 0 || to >= vids.length) return;
-    settle();
-    var from = cur, A = vids[from], B = vids[to], dir = to > from ? 1 : -1, my = ++token, started = false, raf = 0;
-    cur = to; warm(to); warm(to + 1);
-    function finish() {
-      cancelAnimationFrame(raf); wipe = null;
-      clip(B, 'none'); B.volume = 1; B.style.visibility = 'visible'; B.style.zIndex = '2';
-      if (A !== B) { A.pause(); A.volume = 1; A.style.visibility = 'hidden'; A.style.zIndex = '0'; }
+  function cancelLoading() {
+    if (!T || T.phase !== 'loading') return;
+    token++; var B = vids[T.to]; if (T.to !== shown) { B.pause(); B.style.visibility = 'hidden'; B.style.zIndex = '0'; }
+    T = null;
+  }
+  function start(to) {
+    if (to === shown) { T = null; onUpdate(); return; }
+    var from = shown, A = vids[from], B = vids[to], dir = to > from ? 1 : -1, my = ++token, raf = 0;
+    var quick = Math.abs(to - from) > 1 || target !== to;
+    T = { to: to, phase: 'loading' };
+    warm(to);
+    function finishWipe() {
+      cancelAnimationFrame(raf);
+      clip(B, 'none'); B.volume = 1; B.style.zIndex = '2'; B.style.visibility = 'visible';
+      A.pause(); A.volume = 1; A.style.visibility = 'hidden'; A.style.zIndex = '0';
       bar.style.display = 'none';
+      shown = to; T = null;
       if (playing && B.paused) { var p = B.play(); if (p && p.catch) p.catch(function () {}); }
       onUpdate();
+      if (target !== shown) start(target); else tidy();
     }
-    function abortPending() { token++; started = true; finish(); }
-    wipe = abortPending;
-    function start() {
-      if (started || my !== token) return; started = true;
-      var k0 = performance.now(), D = 850;
+    function wipe() {
+      if (my !== token) return;
+      T.phase = 'wiping'; T.finish = finishWipe;
+      var k0 = performance.now(), D = quick ? 480 : 800;
       B.style.zIndex = '3'; A.style.zIndex = '2'; B.style.visibility = 'visible';
       bar.style.display = 'block';
       function paint(p) {
@@ -640,38 +666,60 @@ function mesaEngine(vids, bar, onUpdate) {
         if (playing) { B.volume = e; A.volume = 1 - e; }
       }
       paint(0);
-      wipe = finish;
-      function f(now) { var p = Math.min(1, (now - k0) / D); paint(p); if (p < 1) raf = requestAnimationFrame(f); else finish(); }
+      function f(now) { var p = Math.min(1, (now - k0) / D); paint(p); if (p < 1) raf = requestAnimationFrame(f); else finishWipe(); }
       raf = requestAnimationFrame(f);
+    }
+    function ready() {
+      if (my !== token) return;
+      // wait until the new clip really has a picture before showing it
+      if (B.readyState >= 2) { begin(); return; }
+      var done = false;
+      function go2() { if (done || my !== token) return; done = true; begin(); }
+      B.addEventListener('loadeddata', go2, { once: true }); B.addEventListener('canplay', go2, { once: true });
+    }
+    function begin() {
+      if (my !== token) return;
+      if (playing) {
+        B.volume = 0; var p = B.play();
+        if (p && p.then) { p.then(function () { wipe(); }, function () { wipe(); }); return; }
+      }
+      wipe();
     }
     function seekAndGo() {
       if (my !== token) return;
-      var t = mapT(from, to, (A.currentTime || 0) + (playing ? 0.25 : 0)), fired = false;
-      function ready() {
-        if (fired || my !== token) return; fired = true;
-        if (playing) { B.volume = 0; var p = B.play(); if (p && p.catch) p.catch(function () {}); }
-        start();
-      }
-      B.addEventListener('seeked', ready, { once: true });
-      try { B.currentTime = t; } catch (e) { ready(); }
-      setTimeout(ready, 1500);
+      var t = mapT(from, to, (A.currentTime || 0) + (playing ? 0.3 : 0)), fired = false;
+      function sk() { if (fired) return; fired = true; ready(); }
+      if (Math.abs((B.currentTime || 0) - t) < 0.05) { sk(); return; }
+      B.addEventListener('seeked', sk, { once: true });
+      try { B.currentTime = t; } catch (e) { sk(); }
     }
-    if (B.readyState >= 1) seekAndGo();
-    else { B.addEventListener('loadedmetadata', seekAndGo, { once: true }); setTimeout(function () { if (my === token && !started) { started = true; finish(); } }, 6000); }
+    if (B.readyState >= 1) seekAndGo(); else B.addEventListener('loadedmetadata', seekAndGo, { once: true });
     onUpdate();
   }
+  function go(to) {
+    if (to < 0 || to >= vids.length) return;
+    target = to;
+    if (T && T.phase === 'wiping') return;           // let the running wipe end; it then jumps to the latest target
+    if (T && T.phase === 'loading') { if (T.to === to) return; cancelLoading(); }
+    start(to);
+  }
   function play() {
-    playing = true; warm(cur); warm(cur + 1); var v = vids[cur]; v.volume = 1;
+    playing = true; warm(shown); var v = vids[shown]; v.volume = 1;
     var p = v.play(); if (p && p.catch) p.catch(function () { playing = false; onUpdate(); });
     onUpdate();
   }
-  function pause() { playing = false; settle(); vids.forEach(function (v) { v.pause(); }); onUpdate(); }
+  function pause() {
+    playing = false;
+    if (T && T.phase === 'wiping') T.finish();
+    vids.forEach(function (v) { v.pause(); });
+    onUpdate();
+  }
   return {
-    go: go, play: play, pause: pause, warm: function () { warm(cur); warm(cur + 1); },
+    go: go, play: play, pause: pause, warm: function () { warm(shown); warm(shown + 1); },
     toggle: function () { if (playing) pause(); else play(); },
     isPlaying: function () { return playing; },
-    seek: function (f) { settle(); var v = vids[cur]; if (v.duration) v.currentTime = f * v.duration; onUpdate(); },
-    time: function () { var v = vids[cur]; return [v.currentTime || 0, v.duration || 0]; }
+    seek: function (f) { var v = vids[shown]; if (v.duration) v.currentTime = f * v.duration; onUpdate(); },
+    time: function () { var v = vids[shown]; return [v.currentTime || 0, v.duration || 0]; }
   };
 }
 
