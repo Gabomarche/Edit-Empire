@@ -233,21 +233,24 @@ html{scroll-behavior:smooth}
 <p style="color: #B5B3AE; max-width: 560px; margin: 16px auto 0; text-align: center">Este es un clip crudo. Suma cada bloque de la postproducción y mira cómo se transforma, hasta quedar listo para publicar.</p>
 <div style="display: flex; flex-wrap: wrap; gap: 48px; margin-top: 48px; align-items: flex-start">
 <div style="flex: 0 1 320px; min-width: 260px">
-<div id="m-frame" style="position: relative; aspect-ratio: 9 / 16; border-radius: 14px; overflow: hidden; border: 1px solid #2A2A2E; background: #262626; transition: background .4s">
-<div id="m-skin" style="position: absolute; left: 50%; top: 30%; width: 34%; aspect-ratio: 1; border-radius: 50%; transform: translateX(-50%); background: #7A7A7A; transition: background .4s"></div>
-<div id="m-subj" style="position: absolute; left: 50%; top: 50%; width: 64%; height: 46%; border-radius: 40% 40% 0 0; transform: translateX(-50%); background: #4A4A4A; transition: background .4s"></div>
-<span id="m-stage" style="position: absolute; top: 12px; left: 12px; font-family: 'JetBrains Mono', monospace; font-size: 11px; background: #0B0B0C; color: #F2F0EC; padding: 4px 8px; border-radius: 4px">CRUDO</span>
-<div id="m-s2" hidden style="position: absolute; left: 50%; top: 26%; width: 46%; aspect-ratio: 1; transform: translateX(-50%); border: 2px dashed #FF6A00; border-radius: 8px"><span style="position: absolute; top: -22px; left: 0; font-family: 'JetBrains Mono', monospace; font-size: 10px; color: #FF6A00; white-space: nowrap">◎ TRACKING</span></div>
-<span id="m-s7" hidden style="position: absolute; top: 46px; left: 12px; font-family: 'JetBrains Mono', monospace; font-size: 11px; background: #0B0B0C; color: #FF6A00; border: 1px solid #FF6A00; padding: 3px 8px; border-radius: 4px">⇄ TRANSICIÓN</span>
-<span id="m-s3" hidden style="position: absolute; top: 12px; right: 12px; font-family: 'JetBrains Mono', monospace; font-size: 11px; background: #0B0B0C; color: #FF6A00; padding: 4px 8px; border-radius: 4px">♫ MÚSICA</span>
-<div id="m-s4" hidden style="position: absolute; top: 48px; right: 12px; width: 38%; aspect-ratio: 4 / 5; border-radius: 8px; border: 2px solid #FF6A00; background: #3A3026; padding: 6px; box-sizing: border-box"><span style="position: absolute; left: 6px; bottom: 6px; font-family: 'JetBrains Mono', monospace; font-size: 11px; color: #F2F0EC">B-ROLL IA</span></div>
-<span id="m-s6" hidden style="position: absolute; top: 46%; left: 12px; font-family: 'JetBrains Mono', monospace; font-size: 11px; background: #FF6A00; color: #111; padding: 4px 8px; border-radius: 4px">SFX · WHOOSH</span>
-<div id="m-bars" style="position: absolute; left: 12px; right: 12px; bottom: 14px; height: 30px; display: flex; align-items: center; gap: 3px"></div>
-<div id="m-s5" hidden style="position: absolute; left: 0; right: 0; bottom: 64px; text-align: center; font-weight: 600; font-size: 22px; line-height: 1.2; text-transform: uppercase">esto es <span style="background: #FF6A00; color: #111; padding: 0 6px; border-radius: 4px">editar</span></div>
-<div id="m-s8" hidden style="position: absolute; inset: 0; background: #0B0B0C; flex-direction: column; align-items: center; justify-content: center; gap: 14px">
-<div style="font-family: Anton, Impact, sans-serif; font-size: 34px; letter-spacing: 0.02em">EDIT <span style="color: #FF6A00">EMPIRE</span></div>
-<span style="font-family: 'Instrument Serif', Georgia, serif; font-style: italic; font-size: 20px; color: #FF6A00">Listo para publicar.</span>
-</div>
+<div id="m-frame" style="position: relative; aspect-ratio: 9 / 16; border-radius: 14px; overflow: hidden; border: 1px solid #2A2A2E; background: #000">
+<video class="m-vid" data-i="0" src="assets/edita/paso-00.mp4" poster="assets/edita/paso-poster.jpg" playsinline preload="auto" style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; background: #000"></video>
+<video class="m-vid" data-i="1" src="assets/edita/paso-01.mp4" playsinline preload="auto" style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; background: #000"></video>
+<video class="m-vid" data-i="2" src="assets/edita/paso-02.mp4" playsinline preload="none" style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; background: #000"></video>
+<video class="m-vid" data-i="3" src="assets/edita/paso-03.mp4" playsinline preload="none" style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; background: #000"></video>
+<video class="m-vid" data-i="4" src="assets/edita/paso-04.mp4" playsinline preload="none" style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; background: #000"></video>
+<video class="m-vid" data-i="5" src="assets/edita/paso-05.mp4" playsinline preload="none" style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; background: #000"></video>
+<video class="m-vid" data-i="6" src="assets/edita/paso-06.mp4" playsinline preload="none" style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; background: #000"></video>
+<video class="m-vid" data-i="7" src="assets/edita/paso-07.mp4" playsinline preload="none" style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; background: #000"></video>
+<video class="m-vid" data-i="8" src="assets/edita/paso-08.mp4" playsinline preload="none" style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; background: #000"></video>
+<video class="m-vid" data-i="9" src="assets/edita/paso-09.mp4" playsinline preload="none" style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; background: #000"></video>
+<video class="m-vid" data-i="10" src="assets/edita/paso-10.mp4" playsinline preload="none" style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; background: #000"></video>
+<div id="m-wipe" aria-hidden="true" style="display: none; position: absolute; top: 0; bottom: 0; left: 0; width: 3px; transform: translateX(-50%); background: #FF6A00; box-shadow: 0 0 18px #FF6A00; z-index: 5; pointer-events: none"></div>
+<button id="m-play" aria-label="Reproducir el video" style="position: absolute; inset: 0; z-index: 6; display: flex; align-items: center; justify-content: center; background: transparent; border: 0; padding: 0; cursor: pointer">
+<span id="m-play-ic" style="width: 72px; height: 72px; border-radius: 50%; background: #FF6A00; display: flex; align-items: center; justify-content: center; box-shadow: 0 6px 24px rgba(0,0,0,.45)"><svg width="26" height="26" viewBox="0 0 24 24" fill="#111" aria-hidden="true"><path d="M8 5v14l11-7z"></path></svg></span>
+</button>
+<span id="m-stage" style="position: absolute; top: 12px; left: 12px; z-index: 7; font-family: 'JetBrains Mono', monospace; font-size: 11px; background: #0B0B0C; color: #F2F0EC; padding: 4px 8px; border-radius: 4px; pointer-events: none">CRUDO</span>
+<div id="m-track" style="position: absolute; left: 0; right: 0; bottom: 0; height: 4px; z-index: 7; background: rgba(255,255,255,.18); cursor: pointer"><div id="m-fill" style="height: 100%; width: 0; background: #FF6A00"></div></div>
 </div>
 <div style="display: flex; justify-content: space-between; margin-top: 12px; font-family: 'JetBrains Mono', monospace; font-size: 12px; color: #8C8A85"><span id="m-prog">0 / 10 bloques</span><span id="m-tc">00:00:00:00</span></div>
 </div>
@@ -449,13 +452,94 @@ html{scroll-behavior:smooth}
 </div>
 <script>
 (function () {
+function mesaEngine(vids, bar, onUpdate) {
+  var cur = 0, playing = false, wipe = null, token = 0;
+  vids.forEach(function (v, i) {
+    v.loop = true; v.playsInline = true;
+    v.style.visibility = i === 0 ? 'visible' : 'hidden';
+    v.style.zIndex = i === 0 ? '2' : '0';
+    v.addEventListener('timeupdate', function () { if (i === cur) onUpdate(); });
+    v.addEventListener('loadedmetadata', function () { if (i === cur) onUpdate(); });
+  });
+  function warm(i) { var v = vids[i]; if (v && v.preload !== 'auto') { v.preload = 'auto'; try { v.load(); } catch (e) {} } }
+  warm(0); warm(1);
+  function mapT(a, b, t) {
+    var da = vids[a].duration, db = vids[b].duration;
+    if (!da || !db) return t;
+    if (Math.abs(da - db) < 0.6) return Math.min(t, db - 0.1);
+    return (t % da) * db / da;
+  }
+  function clip(v, s) { v.style.clipPath = s; v.style.webkitClipPath = s; }
+  function settle() { if (wipe) wipe(); }
+  function go(to) {
+    if (to === cur || to < 0 || to >= vids.length) return;
+    settle();
+    var from = cur, A = vids[from], B = vids[to], dir = to > from ? 1 : -1, my = ++token, started = false, raf = 0;
+    cur = to; warm(to); warm(to + 1);
+    function finish() {
+      cancelAnimationFrame(raf); wipe = null;
+      clip(B, 'none'); B.volume = 1; B.style.visibility = 'visible'; B.style.zIndex = '2';
+      if (A !== B) { A.pause(); A.volume = 1; A.style.visibility = 'hidden'; A.style.zIndex = '0'; }
+      bar.style.display = 'none';
+      if (playing && B.paused) { var p = B.play(); if (p && p.catch) p.catch(function () {}); }
+      onUpdate();
+    }
+    function abortPending() { token++; started = true; finish(); }
+    wipe = abortPending;
+    function start() {
+      if (started || my !== token) return; started = true;
+      var k0 = performance.now(), D = 850;
+      B.style.zIndex = '3'; A.style.zIndex = '2'; B.style.visibility = 'visible';
+      bar.style.display = 'block';
+      function paint(p) {
+        var e = p < 0.5 ? 2 * p * p : 1 - Math.pow(-2 * p + 2, 2) / 2, r = (1 - e) * 100;
+        clip(B, dir > 0 ? 'inset(0 ' + r + '% 0 0)' : 'inset(0 0 0 ' + r + '%)');
+        bar.style.left = (dir > 0 ? e * 100 : 100 - e * 100) + '%';
+        if (playing) { B.volume = e; A.volume = 1 - e; }
+      }
+      paint(0);
+      wipe = finish;
+      function f(now) { var p = Math.min(1, (now - k0) / D); paint(p); if (p < 1) raf = requestAnimationFrame(f); else finish(); }
+      raf = requestAnimationFrame(f);
+    }
+    function seekAndGo() {
+      if (my !== token) return;
+      var t = mapT(from, to, (A.currentTime || 0) + (playing ? 0.25 : 0)), fired = false;
+      function ready() {
+        if (fired || my !== token) return; fired = true;
+        if (playing) { B.volume = 0; var p = B.play(); if (p && p.catch) p.catch(function () {}); }
+        start();
+      }
+      B.addEventListener('seeked', ready, { once: true });
+      try { B.currentTime = t; } catch (e) { ready(); }
+      setTimeout(ready, 1500);
+    }
+    if (B.readyState >= 1) seekAndGo();
+    else { B.addEventListener('loadedmetadata', seekAndGo, { once: true }); setTimeout(function () { if (my === token && !started) { started = true; finish(); } }, 6000); }
+    onUpdate();
+  }
+  function play() {
+    playing = true; var v = vids[cur]; v.volume = 1;
+    var p = v.play(); if (p && p.catch) p.catch(function () { playing = false; onUpdate(); });
+    onUpdate();
+  }
+  function pause() { playing = false; settle(); vids.forEach(function (v) { v.pause(); }); onUpdate(); }
+  return {
+    go: go, play: play, pause: pause,
+    toggle: function () { if (playing) pause(); else play(); },
+    isPlaying: function () { return playing; },
+    seek: function (f) { settle(); var v = vids[cur]; if (v.duration) v.currentTime = f * v.duration; onUpdate(); },
+    time: function () { var v = vids[cur]; return [v.currentTime || 0, v.duration || 0]; }
+  };
+}
+
   var ACCENT = '#FF6A00';
   var WAVES = {"raw": [21, 25, 32, 26, 13, 24, 25, 19, 24, 17, 16, 31, 25, 31, 27, 14, 17, 23, 18, 29, 20, 23, 21, 21, 30, 23, 26, 24, 31, 29, 21, 14, 14, 21, 24, 30, 20, 26, 15, 28, 23, 19, 29, 26, 22, 26, 13, 28, 25, 23, 21, 22, 19, 28, 31, 24, 30, 27, 22, 26, 21, 29, 18, 20], "cln": [20, 26, 27, 24, 7, 21, 24, 15, 22, 11, 5, 29, 25, 28, 24, 5, 6, 13, 13, 27, 5, 24, 8, 16, 28, 19, 27, 25, 28, 25, 21, 5, 5, 20, 25, 28, 20, 25, 8, 25, 24, 10, 26, 26, 18, 27, 5, 24, 23, 24, 20, 24, 20, 27, 27, 24, 28, 26, 21, 24, 23, 28, 23, 13]};
   var players = []; // everything that can play, so only one sounds at a time
 
   function stopOthers(except) {
     players.forEach(function (p) { if (p !== except) p.stop(); });
-    document.querySelectorAll('video').forEach(function (v) { if (v !== except) v.pause(); });
+    document.querySelectorAll('video').forEach(function (v) { if (v !== except && !v.classList.contains('m-vid')) v.pause(); });
   }
   function mmss(s) { s = Math.max(0, s || 0); return Math.floor(s / 60) + ':' + String(Math.floor(s % 60)).padStart(2, '0'); }
   function setIcon(root, playing) {
@@ -475,7 +559,7 @@ html{scroll-behavior:smooth}
   menu.querySelectorAll('a').forEach(function (a) { a.addEventListener('click', function () { setMenu(false); }); });
 
   // ---------- only one video at a time
-  document.querySelectorAll('video').forEach(function (v) {
+  document.querySelectorAll('video:not(.m-vid)').forEach(function (v) {
     v.addEventListener('play', function () { stopOthers(v); });
   });
 
@@ -629,34 +713,46 @@ html{scroll-behavior:smooth}
     paintMode();
   }
 
-  // ---------- "Edita conmigo": interactive edit table (desktop only)
+  // ---------- "Edita conmigo": real clips, one per block; the video keeps playing and each change wipes in
   var mBlocks = document.getElementById('m-blocks');
   if (mBlocks) {
     var steps = [
       ['CORTES', 'CORTES', 'Ritmo y silencios fuera'], ['ESTRUCTURA + IA', 'IA', 'B-roll y tomas con IA'],
       ['SEGUIMIENTO DE CÁMARA', 'CÁMARA', 'El encuadre sigue al sujeto'], ['SONIDO', 'SONIDO', 'Voz limpia y nivelada'],
-      ['MÚSICA', 'MÚSICA', 'Según el momento del video'], ['COLOR', 'COLOR', 'Colorimetría final'], ['TRANSICIONES', 'TRANS', 'Pasos de una toma a otra'],
-      ['SUBTÍTULOS', 'SUBS', 'Animados, palabra por palabra'], ['SFX', 'SFX', 'Efectos que marcan el ritmo'],
-      ['LOGO', 'LOGO', 'La firma de la marca al cierre']
+      ['MÚSICA', 'MÚSICA', 'Según el momento del video'], ['COLOR', 'COLOR', 'Colorimetría final'],
+      ['TRANSICIONES', 'TRANS', 'Pasos de una toma a otra'], ['SUBTÍTULOS', 'SUBS', 'Animados, palabra por palabra'],
+      ['SFX', 'SFX', 'Efectos que marcan el ritmo'], ['LOGO', 'LOGO', 'La firma de la marca al cierre']
     ];
-    var raw = [9, 26, 6, 30, 14, 4, 28, 10, 22, 5, 30, 12, 7, 27, 16, 3, 29, 11, 24, 6, 18, 30, 8, 20];
-    var smooth = [10, 14, 18, 22, 20, 16, 12, 16, 20, 24, 22, 18, 14, 18, 22, 24, 20, 16, 12, 14, 18, 20, 16, 12];
-    var step = 0, $ = function (id) { return document.getElementById(id); };
-    var mBars = $('m-bars'), barEls = [], blockEls = [], slotEls = [];
-    raw.forEach(function () { var d = document.createElement('div'); d.style.cssText = 'flex:1;border-radius:2px;transition:height .3s, background .3s'; mBars.appendChild(d); barEls.push(d); });
+    var N = steps.length, step = 0, $ = function (id) { return document.getElementById(id); };
+    var blockEls = [], slotEls = [];
+    var mv = Array.prototype.slice.call(document.querySelectorAll('.m-vid'));
+    var eng = mesaEngine(mv, $('m-wipe'), function () { paintPlayer(); });
+    var mesaPlayer = { stop: function () { if (eng.isPlaying()) eng.pause(); } };
+    players.push(mesaPlayer);
+    function paintPlayer() {
+      var tt = eng.time(), on = eng.isPlaying();
+      $('m-play-ic').style.display = on ? 'none' : 'flex';
+      $('m-play').setAttribute('aria-label', on ? 'Pausar el video' : 'Reproducir el video');
+      $('m-fill').style.width = (tt[1] ? tt[0] / tt[1] * 100 : 0).toFixed(2) + '%';
+      $('m-tc').textContent = mmss(tt[0]) + ' / ' + mmss(tt[1]);
+    }
+    $('m-play').addEventListener('click', function () { if (!eng.isPlaying()) stopOthers(mesaPlayer); eng.toggle(); });
+    $('m-track').addEventListener('click', function (e) {
+      var r = e.currentTarget.getBoundingClientRect();
+      eng.seek(Math.min(1, Math.max(0, (e.clientX - r.left) / r.width)));
+    });
     steps.forEach(function (st, i) {
       var b = document.createElement('button');
       b.style.cssText = 'text-align:left;min-height:76px;padding:14px 16px;border-radius:10px;display:flex;gap:14px;align-items:flex-start;border:1px solid;cursor:pointer;font-family:inherit';
       b.innerHTML = '<span style="font-family:\'JetBrains Mono\',monospace;font-size:12px;padding-top:3px">' + String(i + 1).padStart(2, '0') + '</span><span style="display:flex;flex-direction:column;gap:2px"><span style="font-family:Anton,Impact,sans-serif;font-size:20px;letter-spacing:.02em;line-height:1.1">' + st[0] + '</span><span class="d" style="font-size:13px">' + st[2] + '</span></span>';
-      b.addEventListener('click', function () { step = i < step ? i : i + 1; render(); });
+      b.addEventListener('click', function () { setStep(i < step ? i : i + 1); });
       mBlocks.appendChild(b); blockEls.push(b);
       var s = document.createElement('div');
       s.style.cssText = "height:30px;border-radius:3px;border:1px dashed;font-family:'JetBrains Mono',monospace;font-size:11px;display:flex;align-items:center;justify-content:center;overflow:hidden;white-space:nowrap";
       s.textContent = st[1]; $('m-slots').appendChild(s); slotEls.push(s);
     });
-    function show(id, on) { var e = $(id); if (on) { e.removeAttribute('hidden'); if (id === 'm-s8') e.style.display = 'flex'; } else { e.setAttribute('hidden', ''); e.style.display = ''; } }
+    function setStep(n) { step = Math.max(0, Math.min(N, n)); eng.go(step); render(); }
     function render() {
-      var graded = step >= 6, clean = step >= 4, pad = function (x) { return String(x).padStart(2, '0'); };
       blockEls.forEach(function (b, i) {
         var added = i < step, next = i === step;
         b.style.background = added ? ACCENT : '#141416'; b.style.color = added ? '#111111' : '#F2F0EC';
@@ -665,20 +761,15 @@ html{scroll-behavior:smooth}
         b.setAttribute('aria-pressed', added ? 'true' : 'false');
         var s = slotEls[i]; s.style.background = added ? ACCENT : 'transparent'; s.style.color = added ? '#111111' : '#4A4845'; s.style.borderColor = added ? ACCENT : '#34343A';
       });
-      (clean ? smooth : raw).forEach(function (h, i) { barEls[i].style.height = h + 'px'; barEls[i].style.background = clean ? ACCENT : '#6E6C68'; });
-      $('m-frame').style.background = graded ? '#2E1F14' : '#262626';
-      $('m-subj').style.background = graded ? '#1E3A4A' : '#4A4A4A';
-      $('m-skin').style.background = graded ? '#D9A07A' : '#7A7A7A';
-      $('m-stage').textContent = step === 0 ? 'CRUDO' : (step === 10 ? 'ENTREGADO' : 'BLOQUE ' + step + ' / 10');
-      show('m-s2', step >= 3); show('m-s3', step >= 5); show('m-s4', step >= 2); show('m-s7', step >= 7); show('m-s5', step >= 8); show('m-s6', step >= 9); show('m-s8', step >= 10);
-      $('m-prog').textContent = step + ' / 10 bloques';
-      $('m-tc').textContent = '00:00:' + pad(step * 7) + ':' + pad((step * 5) % 24);
-      $('m-next').querySelector('.ee-l').textContent = step < 10 ? 'Agregar ' + steps[step][0].toLowerCase() : 'Video terminado';
+      $('m-stage').textContent = step === 0 ? 'CRUDO' : (step === N ? 'ENTREGADO' : 'BLOQUE ' + step + ' / ' + N);
+      $('m-prog').textContent = step + ' / ' + N + ' bloques';
+      $('m-next').querySelector('.ee-l').textContent = step < N ? 'Agregar ' + steps[step][0].toLowerCase() : 'Video terminado';
       $('m-prev').querySelector('.ee-r').textContent = step > 0 ? 'Quitar ' + steps[step - 1][0].toLowerCase() : 'Nada que quitar';
+      paintPlayer();
     }
-    $('m-next').addEventListener('click', function () { step = Math.min(10, step + 1); render(); });
-    $('m-prev').addEventListener('click', function () { step = Math.max(0, step - 1); render(); });
-    $('m-reset').addEventListener('click', function () { step = 0; render(); });
+    $('m-next').addEventListener('click', function () { setStep(step + 1); });
+    $('m-prev').addEventListener('click', function () { setStep(step - 1); });
+    $('m-reset').addEventListener('click', function () { setStep(0); });
     render();
   }
 
