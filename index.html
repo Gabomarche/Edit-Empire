@@ -81,6 +81,29 @@
 <link href="https://fonts.googleapis.com/css2?family=Anton&amp;family=Instrument+Serif:ital@0;1&amp;family=Inter+Tight:wght@400;500;600&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap" rel="stylesheet">
 <style>
 .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+.vp{position:absolute;inset:0;z-index:3;-webkit-tap-highlight-color:transparent}
+.vp-tap{position:absolute;inset:0;border:0;background:transparent;padding:0;cursor:pointer;display:flex;align-items:center;justify-content:center}
+.vp-big{width:64px;height:64px;border-radius:50%;background:#FF6A00;display:flex;align-items:center;justify-content:center;box-shadow:0 6px 24px rgba(0,0,0,.45);transition:opacity .2s,transform .2s}
+.vp.on .vp-big{opacity:0;transform:scale(.85)}
+.vp-bar{position:absolute;left:0;right:0;bottom:0;padding:22px 10px 8px;background:linear-gradient(transparent,rgba(0,0,0,.75));display:flex;align-items:center;gap:6px;transition:opacity .25s;opacity:0;pointer-events:none}
+.vp.started .vp-bar{opacity:1;pointer-events:auto}
+.vp.on.idle .vp-bar{opacity:0;pointer-events:none}
+.vp-ib{flex:none;width:36px;height:36px;border:0;border-radius:50%;background:transparent;color:#F2F0EC;padding:0;display:flex;align-items:center;justify-content:center;cursor:pointer}
+.vp-ib:active{background:rgba(255,255,255,.12)}
+.vp-track{flex:1;min-width:40px;height:36px;position:relative;touch-action:none;cursor:pointer}
+.vp-line{position:absolute;left:0;right:0;top:50%;height:4px;margin-top:-2px;border-radius:2px;background:rgba(255,255,255,.28)}
+.vp-fill{position:absolute;left:0;top:0;bottom:0;width:0;border-radius:2px;background:#FF6A00}
+.vp-knob{position:absolute;top:50%;left:0;width:16px;height:16px;margin:-8px 0 0 -8px;border-radius:50%;background:#FF6A00;box-shadow:0 0 0 3px rgba(255,106,0,.25);transition:transform .15s}
+.vp-track.drag .vp-knob{transform:scale(1.35)}
+.vp-time{flex:none;font-family:'JetBrains Mono',monospace;font-size:11px;color:#E4E2DD;min-width:34px;text-align:center}
+.vp-tip{position:absolute;bottom:34px;transform:translateX(-50%);background:#0B0B0C;color:#F2F0EC;font-family:'JetBrains Mono',monospace;font-size:11px;padding:3px 6px;border-radius:4px;display:none;white-space:nowrap}
+.vp-track.drag .vp-tip{display:block}
+.vp.compact .vp-time,.vp.compact .vp-mu{display:none}
+.vp.compact .vp-bar{padding:22px 4px 6px;gap:2px}
+.vp:fullscreen,.vp-wrap:fullscreen{background:#000}
+#m-track{touch-action:none}
+#m-track::before{content:"";position:absolute;left:0;right:0;bottom:0;height:28px}
+.vp-wrap>span{z-index:4}
 body{margin:0;background:#0B0B0C}
 a{color:#F2F0EC;text-decoration:none}a:hover{color:#FF8A33}
 button{font-family:inherit;cursor:pointer}
@@ -658,6 +681,93 @@ function mesaEngine(vids, bar, onUpdate) {
   burger.addEventListener('click', function () { setMenu(menu.hasAttribute('hidden')); });
   menu.querySelectorAll('a').forEach(function (a) { a.addEventListener('click', function () { setMenu(false); }); });
 
+  // ---------- our own video controls: big play button + a timeline you can drag with the finger
+  var IC = {
+    play: '<svg width="22" height="22" viewBox="0 0 24 24" fill="#111" aria-hidden="true"><path d="M8 5v14l11-7z"></path></svg>',
+    sPlay: '<svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5v14l11-7z"></path></svg>',
+    sPause: '<svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M7 5h4v14H7zM13 5h4v14h-4z"></path></svg>',
+    vol: '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M11 5L6 9H3v6h3l5 4z" fill="currentColor"></path><path d="M15.5 8.5a5 5 0 0 1 0 7"></path><path d="M18.5 5.5a9 9 0 0 1 0 13"></path></svg>',
+    mute: '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M11 5L6 9H3v6h3l5 4z" fill="currentColor"></path><path d="M16 9l5 6M21 9l-5 6"></path></svg>',
+    fs: '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5"></path></svg>'
+  };
+  function makePlayer(v) {
+    var wrap = v.parentElement;
+    wrap.classList.add('vp-wrap');
+    v.removeAttribute('controls'); v.controls = false;
+    var label = v.getAttribute('aria-label') || 'video';
+    var ui = document.createElement('div'); ui.className = 'vp';
+    ui.innerHTML = '<button class="vp-tap" aria-label="Reproducir ' + label + '"><span class="vp-big">' + IC.play + '</span></button>' +
+      '<div class="vp-bar"><button class="vp-ib vp-pp" aria-label="Pausar">' + IC.sPause + '</button>' +
+      '<div class="vp-track" role="slider" tabindex="0" aria-label="Línea de tiempo" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"><div class="vp-line"><div class="vp-fill"></div></div><div class="vp-knob"></div><div class="vp-tip">0:00</div></div>' +
+      '<span class="vp-time"><span class="vp-cur">0:00</span><span class="vp-tot"> / 0:00</span></span>' +
+      '<button class="vp-ib vp-mu" aria-label="Silenciar">' + IC.vol + '</button>' +
+      '<button class="vp-ib vp-fs" aria-label="Pantalla completa">' + IC.fs + '</button></div>';
+    wrap.appendChild(ui);
+    var tap = ui.querySelector('.vp-tap'), pp = ui.querySelector('.vp-pp'), tr = ui.querySelector('.vp-track');
+    var fill = ui.querySelector('.vp-fill'), knob = ui.querySelector('.vp-knob'), tip = ui.querySelector('.vp-tip');
+    var cur = ui.querySelector('.vp-cur'), tot = ui.querySelector('.vp-tot'), mu = ui.querySelector('.vp-mu'), fsb = ui.querySelector('.vp-fs');
+    var dragging = false, idleT = 0;
+    function compact() { ui.classList.toggle('compact', wrap.clientWidth < 260); }
+    compact(); window.addEventListener('resize', compact);
+    function paint(t) {
+      var d = v.duration || 0; t = t == null ? v.currentTime : t;
+      var p = d ? Math.min(1, t / d) : 0;
+      fill.style.width = (p * 100) + '%'; knob.style.left = (p * 100) + '%';
+      cur.textContent = mmss(t); tot.textContent = ' / ' + mmss(d);
+      tr.setAttribute('aria-valuenow', String(Math.round(p * 100)));
+      tr.setAttribute('aria-valuetext', mmss(t) + ' de ' + mmss(d));
+    }
+    function wake() {
+      ui.classList.remove('idle'); clearTimeout(idleT);
+      if (!v.paused && !dragging) idleT = setTimeout(function () { ui.classList.add('idle'); }, 2500);
+    }
+    function state() {
+      var on = !v.paused;
+      ui.classList.toggle('on', on);
+      pp.innerHTML = on ? IC.sPause : IC.sPlay; pp.setAttribute('aria-label', on ? 'Pausar' : 'Reproducir');
+      tap.setAttribute('aria-label', (on ? 'Pausar ' : 'Reproducir ') + label);
+      wake();
+    }
+    function toggle() { if (v.paused) { ui.classList.add('started'); var p = v.play(); if (p && p.catch) p.catch(function () {}); } else v.pause(); }
+    tap.addEventListener('click', function () {
+      // while playing, the first tap only shows the controls; a second tap pauses
+      if (!v.paused && ui.classList.contains('idle')) { wake(); return; }
+      toggle();
+    });
+    pp.addEventListener('click', toggle);
+    mu.addEventListener('click', function () { v.muted = !v.muted; mu.innerHTML = v.muted ? IC.mute : IC.vol; mu.setAttribute('aria-label', v.muted ? 'Activar sonido' : 'Silenciar'); wake(); });
+    fsb.addEventListener('click', function () {
+      if (document.fullscreenElement) { document.exitFullscreen(); return; }
+      if (wrap.requestFullscreen) wrap.requestFullscreen().catch(function () { if (v.webkitEnterFullscreen) v.webkitEnterFullscreen(); });
+      else if (v.webkitEnterFullscreen) v.webkitEnterFullscreen();
+    });
+    function frac(e) { var r = tr.getBoundingClientRect(); return Math.min(1, Math.max(0, (e.clientX - r.left) / r.width)); }
+    function seekTo(f) {
+      var d = v.duration; if (!d) return;
+      var t = f * d; paint(t);
+      tip.style.left = (f * 100) + '%'; tip.textContent = mmss(t);
+      if (v.fastSeek && dragging) v.fastSeek(t); else v.currentTime = t;
+    }
+    tr.addEventListener('pointerdown', function (e) {
+      dragging = true; tr.classList.add('drag'); clearTimeout(idleT);
+      try { tr.setPointerCapture(e.pointerId); } catch (x) {}
+      seekTo(frac(e)); e.preventDefault();
+    });
+    tr.addEventListener('pointermove', function (e) { if (dragging) seekTo(frac(e)); });
+    function end(e) { if (!dragging) return; dragging = false; tr.classList.remove('drag'); v.currentTime = frac(e) * (v.duration || 0); wake(); }
+    tr.addEventListener('pointerup', end); tr.addEventListener('pointercancel', function () { dragging = false; tr.classList.remove('drag'); wake(); });
+    tr.addEventListener('keydown', function (e) {
+      if (e.key === 'ArrowRight' || e.key === 'ArrowLeft') { v.currentTime = Math.max(0, Math.min(v.duration || 0, v.currentTime + (e.key === 'ArrowRight' ? 5 : -5))); paint(); wake(); e.preventDefault(); }
+    });
+    ui.addEventListener('pointermove', function (e) { if (e.pointerType === 'mouse') wake(); });
+    v.addEventListener('play', state); v.addEventListener('pause', state);
+    v.addEventListener('timeupdate', function () { if (!dragging) paint(); });
+    v.addEventListener('loadedmetadata', function () { paint(); });
+    v.addEventListener('ended', function () { ui.classList.remove('idle'); state(); });
+    paint();
+  }
+  document.querySelectorAll('video:not(.m-vid)').forEach(makePlayer);
+
   // ---------- only one video at a time
   document.querySelectorAll('video:not(.m-vid)').forEach(function (v) {
     v.addEventListener('play', function () { stopOthers(v); });
@@ -868,10 +978,14 @@ function mesaEngine(vids, bar, onUpdate) {
       $('m-tc').textContent = mmss(tt[0]) + ' / ' + mmss(tt[1]);
     }
     $('m-play').addEventListener('click', function () { if (!eng.isPlaying()) stopOthers(mesaPlayer); eng.toggle(); });
-    $('m-track').addEventListener('click', function (e) {
-      var r = e.currentTarget.getBoundingClientRect();
-      eng.seek(Math.min(1, Math.max(0, (e.clientX - r.left) / r.width)));
-    });
+    (function () {
+      var t = $('m-track'), drag = false;
+      function f(e) { var r = t.getBoundingClientRect(); return Math.min(1, Math.max(0, (e.clientX - r.left) / r.width)); }
+      t.addEventListener('pointerdown', function (e) { drag = true; try { t.setPointerCapture(e.pointerId); } catch (x) {} eng.seek(f(e)); e.preventDefault(); });
+      t.addEventListener('pointermove', function (e) { if (drag) eng.seek(f(e)); });
+      t.addEventListener('pointerup', function () { drag = false; });
+      t.addEventListener('pointercancel', function () { drag = false; });
+    })();
     steps.forEach(function (st, i) {
       var b = document.createElement('button');
       b.style.cssText = 'text-align:left;min-height:76px;padding:14px 16px;border-radius:10px;display:flex;gap:14px;align-items:flex-start;border:1px solid;cursor:pointer;font-family:inherit';
