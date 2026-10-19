@@ -106,12 +106,12 @@
 #m-track{touch-action:none}
 #m-track::before{content:"";position:absolute;left:0;right:0;bottom:0;height:28px}
 .vp-wrap>span{z-index:4}
-.to-top{position:fixed;right:20px;bottom:20px;z-index:50;width:48px;height:48px;border-radius:50%;border:1px solid #FF6A00;background:#0B0B0C;color:#FF6A00;display:flex;align-items:center;justify-content:center;padding:0;cursor:pointer;box-shadow:0 8px 24px rgba(0,0,0,.5);opacity:0;transform:translateY(12px);pointer-events:none;transition:opacity .25s,transform .25s,background .2s,color .2s}
+.to-top{position:fixed;right:20px;bottom:20px;z-index:9998;width:48px;height:48px;border-radius:50%;border:1px solid #FF6A00;background:#0B0B0C;color:#FF6A00;display:flex;align-items:center;justify-content:center;padding:0;cursor:pointer;box-shadow:0 8px 24px rgba(0,0,0,.5);opacity:0;transform:translateY(12px);pointer-events:none;transition:opacity .25s,transform .25s,background .2s,color .2s}
 .to-top.show{opacity:1;transform:none;pointer-events:auto}
 .to-top:hover{background:#FF6A00;color:#111}
 @media (max-width:640px){.to-top{right:14px;bottom:14px;width:44px;height:44px}}
 @media (prefers-reduced-motion:reduce){.to-top{transition:none}}
-.wa-float{position:fixed;right:20px;bottom:20px;z-index:51;width:56px;height:56px;border-radius:50%;background:#25D366;display:flex;align-items:center;justify-content:center;box-shadow:0 8px 24px rgba(0,0,0,.45);transition:transform .2s}
+.wa-float{position:fixed;right:20px;bottom:20px;z-index:9999;width:56px;height:56px;border-radius:50%;background:#25D366;display:flex;align-items:center;justify-content:center;box-shadow:0 8px 24px rgba(0,0,0,.45);transition:transform .2s}
 .wa-float:hover{transform:scale(1.07)}
 .to-top{bottom:88px;right:24px}
 @media (max-width:640px){.wa-float{right:14px;bottom:14px;width:52px;height:52px}.to-top{right:18px;bottom:78px}}
@@ -180,6 +180,15 @@ button{font-family:inherit;cursor:pointer}
 .rev-quotes{grid-template-columns:1fr !important;gap:14px !important}
 .rev-banner{padding:16px 18px !important;margin-top:32px !important}
 }
+.to-top{position:fixed;right:20px;bottom:20px;z-index:9998;width:48px;height:48px;border-radius:50%;border:1px solid #FF6A00;background:#0B0B0C;color:#FF6A00;display:flex;align-items:center;justify-content:center;padding:0;cursor:pointer;box-shadow:0 8px 24px rgba(0,0,0,.5);opacity:0;transform:translateY(12px);pointer-events:none;transition:opacity .25s,transform .25s,background .2s,color .2s}
+.to-top.show{opacity:1;transform:none;pointer-events:auto}
+.to-top:hover{background:#FF6A00;color:#111}
+@media (max-width:640px){.to-top{right:14px;bottom:14px;width:44px;height:44px}}
+@media (prefers-reduced-motion:reduce){.to-top{transition:none}}
+.wa-float{position:fixed;right:20px;bottom:20px;z-index:9999;width:56px;height:56px;border-radius:50%;background:#25D366;display:flex;align-items:center;justify-content:center;box-shadow:0 8px 24px rgba(0,0,0,.45);transition:transform .2s}
+.wa-float:hover{transform:scale(1.07)}
+.to-top{bottom:88px;right:24px}
+@media (max-width:640px){.wa-float{right:14px;bottom:14px;width:52px;height:52px}.to-top{right:18px;bottom:78px}}
 
 html{scroll-behavior:smooth}
 *{-webkit-tap-highlight-color:transparent}
@@ -580,7 +589,6 @@ html{scroll-behavior:smooth}
 <div style="max-width: 1240px; margin: 0 auto; padding: 28px 24px; display: flex; flex-wrap: wrap; justify-content: space-between; gap: 12px; font-family: 'JetBrains Mono', monospace; font-size: 12px; color: #6E6C68">
 <span>EDIT EMPIRE · 2026</span>
 <a target="_blank" rel="noopener" href="https://www.instagram.com/gabomarchese/" style="color: #B5B3AE">Instagram · @gabomarchese</a>
-<a href="#inicio" style="color: #8C8A85">Volver al inicio ↑</a>
 </div>
 </footer>
 
