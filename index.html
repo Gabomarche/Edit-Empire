@@ -283,12 +283,55 @@ button{font-family:inherit;cursor:pointer}
 .wa-float:hover{transform:scale(1.07)}
 .to-top{bottom:88px;right:24px}
 @media (max-width:640px){.wa-float{right:14px;bottom:14px;width:52px;height:52px}.to-top{right:18px;bottom:78px}}
-.faq-it summary{list-style:none}
-.faq-it summary::-webkit-details-marker{display:none}
-.faq-it summary:hover{color:#FF8A33}
-.faq-ic{flex:none;transition:transform .2s}
-.faq-it[open] .faq-ic{transform:rotate(45deg)}
-.faq-it[open] summary{color:#FF8A33}
+.fq{position:relative;overflow:hidden;isolation:isolate}
+.fq-orbs{position:absolute;inset:0;z-index:-1;pointer-events:none}
+.fq-orbs span{position:absolute;border-radius:50%;filter:blur(70px);opacity:.55;animation:fq-drift 18s ease-in-out infinite alternate}
+.fq-orbs span:nth-child(1){width:420px;height:420px;left:-80px;top:180px;background:radial-gradient(circle,#FF6A00 0%,rgba(255,106,0,0) 70%)}
+.fq-orbs span:nth-child(2){width:360px;height:360px;right:6%;top:40%;background:radial-gradient(circle,#B8460A 0%,rgba(184,70,10,0) 70%);animation-duration:22s}
+.fq-orbs span:nth-child(3){width:300px;height:300px;left:38%;bottom:-60px;background:radial-gradient(circle,#FFB066 0%,rgba(255,176,102,0) 70%);opacity:.3;animation-duration:26s}
+@keyframes fq-drift{from{transform:translate(0,0) scale(1)}to{transform:translate(60px,-40px) scale(1.15)}}
+.fq-wrap{display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,.95fr);gap:48px;align-items:start;margin-top:56px}
+.fq-list{position:relative}
+.fq-item{position:relative;z-index:1}
+.fq-q{width:100%;display:flex;align-items:center;gap:16px;min-height:62px;padding:14px 20px;border:0;background:transparent;color:#A3A19C;font:inherit;font-size:17px;font-weight:500;text-align:left;cursor:pointer;border-radius:18px;transition:color .25s}
+.fq-q:focus-visible{outline:2px solid #FF6A00;outline-offset:2px}
+.fq-n{flex:none;font-family:'JetBrains Mono',monospace;font-size:12px;color:#6E6C68;transition:color .25s}
+.fq-t{flex:1}
+.fq-ic{flex:none;opacity:0;transition:transform .3s,opacity .25s}
+.fq-item.on .fq-q{color:#F2F0EC}
+.fq-item.on .fq-n{color:#FF6A00}
+.fq-a{display:none}
+.fq-lens{position:absolute;left:0;right:0;top:0;height:62px;z-index:0;pointer-events:none;transform:translateY(var(--y,0px));transition:transform .62s cubic-bezier(.34,1.42,.5,1),height .5s cubic-bezier(.34,1.3,.5,1),opacity .3s}
+.fq-lens.off{opacity:0}
+.fq-glass{position:absolute;inset:0;border-radius:18px;background:linear-gradient(135deg,rgba(255,255,255,.16),rgba(255,255,255,.04) 45%,rgba(255,140,60,.08));-webkit-backdrop-filter:blur(16px) saturate(180%);backdrop-filter:blur(16px) saturate(180%);border:1px solid rgba(255,255,255,.2);box-shadow:inset 0 1px 0 rgba(255,255,255,.45),inset 0 -1px 1px rgba(255,255,255,.08),inset 0 0 18px rgba(255,255,255,.06),0 12px 32px rgba(0,0,0,.35);overflow:hidden}
+.fq-glass::before{content:"";position:absolute;inset:0;border-radius:inherit;background:linear-gradient(180deg,rgba(255,255,255,.10),rgba(255,255,255,0) 55%)}
+.fq-glass::after{content:"";position:absolute;inset:-40%;background:radial-gradient(circle at var(--mx,30%) 50%,rgba(255,255,255,.18),rgba(255,255,255,0) 40%);transition:opacity .3s}
+.fq-glass.wob{animation:fq-wob .7s cubic-bezier(.3,1.6,.5,1)}
+@keyframes fq-wob{0%{transform:scale(1,1)}25%{transform:scale(1.035,.88)}55%{transform:scale(.985,1.06)}80%{transform:scale(1.008,.985)}100%{transform:scale(1,1)}}
+.fq-panel{position:sticky;top:96px}
+.fq-card{position:relative;border-radius:24px;padding:36px 34px 32px;background:linear-gradient(140deg,rgba(255,255,255,.12),rgba(255,255,255,.03) 50%,rgba(255,120,40,.07));-webkit-backdrop-filter:blur(22px) saturate(170%);backdrop-filter:blur(22px) saturate(170%);border:1px solid rgba(255,255,255,.16);box-shadow:inset 0 1px 0 rgba(255,255,255,.35),0 24px 60px rgba(0,0,0,.4);overflow:hidden}
+.fq-card::before{content:"";position:absolute;inset:0;border-radius:inherit;background:linear-gradient(180deg,rgba(255,255,255,.07),rgba(255,255,255,0) 40%);pointer-events:none}
+.fq-num{font-family:'JetBrains Mono',monospace;font-size:12px;color:#8C8A85;letter-spacing:.06em}
+.fq-num b{color:#FF6A00;font-weight:500}
+.fq-pq{font-family:Anton,Impact,sans-serif;font-weight:400;font-size:clamp(26px,2.6vw,36px);line-height:1.08;margin:14px 0 0;color:#F2F0EC;text-transform:uppercase}
+.fq-pa{margin:16px 0 26px;color:#D8D6D1;font-size:17px;line-height:1.7}
+@media (prefers-reduced-motion:reduce){.fq-orbs span,.fq-glass.wob{animation:none}.fq-lens{transition:opacity .2s}}
+@media (max-width: 899px){
+.fq-wrap{grid-template-columns:minmax(0,1fr);gap:0;margin-top:40px}
+.fq-panel{display:none}
+.fq-q{min-height:60px;padding:14px 16px;font-size:16px}
+.fq-ic{opacity:1}
+.fq-item.on .fq-ic{transform:rotate(45deg)}
+.fq-a{display:grid;grid-template-rows:0fr;transition:grid-template-rows .42s cubic-bezier(.3,1.2,.5,1)}
+.fq-a>div{overflow:hidden}
+.fq-a p{margin:0;padding:0 18px 20px 46px;color:#D8D6D1;font-size:15.5px;line-height:1.65}
+.fq-item.on .fq-a{grid-template-rows:1fr}
+.fq-item+.fq-item{border-top:1px solid rgba(255,255,255,.06)}
+.fq-orbs span:nth-child(1){width:300px;height:300px;left:-120px}
+.fq-orbs span:nth-child(2){width:260px;height:260px;right:-80px}
+.fq-more{display:block}
+}
+.fq-more{display:none}
 
 html{scroll-behavior:smooth}
 *{-webkit-tap-highlight-color:transparent}
@@ -665,52 +708,64 @@ html{scroll-behavior:smooth}
 </div>
 </section>
 
-<section id="preguntas" style="border-top: 1px solid #1F1F22">
-<div style="max-width: 860px; margin: 0 auto; padding: 88px 24px">
-<h2 style="font-family: Anton, Impact, sans-serif; font-weight: 400; font-size: clamp(44px, 6vw, 80px); line-height: 1; margin: 0; text-align: center">PREGUNTAS FRECUENTES.<br><span style="font-family: 'Instrument Serif', Georgia, serif; font-style: italic; color: #FF6A00">Sin letra chica.</span></h2>
-<div style="margin-top: 48px; border-top: 1px solid #26262A">
-<details class="faq-it" style="border-bottom: 1px solid #26262A">
-<summary style="display: flex; align-items: center; justify-content: space-between; gap: 16px; min-height: 64px; padding: 16px 4px; cursor: pointer; font-size: 18px; font-weight: 500; color: #F2F0EC">¿Cuánto cuesta un video?<svg class="faq-ic" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#FF6A00" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14M5 12h14"></path></svg></summary>
-<p style="margin: 0; padding: 0 44px 22px 4px; color: #B5B3AE; font-size: 16px; line-height: 1.65">Depende del estilo que elijas (Básico, Pro, Premium IA o Motion Graphics), de la duración y del material que me mandes. Escríbeme por WhatsApp y te paso un presupuesto exacto, sin compromiso.</p>
-</details>
-<details class="faq-it" style="border-bottom: 1px solid #26262A">
-<summary style="display: flex; align-items: center; justify-content: space-between; gap: 16px; min-height: 64px; padding: 16px 4px; cursor: pointer; font-size: 18px; font-weight: 500; color: #F2F0EC">¿Cuánto tarda la entrega?<svg class="faq-ic" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#FF6A00" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14M5 12h14"></path></svg></summary>
-<p style="margin: 0; padding: 0 44px 22px 4px; color: #B5B3AE; font-size: 16px; line-height: 1.65">Un reel suele estar listo entre 48 y 72 horas desde que recibo todo el material. Si son varios videos, el plazo depende de la cantidad: te lo confirmo junto con el presupuesto.</p>
-</details>
-<details class="faq-it" style="border-bottom: 1px solid #26262A">
-<summary style="display: flex; align-items: center; justify-content: space-between; gap: 16px; min-height: 64px; padding: 16px 4px; cursor: pointer; font-size: 18px; font-weight: 500; color: #F2F0EC">¿Incluye cambios?<svg class="faq-ic" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#FF6A00" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14M5 12h14"></path></svg></summary>
-<p style="margin: 0; padding: 0 44px 22px 4px; color: #B5B3AE; font-size: 16px; line-height: 1.65">Sí, cada video incluye una ronda de ajustes. Si después quieres cambiar la estructura o pedir más rondas, lo vemos aparte.</p>
-</details>
-<details class="faq-it" style="border-bottom: 1px solid #26262A">
-<summary style="display: flex; align-items: center; justify-content: space-between; gap: 16px; min-height: 64px; padding: 16px 4px; cursor: pointer; font-size: 18px; font-weight: 500; color: #F2F0EC">¿Cómo te paso el material?<svg class="faq-ic" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#FF6A00" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14M5 12h14"></path></svg></summary>
-<p style="margin: 0; padding: 0 44px 22px 4px; color: #B5B3AE; font-size: 16px; line-height: 1.65">Por Google Drive, WeTransfer o el link que te quede más cómodo. Si el material es muy largo, lo tengo en cuenta en el presupuesto.</p>
-</details>
-<details class="faq-it" style="border-bottom: 1px solid #26262A">
-<summary style="display: flex; align-items: center; justify-content: space-between; gap: 16px; min-height: 64px; padding: 16px 4px; cursor: pointer; font-size: 18px; font-weight: 500; color: #F2F0EC">¿Cómo se paga?<svg class="faq-ic" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#FF6A00" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14M5 12h14"></path></svg></summary>
-<p style="margin: 0; padding: 0 44px 22px 4px; color: #B5B3AE; font-size: 16px; line-height: 1.65">50% al confirmar el trabajo y el otro 50% cuando te entrego el video.</p>
-</details>
-<details class="faq-it" style="border-bottom: 1px solid #26262A">
-<summary style="display: flex; align-items: center; justify-content: space-between; gap: 16px; min-height: 64px; padding: 16px 4px; cursor: pointer; font-size: 18px; font-weight: 500; color: #F2F0EC">¿En qué formato me lo entregas?<svg class="faq-ic" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#FF6A00" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14M5 12h14"></path></svg></summary>
-<p style="margin: 0; padding: 0 44px 22px 4px; color: #B5B3AE; font-size: 16px; line-height: 1.65">Listo para publicar: vertical (9:16) para Reels y TikTok, cuadrado (1:1) u horizontal (16:9) para YouTube.</p>
-</details>
-<details class="faq-it" style="border-bottom: 1px solid #26262A">
-<summary style="display: flex; align-items: center; justify-content: space-between; gap: 16px; min-height: 64px; padding: 16px 4px; cursor: pointer; font-size: 18px; font-weight: 500; color: #F2F0EC">¿Y si la grabación salió mal?<svg class="faq-ic" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#FF6A00" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14M5 12h14"></path></svg></summary>
-<p style="margin: 0; padding: 0 44px 22px 4px; color: #B5B3AE; font-size: 16px; line-height: 1.65">Ruido, una toma que falta, poca luz: muchas veces se puede rescatar con IA. Mándamelo y te digo qué se puede hacer.</p>
-</details>
-<details class="faq-it" style="border-bottom: 1px solid #26262A">
-<summary style="display: flex; align-items: center; justify-content: space-between; gap: 16px; min-height: 64px; padding: 16px 4px; cursor: pointer; font-size: 18px; font-weight: 500; color: #F2F0EC">¿Trabajas con clientes de otros países?<svg class="faq-ic" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#FF6A00" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14M5 12h14"></path></svg></summary>
-<p style="margin: 0; padding: 0 44px 22px 4px; color: #B5B3AE; font-size: 16px; line-height: 1.65">Sí, trabajo 100% a distancia, con marcas de Argentina y de otros países, como inmobiliarias de Estados Unidos.</p>
-</details>
-<details class="faq-it" style="border-bottom: 1px solid #26262A">
-<summary style="display: flex; align-items: center; justify-content: space-between; gap: 16px; min-height: 64px; padding: 16px 4px; cursor: pointer; font-size: 18px; font-weight: 500; color: #F2F0EC">¿Tienes paquetes mensuales?<svg class="faq-ic" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#FF6A00" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14M5 12h14"></path></svg></summary>
-<p style="margin: 0; padding: 0 44px 22px 4px; color: #B5B3AE; font-size: 16px; line-height: 1.65">Sí. Si publicas seguido, armamos un precio fijo por mes según la cantidad de videos.</p>
-</details>
-<details class="faq-it" style="border-bottom: 1px solid #26262A">
-<summary style="display: flex; align-items: center; justify-content: space-between; gap: 16px; min-height: 64px; padding: 16px 4px; cursor: pointer; font-size: 18px; font-weight: 500; color: #F2F0EC">¿Puedes encargarte de todas mis redes?<svg class="faq-ic" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#FF6A00" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14M5 12h14"></path></svg></summary>
-<p style="margin: 0; padding: 0 44px 22px 4px; color: #B5B3AE; font-size: 16px; line-height: 1.65">Sí. Junto a mi equipo nos ocupamos de tus redes de punta a punta: la estrategia, los guiones, la edición y la publicación. Escríbeme y vemos qué necesitas.</p>
-</details>
+<section id="preguntas" class="fq" style="border-top: 1px solid #1F1F22">
+<div class="fq-orbs" aria-hidden="true"><span></span><span></span><span></span></div>
+<div style="max-width: 1160px; margin: 0 auto; padding: 88px 24px">
+<h2 style="font-family: Anton, Impact, sans-serif; font-weight: 400; font-size: clamp(44px, 6vw, 80px); line-height: 1; margin: 0; text-align: center">PREGUNTAS FRECUENTES.<br><span style="font-family: 'Instrument Serif', Georgia, serif; font-style: italic; color: #FF6A00">Antes de que preguntes.</span></h2>
+<div class="fq-wrap">
+<div class="fq-list">
+<div class="fq-lens" aria-hidden="true"><div class="fq-glass"></div></div>
+<div class="fq-item on" data-i="0">
+<button class="fq-q" id="fq-q0" aria-expanded="true" aria-controls="fq-a0"><span class="fq-n">01</span><span class="fq-t">¿Cuánto cuesta un video?</span><svg class="fq-ic" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#FF6A00" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14M5 12h14"></path></svg></button>
+<div class="fq-a" id="fq-a0" role="region" aria-labelledby="fq-q0"><div><p>Depende del estilo que elijas (Básico, Pro, Premium IA o Motion Graphics), de la duración y del material que me mandes. Escríbeme por WhatsApp y te paso un presupuesto exacto, sin compromiso.</p></div></div>
 </div>
-<p style="margin: 32px 0 0; text-align: center; color: #B5B3AE">¿Te quedó otra duda? <a target="_blank" rel="noopener" href="https://wa.me/5491123641711?text=Hola%2C%20vi%20tu%20portfolio%20y%20tengo%20una%20consulta" style="color: #FF6A00; font-weight: 500">Escríbeme por WhatsApp</a></p>
+<div class="fq-item" data-i="1">
+<button class="fq-q" id="fq-q1" aria-expanded="false" aria-controls="fq-a1"><span class="fq-n">02</span><span class="fq-t">¿Cuánto tarda la entrega?</span><svg class="fq-ic" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#FF6A00" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14M5 12h14"></path></svg></button>
+<div class="fq-a" id="fq-a1" role="region" aria-labelledby="fq-q1"><div><p>Un reel suele estar listo entre 48 y 72 horas desde que recibo todo el material. Si son varios videos, el plazo depende de la cantidad: te lo confirmo junto con el presupuesto.</p></div></div>
+</div>
+<div class="fq-item" data-i="2">
+<button class="fq-q" id="fq-q2" aria-expanded="false" aria-controls="fq-a2"><span class="fq-n">03</span><span class="fq-t">¿Incluye cambios?</span><svg class="fq-ic" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#FF6A00" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14M5 12h14"></path></svg></button>
+<div class="fq-a" id="fq-a2" role="region" aria-labelledby="fq-q2"><div><p>Sí, cada video incluye una ronda de ajustes. Si después quieres cambiar la estructura o pedir más rondas, lo vemos aparte.</p></div></div>
+</div>
+<div class="fq-item" data-i="3">
+<button class="fq-q" id="fq-q3" aria-expanded="false" aria-controls="fq-a3"><span class="fq-n">04</span><span class="fq-t">¿Cómo te paso el material?</span><svg class="fq-ic" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#FF6A00" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14M5 12h14"></path></svg></button>
+<div class="fq-a" id="fq-a3" role="region" aria-labelledby="fq-q3"><div><p>Por Google Drive, WeTransfer o el link que te quede más cómodo. Si el material es muy largo, lo tengo en cuenta en el presupuesto.</p></div></div>
+</div>
+<div class="fq-item" data-i="4">
+<button class="fq-q" id="fq-q4" aria-expanded="false" aria-controls="fq-a4"><span class="fq-n">05</span><span class="fq-t">¿Cómo se paga?</span><svg class="fq-ic" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#FF6A00" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14M5 12h14"></path></svg></button>
+<div class="fq-a" id="fq-a4" role="region" aria-labelledby="fq-q4"><div><p>50% al confirmar el trabajo y el otro 50% cuando te entrego el video.</p></div></div>
+</div>
+<div class="fq-item" data-i="5">
+<button class="fq-q" id="fq-q5" aria-expanded="false" aria-controls="fq-a5"><span class="fq-n">06</span><span class="fq-t">¿En qué formato me lo entregas?</span><svg class="fq-ic" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#FF6A00" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14M5 12h14"></path></svg></button>
+<div class="fq-a" id="fq-a5" role="region" aria-labelledby="fq-q5"><div><p>Listo para publicar: vertical (9:16) para Reels y TikTok, cuadrado (1:1) u horizontal (16:9) para YouTube.</p></div></div>
+</div>
+<div class="fq-item" data-i="6">
+<button class="fq-q" id="fq-q6" aria-expanded="false" aria-controls="fq-a6"><span class="fq-n">07</span><span class="fq-t">¿Y si la grabación salió mal?</span><svg class="fq-ic" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#FF6A00" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14M5 12h14"></path></svg></button>
+<div class="fq-a" id="fq-a6" role="region" aria-labelledby="fq-q6"><div><p>Ruido, una toma que falta, poca luz: muchas veces se puede rescatar con IA. Mándamelo y te digo qué se puede hacer.</p></div></div>
+</div>
+<div class="fq-item" data-i="7">
+<button class="fq-q" id="fq-q7" aria-expanded="false" aria-controls="fq-a7"><span class="fq-n">08</span><span class="fq-t">¿Trabajas con clientes de otros países?</span><svg class="fq-ic" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#FF6A00" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14M5 12h14"></path></svg></button>
+<div class="fq-a" id="fq-a7" role="region" aria-labelledby="fq-q7"><div><p>Sí, trabajo 100% a distancia, con marcas de Argentina y de otros países, como inmobiliarias de Estados Unidos.</p></div></div>
+</div>
+<div class="fq-item" data-i="8">
+<button class="fq-q" id="fq-q8" aria-expanded="false" aria-controls="fq-a8"><span class="fq-n">09</span><span class="fq-t">¿Tienes paquetes mensuales?</span><svg class="fq-ic" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#FF6A00" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14M5 12h14"></path></svg></button>
+<div class="fq-a" id="fq-a8" role="region" aria-labelledby="fq-q8"><div><p>Sí. Si publicas seguido, armamos un precio fijo por mes según la cantidad de videos.</p></div></div>
+</div>
+<div class="fq-item" data-i="9">
+<button class="fq-q" id="fq-q9" aria-expanded="false" aria-controls="fq-a9"><span class="fq-n">10</span><span class="fq-t">¿Puedes encargarte de todas mis redes?</span><svg class="fq-ic" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#FF6A00" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14M5 12h14"></path></svg></button>
+<div class="fq-a" id="fq-a9" role="region" aria-labelledby="fq-q9"><div><p>Sí. Junto a mi equipo nos ocupamos de tus redes de punta a punta: la estrategia, los guiones, la edición y la publicación. Escríbeme y vemos qué necesitas.</p></div></div>
+</div>
+</div>
+<aside class="fq-panel" aria-live="polite">
+<div class="fq-card">
+<div class="fq-num"><b id="fq-pn">01</b> / 10</div>
+<h3 class="fq-pq" id="fq-pq">¿Cuánto cuesta un video?</h3>
+<p class="fq-pa" id="fq-pa">Depende del estilo que elijas (Básico, Pro, Premium IA o Motion Graphics), de la duración y del material que me mandes. Escríbeme por WhatsApp y te paso un presupuesto exacto, sin compromiso.</p>
+<a class="ee-btn" target="_blank" rel="noopener" href="https://wa.me/5491123641711?text=Hola%2C%20vi%20tu%20portfolio%20y%20tengo%20una%20consulta"><span class="ee-l" style="background: #FF6A00; color: #111; font-weight: 600; padding: 15px 14px 15px 22px">Escríbeme por WhatsApp</span><span class="ee-cut" aria-hidden="true"></span><span class="ee-r" aria-hidden="true" style="background: #FF6A00; color: #111; font-weight: 600; padding: 15px 18px 15px 12px"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#111" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"></path><path d="M13 6l6 6-6 6"></path></svg></span></a>
+</div>
+</aside>
+</div>
+<p class="fq-more" style="margin: 36px 0 0; text-align: center; color: #B5B3AE">¿Te quedó otra duda? <a target="_blank" rel="noopener" href="https://wa.me/5491123641711?text=Hola%2C%20vi%20tu%20portfolio%20y%20tengo%20una%20consulta" style="color: #FF6A00; font-weight: 500">Escríbeme por WhatsApp</a></p>
 </div>
 </section>
 
@@ -984,6 +1039,45 @@ function mesaEngine(vids, bar, onUpdate) {
   }
   document.querySelectorAll('video:not(.m-vid)').forEach(makePlayer);
 
+
+  // ---------- FAQ: a liquid-glass lens glides to the question under the cursor (tap to open on phones)
+  var fq = document.querySelector('.fq');
+  if (fq) {
+    var fqItems = Array.prototype.slice.call(fq.querySelectorAll('.fq-item'));
+    var lens = fq.querySelector('.fq-lens'), glass = fq.querySelector('.fq-glass'), card = fq.querySelector('.fq-card');
+    var wide = window.matchMedia('(min-width: 900px)'), fine = window.matchMedia('(hover: hover) and (pointer: fine)');
+    var cur = wide.matches ? 0 : -1;
+    function fqPlace() {
+      var it = fqItems[cur];
+      if (!it) { lens.classList.add('off'); return; }
+      lens.classList.remove('off');
+      lens.style.setProperty('--y', it.offsetTop + 'px'); lens.style.height = it.offsetHeight + 'px';
+    }
+    function fqSet(i) {
+      if (i === cur) return;
+      cur = i;
+      fqItems.forEach(function (it, k) { var on = k === i; it.classList.toggle('on', on); it.querySelector('.fq-q').setAttribute('aria-expanded', on ? 'true' : 'false'); });
+      glass.classList.remove('wob'); void glass.offsetWidth; glass.classList.add('wob');
+      if (i >= 0) {
+        var q = fqItems[i].querySelector('.fq-t').textContent, a = fqItems[i].querySelector('.fq-a p').textContent;
+        document.getElementById('fq-pn').textContent = String(i + 1).padStart(2, '0');
+        document.getElementById('fq-pq').textContent = q; document.getElementById('fq-pa').textContent = a;
+        if (card.animate && wide.matches) card.animate([{ opacity: 0.25, transform: 'translateY(8px)' }, { opacity: 1, transform: 'none' }], { duration: 380, easing: 'cubic-bezier(.3,1.3,.5,1)' });
+      }
+      fqPlace();
+    }
+    fqItems.forEach(function (it, i) {
+      var b = it.querySelector('.fq-q');
+      it.addEventListener('mouseenter', function () { if (wide.matches && fine.matches) fqSet(i); });
+      it.addEventListener('mousemove', function (e) { if (i !== cur) return; var r = it.getBoundingClientRect(); glass.style.setProperty('--mx', Math.round((e.clientX - r.left) / r.width * 100) + '%'); });
+      b.addEventListener('focus', function () { if (wide.matches) fqSet(i); });
+      b.addEventListener('click', function () { if (!wide.matches && cur === i) fqSet(-1); else fqSet(i); });
+    });
+    if (!wide.matches) { fqItems.forEach(function (it) { it.classList.remove('on'); it.querySelector('.fq-q').setAttribute('aria-expanded', 'false'); }); }
+    if (window.ResizeObserver) { var ro = new ResizeObserver(fqPlace); fqItems.forEach(function (it) { ro.observe(it); }); }
+    window.addEventListener('resize', function () { if (wide.matches && cur < 0) fqSet(0); fqPlace(); });
+    fqPlace();
+  }
   // ---------- only one video at a time
   document.querySelectorAll('video:not(.m-vid)').forEach(function (v) {
     v.addEventListener('play', function () { stopOthers(v); });
