@@ -377,6 +377,22 @@ button{font-family:inherit;cursor:pointer}
 .glass-card:hover{transform:translateY(-3px)}
 @media (prefers-reduced-motion:reduce){.ee-btn,.st-arrow,.to-top,.wd-btn,.glass-card{transition:none}.ee-btn:hover{transform:none}}
 @media (max-width: 640px){.st-card{width:46vw}.st-stage{height:112vw}.st-hint{font-size:12px}}
+.vb-orbs{display:none}
+.voices.floating{position:relative;display:block !important;height:600px;margin-top:40px !important}
+.voices.floating .vb-orbs{display:block;position:absolute;inset:0;pointer-events:none;z-index:0}
+.voices.floating .vb-orbs span{position:absolute;border-radius:50%;filter:blur(80px);opacity:.45;animation:fq-drift 20s ease-in-out infinite alternate}
+.voices.floating .vb-orbs span:nth-child(1){width:380px;height:380px;left:8%;top:10%;background:radial-gradient(circle,#FF6A00,rgba(255,106,0,0) 70%)}
+.voices.floating .vb-orbs span:nth-child(2){width:320px;height:320px;right:10%;bottom:0;background:radial-gradient(circle,#B8460A,rgba(184,70,10,0) 70%);animation-duration:26s}
+.voices.floating .voice-card{position:absolute;left:0;top:0;z-index:1;will-change:transform}
+.voices.floating .voice-card:hover,.voices.floating .voice-card[data-still]{z-index:3}
+.voice-btn{border-radius:50%;background:radial-gradient(circle at 32% 26%,rgba(255,255,255,.22),rgba(255,255,255,.05) 38%,rgba(255,255,255,.02) 62%,rgba(255,140,60,.10)) !important;-webkit-backdrop-filter:blur(12px) saturate(170%);backdrop-filter:blur(12px) saturate(170%);box-shadow:inset 0 0 0 1px rgba(255,255,255,.22),inset -10px -14px 26px rgba(255,106,0,.14),inset 8px 10px 20px rgba(255,255,255,.10),0 22px 50px rgba(0,0,0,.45);transition:transform .5s cubic-bezier(.34,1.56,.64,1)}
+.voice-btn::after{content:"";position:absolute;left:16%;top:9%;width:40%;height:24%;border-radius:50%;background:radial-gradient(ellipse at 50% 40%,rgba(255,255,255,.55),rgba(255,255,255,0) 70%);transform:rotate(-24deg);pointer-events:none;z-index:2}
+.voice-btn .voice-ring circle:first-child{stroke:rgba(255,255,255,.14)}
+.voices.floating .voice-card .voice-btn{animation:vb-breathe 5.5s ease-in-out infinite}
+.voices.floating .voice-card[data-still] .voice-btn{animation-play-state:paused}
+.voices.floating .voice-card:hover .voice-btn{transform:scale(1.05)}
+@keyframes vb-breathe{0%,100%{transform:scale(1,1)}33%{transform:scale(1.025,.985)}66%{transform:scale(.99,1.02)}}
+@media (prefers-reduced-motion:reduce){.voices.floating .voice-card .voice-btn{animation:none}}
 
 html{scroll-behavior:smooth}
 *{-webkit-tap-highlight-color:transparent}
@@ -615,6 +631,7 @@ html{scroll-behavior:smooth}
 <div style="max-width: 1240px; margin: 0 auto; padding: 72px 24px">
 <h2 style="font-family: Anton, Impact, sans-serif; font-weight: 400; font-size: clamp(44px, 6vw, 80px); line-height: 1; margin: 0; text-align: center">NO LO DIGO YO.<br><span style="font-family: 'Instrument Serif', Georgia, serif; font-style: italic; color: #FF6A00">Escúchalos.</span></h2>
 <div class="voices" style="display: flex; flex-wrap: wrap; justify-content: center; gap: 48px 40px; margin-top: 56px">
+<div class="vb-orbs" aria-hidden="true"><span></span><span></span></div>
 <div class="voice voice-card" data-name="Blink Marketing" data-src="assets/resena-blink.m4a" style="display: flex; flex-direction: column; align-items: center; gap: 16px; text-align: center; width: 200px">
 <button class="ee-play voice-btn" aria-label="Escuchar la reseña de Blink Marketing" aria-pressed="false" style="position: relative; width: 176px; height: 176px; border-radius: 50%; border: none; background: transparent; padding: 0">
 <svg class="voice-ring" width="176" height="176" viewBox="0 0 176 176" style="position: absolute; inset: 0; transform: rotate(-90deg)"><circle cx="88" cy="88" r="85" fill="none" stroke="#2A2A2E" stroke-width="3"></circle><circle class="ring" cx="88" cy="88" r="85" fill="none" stroke="#FF6A00" stroke-width="3" stroke-linecap="round" stroke-dasharray="534.1" stroke-dashoffset="534.1"></circle></svg>
@@ -803,6 +820,70 @@ html{scroll-behavior:smooth}
 </div>
 <script>
 (function () {
+function bubbleEngine(box, cards) {
+  // Reviews float as glass bubbles inside their section (desktop only). They bounce off the edges, keep apart
+  // from each other, and stop while the pointer is over one or while it is playing.
+  var wide = window.matchMedia('(min-width: 1025px)'), rm = window.matchMedia('(prefers-reduced-motion: reduce)');
+  var B = cards.map(function (c) { return { c: c, btn: c.querySelector('.voice-btn'), x: 0, y: 0, vx: 0, vy: 0, w: 0, h: 0, ph: Math.random() * 6.28 }; });
+  var on = false, raf = 0, last = 0, vis = true;
+  function still(b) { return b.c.matches(':hover') || b.btn.getAttribute('aria-pressed') === 'true' || b.c.contains(document.activeElement); }
+  function paint() { B.forEach(function (b) { b.c.style.transform = 'translate(' + b.x.toFixed(1) + 'px,' + b.y.toFixed(1) + 'px)'; }); }
+  function setup() {
+    var f = wide.matches && !rm.matches;
+    if (f === on) return;
+    on = f; box.classList.toggle('floating', on);
+    if (!on) { B.forEach(function (b) { b.c.style.transform = ''; b.c.removeAttribute('data-still'); }); cancelAnimationFrame(raf); raf = 0; return; }
+    var W = box.clientWidth, H = box.clientHeight, n = B.length, cell = W / n;
+    B.forEach(function (b, i) {
+      b.w = b.c.offsetWidth; b.h = b.c.offsetHeight;
+      b.x = cell * i + (cell - b.w) / 2; b.y = i % 2 ? Math.max(0, H - b.h - 20) : 20;
+      var a = Math.random() * 6.28, s = 16 + Math.random() * 10; b.vx = Math.cos(a) * s; b.vy = Math.sin(a) * s;
+    });
+    paint(); loop();
+  }
+  function step(dt) {
+    var W = box.clientWidth, H = box.clientHeight;
+    B.forEach(function (b) {
+      b.s = still(b);
+      if (b.s) b.c.setAttribute('data-still', ''); else b.c.removeAttribute('data-still');
+      if (b.s) return;
+      b.ph += dt * 0.7;
+      b.x += (b.vx + Math.cos(b.ph) * 7) * dt; b.y += (b.vy + Math.sin(b.ph * 1.3) * 7) * dt;
+      if (b.x < 0) { b.x = 0; b.vx = Math.abs(b.vx); } else if (b.x > W - b.w) { b.x = W - b.w; b.vx = -Math.abs(b.vx); }
+      if (b.y < 0) { b.y = 0; b.vy = Math.abs(b.vy); } else if (b.y > H - b.h) { b.y = H - b.h; b.vy = -Math.abs(b.vy); }
+    });
+    for (var i = 0; i < B.length; i++) for (var j = i + 1; j < B.length; j++) {
+      var a = B[i], c = B[j];
+      var dx = (c.x + c.w / 2) - (a.x + a.w / 2), dy = (c.y + c.h / 2) - (a.y + a.h / 2), d = Math.sqrt(dx * dx + dy * dy) || 1;
+      var minD = (Math.max(a.w, a.h) + Math.max(c.w, c.h)) * 0.42;
+      if (d >= minD) continue;
+      var nx = dx / d, ny = dy / d, push = (minD - d);
+      if (a.s && c.s) continue;
+      if (a.s) { c.x += nx * push; c.y += ny * push; } else if (c.s) { a.x -= nx * push; a.y -= ny * push; }
+      else { a.x -= nx * push / 2; a.y -= ny * push / 2; c.x += nx * push / 2; c.y += ny * push / 2; }
+      var rel = (c.vx - a.vx) * nx + (c.vy - a.vy) * ny;
+      if (rel < 0) {
+        if (!a.s) { a.vx += rel * nx; a.vy += rel * ny; }
+        if (!c.s) { c.vx -= rel * nx; c.vy -= rel * ny; }
+      }
+    }
+    B.forEach(function (b) { b.x = Math.max(0, Math.min(W - b.w, b.x)); b.y = Math.max(0, Math.min(H - b.h, b.y));
+      var sp = Math.sqrt(b.vx * b.vx + b.vy * b.vy) || 1, t = Math.max(12, Math.min(30, sp)); b.vx *= t / sp; b.vy *= t / sp; });
+  }
+  function loop() {
+    if (raf) return;
+    last = performance.now();
+    raf = requestAnimationFrame(function f(t) {
+      var dt = Math.min(0.05, (t - last) / 1000); last = t;
+      if (vis) { step(dt); paint(); }
+      raf = on ? requestAnimationFrame(f) : 0;
+    });
+  }
+  if ('IntersectionObserver' in window) new IntersectionObserver(function (en) { en.forEach(function (x) { vis = x.isIntersecting; }); }).observe(box);
+  if (wide.addEventListener) { wide.addEventListener('change', setup); rm.addEventListener('change', setup); }
+  window.addEventListener('resize', function () { if (on) { B.forEach(function (b) { b.w = b.c.offsetWidth; b.h = b.c.offsetHeight; }); step(0); paint(); } });
+  setup();
+}
 function stEngine(stage, cards, onCenter) {
   // 3D concave carousel: the centre card is the smallest, the side cards grow and turn toward the viewer.
   // Drag (mouse or finger), arrows or tapping a side card move it; videos loop muted while the section is on screen.
@@ -1194,6 +1275,9 @@ function mesaEngine(vids, bar, onUpdate) {
     var r = c.getBoundingClientRect();
     c.style.setProperty('--mx', (e.clientX - r.left) + 'px'); c.style.setProperty('--my', (e.clientY - r.top) + 'px');
   }, { passive: true });
+  // ---------- reviews float as glass bubbles
+  var vbBox = document.querySelector('.voices');
+  if (vbBox) bubbleEngine(vbBox, Array.prototype.slice.call(vbBox.querySelectorAll('.voice-card')));
   // ---------- only one video at a time
   document.querySelectorAll('video:not(.m-vid):not(.st-vid)').forEach(function (v) {
     v.addEventListener('play', function () { stopOthers(v); });
